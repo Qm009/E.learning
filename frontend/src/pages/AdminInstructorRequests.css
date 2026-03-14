@@ -1,0 +1,259 @@
+/* Admin Instructor Requests */
+
+.admin-requests-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  color: #6c757d;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.instructor-name-display {
+  color: #3b82f6;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0.5rem 0 0 0;
+  padding: 0.5rem;
+  background: #eff6ff;
+  border-radius: 8px;
+  border-left: 3px solid #3b82f6;
+}
+
+.instructor-name-display strong {
+  color: #1e40af;
+}
+
+.admin-instructor-requests {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.requests-header {
+  margin-bottom: 2rem;
+}
+
+.requests-header h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin: 0 0 0.5rem 0;
+}
+
+.requests-header p {
+  color: #6c757d;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.requests-stats {
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 200px;
+}
+
+.stat-card h3 {
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.stat-card p {
+  margin: 0;
+  opacity: 0.9;
+}
+
+.message {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.message.success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.message.error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.no-requests {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.no-requests h3 {
+  font-size: 3rem;
+  margin: 0 0 1rem 0;
+}
+
+.no-requests p {
+  color: #6c757d;
+  margin: 0;
+}
+
+.request-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.request-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.request-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.user-details h3 {
+  font-size: 1.1rem;
+  color: #2c3e50;
+  margin: 0 0 0.25rem 0;
+}
+
+.user-details p {
+  color: #6c757d;
+  margin: 0 0 0.5rem 0;
+}
+
+.request-date {
+  font-size: 0.85rem;
+  color: #6c757d;
+  display: block;
+}
+
+.request-status {
+  display: flex;
+  align-items: center;
+}
+
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-badge.pending {
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.request-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.btn-success {
+  background: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background: #218838;
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #c82333;
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-instructor-requests {
+    padding: 1rem;
+  }
+  
+  .requests-header h1 {
+    font-size: 2rem;
+  }
+  
+  .request-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .request-info {
+    flex-direction: column;
+  }
+  
+  .request-actions {
+    width: 100%;
+    justify-content: center;
+  }
+}

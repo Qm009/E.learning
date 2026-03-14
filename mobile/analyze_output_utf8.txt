@@ -1,0 +1,56 @@
+﻿Analyzing mobile...                                             
+
+   info - Invalid use of a private type in a public API - lib\screens\course_detail_screen.dart:12:3 - library_private_types_in_public_api
+   info - Don't use 'BuildContext's across async gaps - lib\screens\course_detail_screen.dart:168:9 - use_build_context_synchronously
+   info - Invalid use of a private type in a public API - lib\screens\courses_screen.dart:9:3 - library_private_types_in_public_api
+  error - Missing concrete implementation of 'abstract class State<T extends StatefulWidget> with Diagnosticable.build' - lib\screens\courses_screen.dart:12:7 - non_abstract_class_inherits_abstract_member
+   info - The private field _selectedCategory could be 'final' - lib\screens\courses_screen.dart:15:10 - prefer_final_fields
+warning - The declaration '_getCategories' isn't referenced - lib\screens\courses_screen.dart:23:16 - unused_element
+warning - The declaration '_getFilteredCourses' isn't referenced - lib\screens\courses_screen.dart:34:17 - unused_element
+  error - Expected a class member - lib\screens\courses_screen.dart:245:6 - expected_class_member
+  error - Expected a class member - lib\screens\courses_screen.dart:245:7 - expected_class_member
+  error - The function 'setState' isn't defined - lib\screens\courses_screen.dart:261:19 - undefined_function
+  error - Undefined name '_searchController' - lib\screens\courses_screen.dart:265:29 - undefined_identifier
+  error - Undefined name '_searchController' - lib\screens\courses_screen.dart:276:31 - undefined_identifier
+  error - Undefined name '_searchController' - lib\screens\courses_screen.dart:280:29 - undefined_identifier
+  error - The function 'setState' isn't defined - lib\screens\courses_screen.dart:281:29 - undefined_function
+  error - The function '_getCategories' isn't defined - lib\screens\courses_screen.dart:294:27 - undefined_function
+  error - Undefined name '_selectedCategory' - lib\screens\courses_screen.dart:295:38 - undefined_identifier
+  error - The function 'setState' isn't defined - lib\screens\courses_screen.dart:302:25 - undefined_function
+  error - Undefined name '_selectedCategory' - lib\screens\courses_screen.dart:303:27 - undefined_identifier
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\courses_screen.dart:306:62 - deprecated_member_use
+  error - The function '_getFilteredCourses' isn't defined - lib\screens\courses_screen.dart:319:22 - undefined_function
+  error - The function '_getFilteredCourses' isn't defined - lib\screens\courses_screen.dart:326:28 - undefined_function
+  error - The function '_getFilteredCourses' isn't defined - lib\screens\courses_screen.dart:328:34 - undefined_function
+  error - Expected a method, getter, setter or operator declaration - lib\screens\courses_screen.dart:444:1 - expected_executable
+   info - Invalid use of a private type in a public API - lib\screens\dashboard_screen.dart:9:3 - library_private_types_in_public_api
+warning - The value of the field '_stat1' isn't used - lib\screens\dashboard_screen.dart:14:7 - unused_field
+warning - The value of the field '_stat2' isn't used - lib\screens\dashboard_screen.dart:15:7 - unused_field
+warning - The value of the field '_stat3' isn't used - lib\screens\dashboard_screen.dart:16:7 - unused_field
+   info - The private field _roleFilter could be 'final' - lib\screens\dashboard_screen.dart:18:10 - prefer_final_fields
+warning - The value of the field '_isLoading' isn't used - lib\screens\dashboard_screen.dart:19:8 - unused_field
+  error - Undefined name 'http' - lib\screens\dashboard_screen.dart:41:32 - undefined_identifier
+  error - The method 'jsonDecode' isn't defined for the type '_DashboardScreenState' - lib\screens\dashboard_screen.dart:47:24 - undefined_method
+warning - The declaration '_filteredUsers' isn't referenced - lib\screens\dashboard_screen.dart:106:21 - unused_element
+   info - Don't use 'BuildContext's across async gaps - lib\screens\dashboard_screen.dart:114:36 - use_build_context_synchronously
+  error - Undefined name '_user' - lib\screens\dashboard_screen.dart:143:24 - undefined_identifier
+  error - Undefined name '_user' - lib\screens\dashboard_screen.dart:159:44 - undefined_identifier
+   info - Use 'const' with the constructor to improve performance - lib\screens\dashboard_screen.dart:186:30 - prefer_const_constructors
+  error - Undefined name '_selectedTabIndex' - lib\screens\dashboard_screen.dart:212:31 - undefined_identifier
+  error - Undefined name '_selectedTabIndex' - lib\screens\dashboard_screen.dart:215:25 - undefined_identifier
+  error - Undefined name '_selectedTabIndex' - lib\screens\dashboard_screen.dart:228:31 - undefined_identifier
+  error - Undefined name '_selectedTabIndex' - lib\screens\dashboard_screen.dart:231:25 - undefined_identifier
+  error - Undefined name '_selectedTabIndex' - lib\screens\dashboard_screen.dart:244:31 - undefined_identifier
+  error - Undefined name '_selectedTabIndex' - lib\screens\dashboard_screen.dart:247:25 - undefined_identifier
+   info - Use 'const' with the constructor to improve performance - lib\screens\dashboard_screen.dart:261:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\dashboard_screen.dart:262:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\dashboard_screen.dart:265:24 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\instructor_profile_screen.dart:16:13 - prefer_const_constructors
+   info - Invalid use of a private type in a public API - lib\screens\login_screen.dart:10:3 - library_private_types_in_public_api
+   info - Don't use 'BuildContext's across async gaps - lib\screens\login_screen.dart:29:38 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\screens\login_screen.dart:32:9 - use_build_context_synchronously
+   info - Invalid use of a private type in a public API - lib\screens\register_screen.dart:10:3 - library_private_types_in_public_api
+   info - Don't use 'BuildContext's across async gaps - lib\screens\register_screen.dart:36:38 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\screens\register_screen.dart:39:9 - use_build_context_synchronously
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\screens\register_screen.dart:127:19 - deprecated_member_use
+

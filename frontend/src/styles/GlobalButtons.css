@@ -1,0 +1,244 @@
+/* GLOBAL BUTTONS FIX - Make ALL buttons work perfectly */
+
+/* Reset and force all buttons to be clickable */
+button, .btn, input[type="button"], input[type="submit"] {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  position: relative !important;
+  z-index: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  border: none !important;
+  outline: none !important;
+  transition: all 0.3s ease !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  text-decoration: none !important;
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Base button styles */
+.btn {
+  padding: 12px 24px !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+  min-height: 44px !important;
+  white-space: nowrap !important;
+}
+
+/* Primary buttons */
+.btn-primary, .btn.btn-primary {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important;
+  color: white !important;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3) !important;
+  border: none !important;
+}
+
+.btn-primary:hover, .btn.btn-primary:hover {
+  background: linear-gradient(135deg, #2563eb, #7c3aed) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4) !important;
+}
+
+.btn-primary:disabled, .btn.btn-primary:disabled {
+  background: #9ca3af !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+  opacity: 0.6 !important;
+}
+
+/* Secondary buttons */
+.btn-secondary, .btn.btn-secondary {
+  background: transparent !important;
+  color: #ef4444 !important;
+  border: 2px solid #ef4444 !important;
+}
+
+.btn-secondary:hover, .btn.btn-secondary:hover {
+  background: #ef4444 !important;
+  color: white !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Outline buttons */
+.btn-outline, .btn.btn-outline {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.btn-outline:hover, .btn.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Success buttons */
+.btn-success, .btn.btn-success, .btn-add-chapter {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3) !important;
+}
+
+.btn-success:hover, .btn.btn-success:hover, .btn-add-chapter:hover {
+  background: linear-gradient(135deg, #059669, #047857) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4) !important;
+}
+
+/* Danger buttons */
+.btn-danger, .btn.btn-danger, .btn-remove-chapter {
+  background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+  color: white !important;
+  border: none !important;
+}
+
+.btn-danger:hover, .btn.btn-danger:hover, .btn-remove-chapter:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
+  transform: scale(1.05) !important;
+}
+
+/* Block buttons */
+.btn-block, .btn.btn-block {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+/* Large buttons */
+.btn-lg, .btn.btn-lg {
+  padding: 16px 32px !important;
+  font-size: 18px !important;
+  min-height: 56px !important;
+}
+
+/* Small buttons */
+.btn-sm, .btn.btn-sm {
+  padding: 8px 16px !important;
+  font-size: 14px !important;
+  min-height: 36px !important;
+}
+
+/* Admin action buttons */
+.admin-action-btn {
+  padding: 16px !important;
+  background: white !important;
+  border: 2px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  color: #374151 !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.admin-action-btn:hover {
+  border-color: #3b82f6 !important;
+  background: #f8fafc !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15) !important;
+}
+
+/* Course action buttons */
+.course-actions .btn {
+  padding: 8px 16px !important;
+  font-size: 14px !important;
+  min-height: 36px !important;
+  border-radius: 6px !important;
+}
+
+/* Modal buttons */
+.modal-close {
+  background: none !important;
+  border: none !important;
+  font-size: 24px !important;
+  color: #6b7280 !important;
+  cursor: pointer !important;
+  padding: 4px !important;
+  border-radius: 4px !important;
+}
+
+.modal-close:hover {
+  background: #f3f4f6 !important;
+  color: #374151 !important;
+}
+
+/* Form buttons */
+.form-actions .btn {
+  margin-right: 12px !important;
+}
+
+.form-actions .btn:last-child {
+  margin-right: 0 !important;
+}
+
+/* Fix any overlays or z-index issues */
+.btn, button, input[type="button"], input[type="submit"] {
+  z-index: 1000 !important;
+}
+
+/* Ensure buttons work in all containers */
+* .btn, * button, * input[type="button"], * input[type="submit"] {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* Mobile fix */
+@media (max-width: 768px) {
+  .btn, button {
+    min-height: 48px !important;
+    padding: 12px 20px !important;
+    font-size: 16px !important;
+  }
+  
+  .btn-lg, .btn.btn-lg {
+    min-height: 56px !important;
+    padding: 16px 24px !important;
+  }
+}
+
+/* Print fix */
+@media print {
+  .btn, button {
+    display: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .btn-primary {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+  }
+  
+  .btn-outline {
+    background: transparent !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .btn, button {
+    transition: none !important;
+  }
+  
+  .btn:hover, button:hover {
+    transform: none !important;
+  }
+}

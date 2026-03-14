@@ -1,0 +1,38 @@
+[
+  {
+    "id": "69b1ddbfa388f0dcce3f92e6",
+    "title": "qwert",
+    "instructor": {
+      "_id": "69b02ed07b08a039ce5a50fc",
+      "name": "ki seydou",
+      "email": "seydou@gmail.com"
+    }
+  },
+  {
+    "id": "69b1e9d6a388f0dcce3f9461",
+    "title": "test cours",
+    "instructor": {
+      "_id": "69b02ed07b08a039ce5a50fc",
+      "name": "ki seydou",
+      "email": "seydou@gmail.com"
+    }
+  },
+  {
+    "id": "69b327b04e2f6d85fceab68a",
+    "title": "xcvbnm,",
+    "instructor": {
+      "_id": "69b02ed07b08a039ce5a50fc",
+      "name": "ki seydou",
+      "email": "seydou@gmail.com"
+    }
+  },
+  {
+    "id": "69b33c3a4e2f6d85fceab825",
+    "title": "wertyu",
+    "instructor": {
+      "_id": "69b02ed07b08a039ce5a50fc",
+      "name": "ki seydou",
+      "email": "seydou@gmail.com"
+    }
+  }
+]

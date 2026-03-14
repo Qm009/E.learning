@@ -1,0 +1,28 @@
+# Dependencies (NEVER commit these)
+node_modules/
+**/node_modules/
+
+# Backend secrets
+backend/.env
+
+# Backend uploads (user files)
+backend/uploads/
+
+# Flutter build artifacts
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/build/
+mobile/.packages
+mobile/pubspec.lock
+mobile/.idea/
+
+# Frontend build
+frontend/dist/
+frontend/build/
+
+# General
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
