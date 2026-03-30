@@ -87,7 +87,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      icon: const Icon(LucideLucideLucideIcons.arrowLeft_ios_new_rounded),
+                      icon: const Icon(LucideIcons.arrowLeft_ios_new_rounded),
                       onPressed: () => Navigator.pop(context),
                     ),
                     TextButton(
@@ -116,7 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Full name',
-                    prefixIcon: const Icon(LucideLucideLucideIcons.userOutlineRounded),
+                    prefixIcon: const Icon(LucideIcons.userOutlineRounded),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -129,7 +129,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Email',
-                    prefixIcon: const Icon(LucideLucideLucideIcons.mailOutlined),
+                    prefixIcon: const Icon(LucideIcons.mailOutlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -143,7 +143,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Password',
-                    prefixIcon: const Icon(LucideLucideLucideLucideIcons.lockOutlineRounded),
+                    prefixIcon: const Icon(LucideIcons.lockOutlineRounded),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),

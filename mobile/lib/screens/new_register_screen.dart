@@ -74,7 +74,7 @@ class _NewRegisterScreenState extends State<NewRegisterScreen> {
                 ),
                 Positioned(
                   top: 10, left: 10, child: IconButton(
-                    icon: Icon(LucideLucideLucideIcons.arrowLeft, color: Theme.of(context).cardColor,),
+                    icon: Icon(LucideIcons.arrowLeft, color: Theme.of(context).cardColor,),
                     onPressed: () => Navigator.pop(context),
                   ),
                 ),
@@ -83,7 +83,7 @@ class _NewRegisterScreenState extends State<NewRegisterScreen> {
                     padding: const EdgeInsets.only(top: 80),
                     child: Column(
                       children: [
-                        Icon(LucideLucideLucideIcons.graduationCap, size: 20, color: Theme.of(context).cardColor,),
+                        Icon(LucideIcons.graduationCap, size: 20, color: Theme.of(context).cardColor,),
                         const SizedBox(height: 16),
                         Text(
                           'Create an Account',
@@ -130,7 +130,7 @@ class _NewRegisterScreenState extends State<NewRegisterScreen> {
                       decoration: InputDecoration(
                         labelText: 'Full Name',
                         hintText: 'Enter your full name',
-                        prefixIcon: const Icon(LucideLucideLucideIcons.user),
+                        prefixIcon: const Icon(LucideIcons.user),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -158,7 +158,7 @@ class _NewRegisterScreenState extends State<NewRegisterScreen> {
                       decoration: InputDecoration(
                         labelText: 'Email',
                         hintText: 'Enter your email',
-                        prefixIcon: const Icon(LucideLucideLucideIcons.mail),
+                        prefixIcon: const Icon(LucideIcons.mail),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -186,10 +186,10 @@ class _NewRegisterScreenState extends State<NewRegisterScreen> {
                       decoration: InputDecoration(
                         labelText: 'Password',
                         hintText: 'Enter your password',
-                        prefixIcon: const Icon(LucideLucideLucideLucideIcons.lock),
+                        prefixIcon: const Icon(LucideIcons.lock),
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _obscurePassword ? LucideLucideLucideIcons.eye : LucideLucideLucideIcons.eyeOff,
+                            _obscurePassword ? LucideIcons.eye : LucideIcons.eyeOff,
                           ),
                           onPressed: () {
                             setState(() {
@@ -224,10 +224,10 @@ class _NewRegisterScreenState extends State<NewRegisterScreen> {
                       decoration: InputDecoration(
                         labelText: 'Confirm Password',
                         hintText: 'Confirm your password',
-                        prefixIcon: const Icon(LucideLucideLucideLucideIcons.lock),
+                        prefixIcon: const Icon(LucideIcons.lock),
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _obscureConfirmPassword ? LucideLucideLucideIcons.eye : LucideLucideLucideIcons.eyeOff,
+                            _obscureConfirmPassword ? LucideIcons.eye : LucideIcons.eyeOff,
                           ),
                           onPressed: () {
                             setState(() {
@@ -271,7 +271,7 @@ class _NewRegisterScreenState extends State<NewRegisterScreen> {
                           child: _buildRoleCard(
                             'Student',
                             'Access to all courses and quizzes',
-                            LucideLucideLucideIcons.graduationCap,
+                            LucideIcons.graduationCap,
                             'student',
                           ),
                         ),
@@ -280,7 +280,7 @@ class _NewRegisterScreenState extends State<NewRegisterScreen> {
                           child: _buildRoleCard(
                             'Instructor',
                             'Create and share your courses',
-                            LucideLucideLucideIcons.user,
+                            LucideIcons.user,
                             'instructor',
                           ),
                         ),
@@ -304,7 +304,7 @@ class _NewRegisterScreenState extends State<NewRegisterScreen> {
                         value: _selectedExpertise,
                         decoration: InputDecoration(
                           labelText: 'Field of expertise',
-                          prefixIcon: const Icon(LucideLucideLucideIcons.briefcase),
+                          prefixIcon: const Icon(LucideIcons.briefcase),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -341,7 +341,7 @@ class _NewRegisterScreenState extends State<NewRegisterScreen> {
                         decoration: InputDecoration(
                           labelText: 'Motivation message',
                           hintText: 'Why do you want to become an instructor? (minimum 50 characters)',
-                          prefixIcon: const Icon(LucideLucideIcons.message),
+                          prefixIcon: const Icon(LucideIcons.message),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import './Home.css';
-import { Book, GraduationCap, Rocket, Trophy, User, Users } from 'lucide-react';
+import { Book, ChevronRight, GraduationCap, Rocket, Trophy, User, Users } from 'lucide-react';
 
 
 const Home = () => {
@@ -82,7 +82,7 @@ const Home = () => {
               <h3>Expert Courses</h3>
               <p>Learn from industry experts and professionals with years of experience in their fields.</p>
               <Link to="/courses" className="feature-link">
-                Explore Courses →
+                Explore Courses <ChevronRight size={14} />
               </Link>
             </div>
 
@@ -95,7 +95,7 @@ const Home = () => {
               <h3>Certified Degrees</h3>
               <p>Earn recognized certificates and degrees upon course completion to boost your career.</p>
               <Link to="/certified-degree" className="feature-link">
-                View Programs →
+                View Programs <ChevronRight size={14} />
               </Link>
             </div>
 
@@ -108,7 +108,7 @@ const Home = () => {
               <h3>Quality Education</h3>
               <p>High-quality content with interactive lessons and real-world projects.</p>
               <Link to="/courses" className="feature-link">
-                Learn More →
+                Learn More <ChevronRight size={14} />
               </Link>
             </div>
 
@@ -121,7 +121,7 @@ const Home = () => {
               <h3>Community Support</h3>
               <p>Join a vibrant community of learners and get help when you need it.</p>
               <Link to="/community-support" className="feature-link">
-                Join Community →
+                Join Community <ChevronRight size={14} />
               </Link>
             </div>
           </div>

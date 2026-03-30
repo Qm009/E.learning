@@ -15,12 +15,12 @@
 /* Hero Section - Optimisé */
 .hero {
   position: relative;
-  min-height: 90vh;
+  min-height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #0f172a;
 }
 
 .hero-background {
@@ -42,7 +42,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%);
+  background: radial-gradient(circle at center, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.8) 100%);
   z-index: 2;
 }
 
@@ -70,7 +70,10 @@
 }
 
 .hero-title .highlight {
-  color: #00BCD4;
+  background: linear-gradient(135deg, #38BDF8 0%, #6366F1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-weight: 900;
   position: relative;
 }
@@ -296,8 +299,11 @@
 
 .stat-number {
   font-size: 2.5rem;
-  font-weight: 700;
-  color: #667eea;
+  font-weight: 800;
+  background: linear-gradient(135deg, #38BDF8 0%, #6366F1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 0.5rem;
   display: block;
 }
@@ -366,17 +372,17 @@
 }
 
 .icon-circle {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.5rem;
-  font-size: 2rem;
-  color: white;
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  font-size: 1.5rem;
+  color: #6366F1;
+  border: 1px solid rgba(99, 102, 241, 0.2);
 }
 
 .feature-card h3 {

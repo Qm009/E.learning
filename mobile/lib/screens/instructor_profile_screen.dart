@@ -19,7 +19,7 @@ class InstructorProfileScreen extends StatelessWidget {
               radius: 40,
               backgroundColor: Color(0xFFE0F8FF),
               child: Icon(
-                LucideLucideLucideIcons.userOutlineRounded,
+                LucideIcons.userOutlineRounded,
                 size: 48,
                 color: Color(0xFF0052D4),
               ),
@@ -50,34 +50,34 @@ class InstructorProfileScreen extends StatelessWidget {
                   _ProfileTile(
                     title: 'Advanced React Patterns',
                     subtitle: '12 modules • Completed',
-                    icon: LucideLucideIcons.verifiedRounded,
+                    icon: LucideIcons.verifiedRounded,
                   ),
                   _ProfileTile(
                     title: 'Modern Typography Systems',
                     subtitle: '8 modules • In progress',
-                    icon: LucideLucideIcons.autoGraphRounded,
+                    icon: LucideIcons.autoGraphRounded,
                   ),
                   SizedBox(height: 24),
                   _ProfileSectionTitle('Account Settings'),
                   _ProfileTile(
                     title: 'Personal Information',
                     subtitle: 'Update your basic info',
-                    icon: LucideLucideLucideIcons.userOutlineRounded,
+                    icon: LucideIcons.userOutlineRounded,
                   ),
                   _ProfileTile(
                     title: 'Notification Settings',
                     subtitle: 'Email & push notifications',
-                    icon: LucideLucideLucideIcons.bellNoneRounded,
+                    icon: LucideIcons.bellNoneRounded,
                   ),
                   _ProfileTile(
                     title: 'Privacy & Security',
                     subtitle: 'Password, 2, FA and more',
-                    icon: LucideLucideLucideLucideIcons.lockOutlineRounded,
+                    icon: LucideIcons.lockOutlineRounded,
                   ),
                   _ProfileTile(
                     title: 'Help & Support',
                     subtitle: 'FAQ and contact',
-                    icon: LucideLucideLucideLucideIcons.helpCircleCircle_outline_rounded,
+                    icon: LucideIcons.helpCircleCircle_outline_rounded,
                   ),
                 ],
               ),
@@ -202,7 +202,7 @@ class _ProfileTile extends StatelessWidget {
               ),
             ),
             const Icon(
-              LucideLucideLucideIcons.chevronRight_rounded,
+              LucideIcons.chevronRight_rounded,
               color: Color(0xFF9BA9C4),
             ),
           ],

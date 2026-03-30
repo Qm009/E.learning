@@ -63,8 +63,8 @@ class _InstructorHomeScreenState extends State<InstructorHomeScreen> {
         };
         
         _recentActivity = [
-          {'message': 'New student enrolled in Flutter Pro', 'time': '2, h ago', 'icon': LucideLucideLucideIcons.userAddRounded, 'color': kIndigo600},
-          {'message': 'Course content updated successfully', 'time': 'Yesterday', 'icon': LucideLucideIcons.autoAwesomeRounded, 'color': Colors.amber},
+          {'message': 'New student enrolled in Flutter Pro', 'time': '2, h ago', 'icon': LucideIcons.userAddRounded, 'color': kIndigo600},
+          {'message': 'Course content updated successfully', 'time': 'Yesterday', 'icon': LucideIcons.autoAwesomeRounded, 'color': Colors.amber},
         ];
         _isLoading = false;
       });
@@ -174,9 +174,9 @@ class _InstructorHomeScreenState extends State<InstructorHomeScreen> {
       mainAxisSpacing: 16,
       childAspectRatio: 0.9,
       children: [
-        _buildHomeStatCard('Students', '${_stats['totalStudents']}', LucideLucideIcons.groupsRounded, kIndigo600),
-        _buildHomeStatCard('Courses', '${_stats['activeCourses']}', LucideLucideLucideIcons.graduationCap, kSlate900),
-        _buildHomeStatCard('Rating', '${_stats['averageRating']}', LucideLucideLucideLucideIcons.starRounded, Colors.amber),
+        _buildHomeStatCard('Students', '${_stats['totalStudents']}', LucideIcons.groupsRounded, kIndigo600),
+        _buildHomeStatCard('Courses', '${_stats['activeCourses']}', LucideIcons.graduationCap, kSlate900),
+        _buildHomeStatCard('Rating', '${_stats['averageRating']}', LucideIcons.starRounded, Colors.amber),
       ],
     );
   }
@@ -226,7 +226,7 @@ class _InstructorHomeScreenState extends State<InstructorHomeScreen> {
                   ? (c['image'].toString().startsWith('http') ? c['image'] : '${ApiConfig.baseUrl}${c['image']}')
                   : 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=300',
               width: 60, height: 60, fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => Container(color: kSlate400.withValues(alpha: 0.1), child: Icon(LucideLucideLucideLucideIcons.bookRounded, color: kSlate400)),
+              errorBuilder: (_, __, ___) => Container(color: kSlate400.withValues(alpha: 0.1), child: Icon(LucideIcons.bookRounded, color: kSlate400)),
             ),
           ),
           const SizedBox(width: 16),
@@ -240,7 +240,7 @@ class _InstructorHomeScreenState extends State<InstructorHomeScreen> {
                   children: [
                     Text('${c['students']} enrolled', style: TextStyle(fontSize: 14, color: kSlate400, fontWeight: FontWeight.w600)),
                     const SizedBox(width: 8),
-                    const Icon(LucideLucideLucideLucideIcons.starRounded, size: 20, color: Colors.amber),
+                    const Icon(LucideIcons.starRounded, size: 20, color: Colors.amber),
                     Text('${c['rating']}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800)),
                   ],
                 ),

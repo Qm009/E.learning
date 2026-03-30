@@ -128,7 +128,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
         title: Text('Quiz · Question ${_currentQuestion + 1}/${_questions.length}',
             style: const TextStyle(color: Color(0xFF042444), fontWeight: FontWeight.bold, fontSize: 16)),
         leading: IconButton(
-          icon: const Icon(LucideLucideLucideIcons.x, color: Color(0xFF042444)),
+          icon: const Icon(LucideIcons.x, color: Color(0xFF042444)),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -206,7 +206,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                             color: const Color(0xFFEEF2FF),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: const Icon(LucideLucideLucideLucideLucideIcons.helpCircleCircleCircle, color: Color(0xFF6366F1), size: 28),
+                          child: const Icon(LucideIcons.helpCircleCircleCircle, color: Color(0xFF6366F1), size: 28),
                         ),
                         const SizedBox(height: 16),
                         Text(q['question'], textAlign: TextAlign.center,
@@ -253,7 +253,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                               ),
                               child: Center(
                                 child: _answered
-                                    ? Icon(isCorrect ? LucideLucideLucideLucideIcons.check : (isSelected ? LucideLucideLucideIcons.x : null),
+                                    ? Icon(isCorrect ? LucideIcons.check : (isSelected ? LucideIcons.x : null),
                                         color: Colors.white, size: 16)
                                     : Text(String.fromCharCode(65 + i),
                                         style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF6366F1))),
@@ -280,7 +280,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(LucideLucideLucideLucideIcons.lightbulb, color: Colors.amber, size: 20),
+                          const Icon(LucideIcons.lightbulb, color: Colors.amber, size: 20),
                           const SizedBox(width: 10),
                           Expanded(child: Text(q['explanation'], style: TextStyle(color: Colors.grey.shade700, fontSize: 14, height: 1.5))),
                         ],

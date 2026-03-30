@@ -13,7 +13,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <span className="logo-icon"><span className="icon-wrapper"><BookOpen size={18} /></span></span>
+          <img src="/logo.png" alt="EduPortal Logo" height="32" style={{marginRight: '10px'}} />
           EduPortal
         </Link>
 

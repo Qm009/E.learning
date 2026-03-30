@@ -108,7 +108,7 @@ class _QuizListScreenState extends State<QuizListScreen> with SingleTickerProvid
       return _buildEmptyState(
         'No quizzes to do',
         'You have completed all your quizzes!',
-        LucideLucideLucideLucideLucideIcons.helpCircleCircleCircle_outlined,
+        LucideIcons.helpCircleCircleCircle_outlined,
       );
     }
 
@@ -130,7 +130,7 @@ class _QuizListScreenState extends State<QuizListScreen> with SingleTickerProvid
       return _buildEmptyState(
         'No completed quizzes',
         'Start your first quizzes to see your results here',
-        LucideLucideIcons.emojiEventsOutlined,
+        LucideIcons.emojiEventsOutlined,
       );
     }
 
@@ -208,8 +208,8 @@ class _QuizListScreenState extends State<QuizListScreen> with SingleTickerProvid
                   ),
                   child: Icon(
                     isCompleted 
-                        ? (quiz['passed'] ? LucideLucideLucideLucideLucideIcons.checkCircle : LucideLucideIcons.cancel)
-                        : LucideLucideLucideLucideLucideIcons.helpCircleCircleCircle_outlined,
+                        ? (quiz['passed'] ? LucideIcons.checkCircle : LucideIcons.cancel)
+                        : LucideIcons.helpCircleCircleCircle_outlined,
                     color: isCompleted 
                         ? (quiz['passed'] ? Colors.green : Colors.red)
                         : Color(0xFF00C6FF),
@@ -242,9 +242,9 @@ class _QuizListScreenState extends State<QuizListScreen> with SingleTickerProvid
             const SizedBox(height: 12),
             Row(
               children: [
-                _buildInfoChip(LucideLucideIcons.questionAnswer, '${quiz['questions']} questions'),
+                _buildInfoChip(LucideIcons.questionAnswer, '${quiz['questions']} questions'),
                 const SizedBox(width: 8),
-                _buildInfoChip(LucideLucideIcons.schedule, quiz['duration']),
+                _buildInfoChip(LucideIcons.schedule, quiz['duration']),
                 if (!isCompleted) ...[
                   const SizedBox(width: 8),
                   _buildDifficultyChip(quiz['difficulty']),
@@ -276,7 +276,7 @@ class _QuizListScreenState extends State<QuizListScreen> with SingleTickerProvid
                             ),
                             if (quiz['passed']) ...[
                               const SizedBox(width: 8),
-                              const Icon(LucideLucideIcons.emojiEvents, color: Colors.amber),
+                              const Icon(LucideIcons.emojiEvents, color: Colors.amber),
                             ],
                           ],
                         ),

@@ -285,7 +285,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
                     controller: _searchController,
                     decoration: InputDecoration(
                       hintText: 'Search courses by name or description...',
-                      prefixIcon: const Icon(LucideLucideLucideLucideIcons.search),
+                      prefixIcon: const Icon(LucideIcons.search),
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
@@ -295,7 +295,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
                       contentPadding: const EdgeInsets.symmetric(vertical: 0),
                       suffixIcon: _searchController.text.isNotEmpty
                           ? IconButton(
-                              icon: const Icon(LucideLucideIcons.clear),
+                              icon: const Icon(LucideIcons.clear),
                               onPressed: () {
                                 _searchController.clear();
                                 setState(() {});
@@ -396,23 +396,23 @@ class _CoursesScreenState extends State<CoursesScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _NavItem(
-                    icon: LucideLucideLucideLucideIcons.homeOutlined,
+                    icon: LucideIcons.home,
                     label: 'Home',
                     onTap: () => Navigator.pushReplacementNamed(context, '/'),
                   ),
                   _NavItem(
-                    icon: LucideLucideLucideLucideIcons.menuBookRounded,
+                    icon: LucideIcons.book,
                     label: 'Courses',
                     isActive: true,
                     onTap: () {},
                   ),
                   _NavItem(
-                    icon: LucideLucideLucideIcons.layoutDashboard_outlined,
+                    icon: LucideIcons.layoutDashboard,
                     label: 'Admin',
                     onTap: () => Navigator.pushReplacementNamed(context, '/dashboard'),
                   ),
                   _NavItem(
-                    icon: LucideLucideLucideIcons.userOutlineRounded,
+                    icon: LucideIcons.user,
                     label: 'Profile',
                     onTap: () => Navigator.pushReplacementNamed(context, '/instructor'),
                   ),
@@ -503,7 +503,7 @@ class _CourseCard extends StatelessWidget {
                   Row(
                     children: [
                       const Icon(
-                        LucideLucideIcons.schedule,
+                        LucideIcons.calendar,
                         size: 14,
                         color: Color(0xFF6B7A90),
                       ),

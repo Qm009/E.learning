@@ -321,7 +321,7 @@ Continuez vos efforts, la maîtrise technique est à portée de main !''',
                   leading: Text(icon, style: const TextStyle(fontSize: 24)),
                   title: Text(file['originalName'] ?? 'Unnamed file'),
                   subtitle: Text('${isImage ? 'Image' : (isPdf ? 'PDF' : 'Document')} • ${((file['size'] ?? 0) / 1024 / 1024).toStringAsFixed(2)} MB'),
-                  trailing: Icon(LucideLucideLucideLucideIcons.downloadRounded, color: Color(0xFF00C6FF)),
+                  trailing: Icon(LucideIcons.downloadRounded, color: Color(0xFF00C6FF)),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Download simulating...')),
@@ -435,7 +435,7 @@ Continuez vos efforts, la maîtrise technique est à portée de main !''',
                   subtitle: lesson['duration'] != null 
                     ? Text('⏱️ ${lesson['duration']}') 
                     : null,
-                  trailing: Icon(LucideLucideLucideIcons.chevronRight, size: 14, color: Color(0xFF667EEA)),
+                  trailing: Icon(LucideIcons.chevronRight, size: 14, color: Color(0xFF667EEA)),
                   onTap: () {
                     showDialog(
                       context: context,

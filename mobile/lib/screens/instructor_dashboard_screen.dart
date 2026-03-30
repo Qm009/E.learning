@@ -132,7 +132,7 @@ class _InstructorDashboardScreenState extends State<InstructorDashboardScreen> {
           ),
           const SizedBox(width: 8),
           IconButton(
-            icon: const Icon(LucideLucideLucideIcons.logOut_rounded, color: Colors.white70),
+            icon: const Icon(LucideIcons.logOut_rounded, color: Colors.white70),
             onPressed: _logout,
           ),
         ],
@@ -142,9 +142,9 @@ class _InstructorDashboardScreenState extends State<InstructorDashboardScreen> {
 
   Widget _buildStatCards() {
     final stats = [
-      {'label': 'My Courses', 'value': '${_myCourses.length}', 'icon': LucideLucideLucideLucideIcons.bookOutlined, 'color': Color(0xFF00C6FF)},
-      {'label': 'Students', 'value': '0', 'icon': LucideLucideLucideIcons.usersOutline, 'color': Color(0xFF4CAF50)},
-      {'label': 'Reviews', 'value': '0', 'icon': LucideLucideLucideLucideIcons.starOutline, 'color': Color(0xFFFFC107)},
+      {'label': 'My Courses', 'value': '${_myCourses.length}', 'icon': LucideIcons.bookOutlined, 'color': Color(0xFF00C6FF)},
+      {'label': 'Students', 'value': '0', 'icon': LucideIcons.usersOutline, 'color': Color(0xFF4CAF50)},
+      {'label': 'Reviews', 'value': '0', 'icon': LucideIcons.starOutline, 'color': Color(0xFFFFC107)},
     ];
 
     return SizedBox(
@@ -193,7 +193,7 @@ class _InstructorDashboardScreenState extends State<InstructorDashboardScreen> {
           children: [
             Expanded(
               child: _ActionCard(
-                icon: LucideLucideLucideIcons.plusCircleOutline,
+                icon: LucideIcons.plusCircleOutline,
                 label: 'Create Course',
                 color: Color(0xFF00C6FF),
                 onTap: () => Navigator.pushNamed(context, '/instructor_courses'),
@@ -202,7 +202,7 @@ class _InstructorDashboardScreenState extends State<InstructorDashboardScreen> {
             const SizedBox(width: 12),
             Expanded(
               child: _ActionCard(
-                icon: LucideLucideLucideIcons.barChart_outlined,
+                icon: LucideIcons.barChart_outlined,
                 label: 'My Courses',
                 color: Color(0xFF4CAF50),
                 onTap: () => Navigator.pushNamed(context, '/courses'),
@@ -242,11 +242,11 @@ class _InstructorDashboardScreenState extends State<InstructorDashboardScreen> {
                   Container(
                     width: 42, height: 42,
                     decoration: BoxDecoration(color: Color(0xFF00C6FF).withValues(alpha: 0.2), borderRadius: BorderRadius.circular(10)),
-                    child: Icon(LucideLucideIcons.playCircleOutline, color: Color(0xFF00C6FF)),
+                    child: Icon(LucideIcons.playCircleOutline, color: Color(0xFF00C6FF)),
                   ),
                   const SizedBox(width: 12),
                   Expanded(child: Text(title.toString(), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600))),
-                  const Icon(LucideLucideLucideIcons.chevronRight, color: Colors.white38),
+                  const Icon(LucideIcons.chevronRight, color: Colors.white38),
                 ],
               ),
             );

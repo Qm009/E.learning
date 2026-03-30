@@ -121,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      icon: const Icon(LucideLucideLucideIcons.arrowLeft_ios_new_rounded),
+                      icon: const Icon(LucideIcons.arrowLeft_ios_new_rounded),
                       onPressed: () => Navigator.pop(context),
                     ),
                     TextButton(
@@ -145,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: _emailController,
                   decoration: InputDecoration(
                     labelText: 'Email Address',
-                    prefixIcon: const Icon(LucideLucideLucideIcons.mailOutlined),
+                    prefixIcon: const Icon(LucideIcons.mailOutlined),
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                   ),
                   keyboardType: TextInputType.emailAddress,
@@ -156,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: _passwordController,
                   decoration: InputDecoration(
                     labelText: 'Password',
-                    prefixIcon: const Icon(LucideLucideLucideLucideIcons.lockOutlineRounded),
+                    prefixIcon: const Icon(LucideIcons.lockOutlineRounded),
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                   ),
                   obscureText: true,

@@ -64,7 +64,7 @@ class _NewInstructorProfileScreenState extends State<NewInstructorProfileScreen>
         ),
         actions: [
           IconButton(
-            icon: const Icon(LucideLucideLucideLucideIcons.edit),
+            icon: const Icon(LucideIcons.edit),
             onPressed: () {
               // TODO: Naviguer vers l'édition du profil
             },
@@ -146,7 +146,7 @@ class _NewInstructorProfileScreenState extends State<NewInstructorProfileScreen>
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
-                      LucideLucideLucideIcons.camera,
+                      LucideIcons.camera,
                       color: Theme.of(context).cardColor,
                       size: 16,
                     ),
@@ -227,12 +227,12 @@ class _NewInstructorProfileScreenState extends State<NewInstructorProfileScreen>
       crossAxisCount: 2,
       mainAxisSpacing: 16, crossAxisSpacing: 16, childAspectRatio: 1.5,
       children: [
-        _buildStatCard('Total Students', '${_stats['totalStudents']}', LucideLucideLucideIcons.users, Colors.blue),
-        _buildStatCard('Courses Created', '${_stats['totalCourses']}', LucideLucideLucideLucideIcons.book, Colors.green),
-        _buildStatCard('Average Rating', '${_stats['averageRating']}', LucideLucideLucideLucideIcons.star, Colors.amber),
-        _buildStatCard('Total Revenue', '\$${_stats['totalRevenue']}', LucideLucideLucideIcons.dollarSign, Colors.purple),
-        _buildStatCard('Years of Experience', '${_stats['yearsOfExperience']}', LucideLucideLucideIcons.briefcase, Colors.orange),
-        _buildStatCard('Certificates Issued', '${_stats['certificatesIssued']}', LucideLucideLucideIcons.graduationCap, Colors.red),
+        _buildStatCard('Total Students', '${_stats['totalStudents']}', LucideIcons.users, Colors.blue),
+        _buildStatCard('Courses Created', '${_stats['totalCourses']}', LucideIcons.book, Colors.green),
+        _buildStatCard('Average Rating', '${_stats['averageRating']}', LucideIcons.star, Colors.amber),
+        _buildStatCard('Total Revenue', '\$${_stats['totalRevenue']}', LucideIcons.dollarSign, Colors.purple),
+        _buildStatCard('Years of Experience', '${_stats['yearsOfExperience']}', LucideIcons.briefcase, Colors.orange),
+        _buildStatCard('Certificates Issued', '${_stats['certificatesIssued']}', LucideIcons.graduationCap, Colors.red),
       ],
     );
   }
@@ -266,7 +266,7 @@ class _NewInstructorProfileScreenState extends State<NewInstructorProfileScreen>
                   child: Icon(icon, color: color, size: 20),
                 ),
                 const Spacer(),
-                Icon(LucideLucideLucideIcons.moreVertical, color: Colors.grey[400]),
+                Icon(LucideIcons.moreVertical, color: Colors.grey[400]),
               ],
             ),
             const SizedBox(height: 12),
@@ -305,7 +305,7 @@ class _NewInstructorProfileScreenState extends State<NewInstructorProfileScreen>
       child: Column(
         children: [
           _buildActionItem(
-            LucideLucideLucideIcons.user,
+            LucideIcons.user,
                         'Edit my profile',
             () {
               // TODO: Naviguer vers l'édition du profil
@@ -313,7 +313,7 @@ class _NewInstructorProfileScreenState extends State<NewInstructorProfileScreen>
           ),
           _buildDivider(),
           _buildActionItem(
-            LucideLucideLucideLucideIcons.lock,
+            LucideIcons.lock,
             'Change my password',
             () {
               // TODO: Naviguer vers le changement de mot de passe
@@ -321,7 +321,7 @@ class _NewInstructorProfileScreenState extends State<NewInstructorProfileScreen>
           ),
           _buildDivider(),
           _buildActionItem(
-            LucideLucideLucideIcons.dollarSign,
+            LucideIcons.dollarSign,
             'My earnings and payments',
             () {
               // TODO: Naviguer vers les revenus
@@ -329,7 +329,7 @@ class _NewInstructorProfileScreenState extends State<NewInstructorProfileScreen>
           ),
           _buildDivider(),
           _buildActionItem(
-            LucideLucideLucideIcons.bell,
+            LucideIcons.bell,
             'Notifications',
             () {
               // TODO: Naviguer vers les notifications
@@ -337,7 +337,7 @@ class _NewInstructorProfileScreenState extends State<NewInstructorProfileScreen>
           ),
           _buildDivider(),
           _buildActionItem(
-            LucideLucideLucideIcons.moon,
+            LucideIcons.moon,
             'Dark Mode',
             () {
               // TODO: Activer/désactiver le mode sombre
@@ -345,7 +345,7 @@ class _NewInstructorProfileScreenState extends State<NewInstructorProfileScreen>
           ),
           _buildDivider(),
           _buildActionItem(
-            LucideLucideLucideIcons.logOut,
+            LucideIcons.logOut,
             'Sign Out',
             () async {
               await AuthService.logout();

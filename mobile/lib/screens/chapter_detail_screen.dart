@@ -44,7 +44,7 @@ class ChapterDetailScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(LucideLucideLucideIcons.playCircle, color: Colors.white, size: 60),
+                      Icon(LucideIcons.playCircle, color: Colors.white, size: 60),
                       SizedBox(height: 8),
                       Text('Video Playback Placeholder', style: TextStyle(color: Colors.white)),
                     ],
@@ -96,7 +96,7 @@ class ChapterDetailScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: const Center(
-                              child: Icon(LucideLucideLucideIcons.playCircle, color: Colors.white, size: 40),
+                              child: Icon(LucideIcons.playCircle, color: Colors.white, size: 40),
                             ),
                           ),
                         ],

@@ -65,7 +65,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(LucideLucideLucideIcons.arrowLeft_ios, color: textColor, size: 20),
+          icon: Icon(LucideIcons.chevronLeft, color: textColor, size: 20),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -104,7 +104,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _buildSwitchRow(
                     title: 'Personal Data',
                     subtitle: 'Update your info to keep your account safe',
-                    icon: LucideLucideLucideIcons.userOutline,
+                    icon: LucideIcons.user,
                     iconColor: Color(0xFF8B5CF6),
                     value: _personalDataEnabled,
                     onChanged: (val) {
@@ -120,7 +120,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _buildSwitchRow(
                     title: 'Notifications',
                     subtitle: 'Listen to your course updates',
-                    icon: LucideLucideLucideIcons.bellNone,
+                    icon: LucideIcons.bell,
                     iconColor: _notificationsEnabled
                         ? Color(0xFF8B5CF6)
                         : (isDark
@@ -140,7 +140,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _buildSwitchRow(
                     title: 'Dark Mode',
                     subtitle: 'Change your screen lighting',
-                    icon: LucideLucideIcons.removeRedEyeOutlined,
+                    icon: LucideIcons.eye,
                     iconColor: Color(0xFF8B5CF6),
                     value: _darkModeEnabled,
                     onChanged: (val) {
@@ -184,7 +184,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _buildChevronRow(
                     title: 'Help Center',
                     subtitle: 'Have an issue? We can help',
-                    icon: LucideLucideLucideLucideIcons.helpCircleCircle_outline,
+                    icon: LucideIcons.helpCircle,
                     iconColor: Color(0xFF8B5CF6),
                     onTap: () {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -201,7 +201,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _buildChevronRow(
                     title: 'Privacy Policy',
                     subtitle: 'Review our terms and privacy',
-                    icon: LucideLucideIcons.privacyTipOutlined,
+                    icon: LucideIcons.shield,
                     iconColor: Color(0xFF8B5CF6),
                     onTap: () {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -332,7 +332,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             const SizedBox(width: 12),
-            Icon(LucideLucideLucideIcons.chevronRight, color: arrowColor, size: 16),
+            Icon(LucideIcons.chevronRight, color: arrowColor, size: 16),
           ],
         ),
       ),

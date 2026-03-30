@@ -94,7 +94,7 @@ class _InstructorStudentsScreenState extends State<InstructorStudentsScreen> {
         elevation: 0,
         title: Text('Learner Insights', style: TextStyle(color: kSlate900, fontWeight: FontWeight.w800, fontSize: 18)),
         leading: IconButton(
-          icon: Icon(LucideLucideLucideIcons.arrowLeft_ios_new_rounded, color: kSlate900, size: 18),
+          icon: Icon(LucideIcons.arrowLeft_ios_new_rounded, color: kSlate900, size: 18),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -137,7 +137,7 @@ class _InstructorStudentsScreenState extends State<InstructorStudentsScreen> {
               decoration: InputDecoration(
                 hintText: 'Search learners...',
                 hintStyle: TextStyle(color: kSlate400.withValues(alpha: 0.6), fontSize: 14),
-                prefixIcon: Icon(LucideLucideLucideLucideIcons.searchRounded, color: kSlate400, size: 20),
+                prefixIcon: Icon(LucideIcons.searchRounded, color: kSlate400, size: 20),
                 border: InputBorder.none,
                 contentPadding: const EdgeInsets.symmetric(vertical: 16),
               ),
@@ -175,7 +175,7 @@ class _InstructorStudentsScreenState extends State<InstructorStudentsScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(LucideLucideLucideIcons.userSearchRounded, size: 20, color: kSlate400.withValues(alpha: 0.3)),
+          Icon(LucideIcons.userSearchRounded, size: 20, color: kSlate400.withValues(alpha: 0.3)),
           const SizedBox(height: 16),
           Text('No learners found', style: TextStyle(color: kSlate900, fontSize: 14, fontWeight: FontWeight.bold)),
           Text('Try adjusting your search filters', style: TextStyle(color: kSlate400, fontSize: 14)),
@@ -252,8 +252,8 @@ class _InstructorStudentsScreenState extends State<InstructorStudentsScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildMiniStat(LucideLucideIcons.calendarTodayRounded, 'Joined ${student['enrollmentDate']}'),
-              _buildMiniStat(LucideLucideLucideIcons.clockRounded, 'Active ${student['lastActivity']}'),
+              _buildMiniStat(LucideIcons.calendarTodayRounded, 'Joined ${student['enrollmentDate']}'),
+              _buildMiniStat(LucideIcons.clockRounded, 'Active ${student['lastActivity']}'),
             ],
           ),
         ],

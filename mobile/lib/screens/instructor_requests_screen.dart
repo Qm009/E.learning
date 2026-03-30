@@ -121,7 +121,7 @@ class _InstructorRequestsScreenState extends State<InstructorRequestsScreen> {
         foregroundColor: Color(0xFF1E293B),
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(LucideLucideLucideIcons.arrowLeft_ios_new_rounded, size: 18),
+          icon: const Icon(LucideIcons.arrowLeft_ios_new_rounded, size: 18),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -133,7 +133,7 @@ class _InstructorRequestsScreenState extends State<InstructorRequestsScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(LucideLucideLucideIcons.alertCircle, size: 20, color: Colors.red),
+                      const Icon(LucideIcons.alertCircle, size: 20, color: Colors.red),
                       const SizedBox(height: 16),
                       Text(_error!, textAlign: TextAlign.center),
                       const SizedBox(height: 16),
@@ -149,7 +149,7 @@ class _InstructorRequestsScreenState extends State<InstructorRequestsScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(LucideLucideLucideLucideLucideIcons.checkCircle, size: 20, color: Colors.green),
+                          Icon(LucideIcons.checkCircle, size: 20, color: Colors.green),
                           SizedBox(height: 16),
                           Text(
                             'Aucune demande en attente',
@@ -230,16 +230,16 @@ class _InstructorRequestsScreenState extends State<InstructorRequestsScreen> {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          _buildDetailRow(LucideLucideLucideIcons.briefcase, 'Expertise', request['expertise'] ?? 'Non précisé'),
+                                          _buildDetailRow(LucideIcons.briefcase, 'Expertise', request['expertise'] ?? 'Non précisé'),
                                           const SizedBox(height: 8),
-                                          _buildDetailRow(LucideLucideIcons.message, 'Motivation', request['motivation'] ?? 'Non précisé'),
+                                          _buildDetailRow(LucideIcons.message, 'Motivation', request['motivation'] ?? 'Non précisé'),
                                         ],
                                       ),
                                     ),
                                     const SizedBox(height: 12),
                                   Row(
                                     children: [
-                                      const Icon(LucideLucideIcons.calendarToday, size: 20, color: Colors.grey),
+                                      const Icon(LucideIcons.calendarToday, size: 20, color: Colors.grey),
                                       const SizedBox(width: 4),
                                       Text(
                                         'Demandé le: ${_formatDate(request['createdAt'])}',
@@ -256,7 +256,7 @@ class _InstructorRequestsScreenState extends State<InstructorRequestsScreen> {
                                       Expanded(
                                         child: ElevatedButton.icon(
                                           onPressed: () => _approveInstructor(request['_id']),
-                                          icon: const Icon(LucideLucideLucideLucideIcons.check, size: 18),
+                                          icon: const Icon(LucideIcons.check, size: 18),
                                           label: const Text('Approuver'),
                                           style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.green,
@@ -269,7 +269,7 @@ class _InstructorRequestsScreenState extends State<InstructorRequestsScreen> {
                                       Expanded(
                                         child: ElevatedButton.icon(
                                           onPressed: () => _rejectInstructor(request['_id']),
-                                          icon: const Icon(LucideLucideLucideIcons.x, size: 18),
+                                          icon: const Icon(LucideIcons.x, size: 18),
                                           label: const Text('Rejeter'),
                                           style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.red,

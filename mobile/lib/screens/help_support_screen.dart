@@ -30,7 +30,7 @@ class HelpSupportScreen extends StatelessWidget {
               context,
               'Contact Support',
               'Email our team for personalized help',
-              LucideLucideLucideIcons.mailOutlined,
+              LucideIcons.mailOutlined,
               Color(0xFF10B981),
               () {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -43,7 +43,7 @@ class HelpSupportScreen extends StatelessWidget {
               context,
               'Live Chat',
               'Chat with an agent for immediate help',
-              LucideLucideLucideIcons.messageCircle_bubble_outline,
+              LucideIcons.messageCircle_bubble_outline,
               Color(0xFF3B82F6),
               () {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -139,7 +139,7 @@ class HelpSupportScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const Icon(LucideLucideLucideIcons.chevronRight,
+            const Icon(LucideIcons.chevronRight,
                 color: Color(0xFFCBD5E1), size: 16),
           ],
         ),

@@ -295,9 +295,9 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
               ],
             ),
           ),
-          _buildGlassIconButton(LucideLucideLucideIcons.bellNoneRounded, () {}),
+          _buildGlassIconButton(LucideIcons.bellNoneRounded, () {}),
           const SizedBox(width: 12),
-          _buildGlassIconButton(LucideLucideLucideIcons.logOut_rounded, _logout),
+          _buildGlassIconButton(LucideIcons.logOut_rounded, _logout),
         ],
       ),
     );
@@ -326,11 +326,11 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
       physics: const BouncingScrollPhysics(),
       child: Row(
         children: [
-          _buildGlassStatCard('Total Users', _stat1.toString(), '+12.5%', LucideLucideLucideIcons.usersAltRounded, [Color(0xFF38BDF8), Color(0xFF0EA5E9)]),
-          _buildGlassStatCard('Instructors', _stat2.toString(), '+3.2%', LucideLucideLucideIcons.graduationCap, [Color(0xFF818CF8), Color(0xFF6366F1)]),
-          _buildGlassStatCard('Live Courses', _stat3.toString(), '+8.0%', LucideLucideIcons.autoStoriesRounded, [Color(0xFFF472B6), Color(0xFFEC4899)]),
+          _buildGlassStatCard('Total Users', _stat1.toString(), '+12.5%', LucideIcons.usersAltRounded, [Color(0xFF38BDF8), Color(0xFF0EA5E9)]),
+          _buildGlassStatCard('Instructors', _stat2.toString(), '+3.2%', LucideIcons.graduationCap, [Color(0xFF818CF8), Color(0xFF6366F1)]),
+          _buildGlassStatCard('Live Courses', _stat3.toString(), '+8.0%', LucideIcons.autoStoriesRounded, [Color(0xFFF472B6), Color(0xFFEC4899)]),
           if (_stat4 > 0)
-            _buildGlassStatCard('Pending', _stat4.toString(), 'Awaiting', LucideLucideIcons.pendingActionsRounded, [Color(0xFFFFA500), Color(0xFFFF6B00)]),
+            _buildGlassStatCard('Pending', _stat4.toString(), 'Awaiting', LucideIcons.pendingActionsRounded, [Color(0xFFFFA500), Color(0xFFFF6B00)]),
         ],
       ),
     );
@@ -370,7 +370,7 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
           const SizedBox(height: 12),
           Row(
             children: [
-              Icon(LucideLucideIcons.trendingUpRounded, color: Color(0xFF10B981), size: 14),
+              Icon(LucideIcons.trendingUpRounded, color: Color(0xFF10B981), size: 14),
               const SizedBox(width: 4),
               Text(trend, style: TextStyle(color: Color(0xFF10B981), fontSize: 11, fontWeight: FontWeight.bold)),
             ],
@@ -393,9 +393,9 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
   Widget _buildActionGrid() {
     return Row(
       children: [
-        Expanded(child: _buildActionCard('Add User', LucideLucideLucideIcons.userAddAlt1Rounded, Color(0xFF38BDF8), () => Navigator.pushNamed(context, '/register'))),
+        Expanded(child: _buildActionCard('Add User', LucideIcons.userAddAlt1Rounded, Color(0xFF38BDF8), () => Navigator.pushNamed(context, '/register'))),
         const SizedBox(width: 16),
-        Expanded(child: _buildActionCard('New Course', LucideLucideLucideIcons.plusCircleOutlineRounded, Color(0xFF818CF8), () {})),
+        Expanded(child: _buildActionCard('New Course', LucideIcons.plusCircleOutlineRounded, Color(0xFF818CF8), () {})),
       ],
     );
   }
@@ -469,7 +469,7 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
               ],
             ),
           ),
-          Icon(LucideLucideLucideIcons.moreVertical_rounded, color: Color(0xFF94A3B8)),
+          Icon(LucideIcons.moreVertical_rounded, color: Color(0xFF94A3B8)),
         ],
       ),
     );

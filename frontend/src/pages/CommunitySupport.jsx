@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CommunitySupport.css';
-import { Book, BookOpen, Clipboard, Heart, MessageSquare, Rocket, Search, Star, User } from 'lucide-react';
+import { Book, BookOpen, Calendar, Check, Clipboard, Heart, LifeBuoy, Map, MessageSquare, MonitorPlay, Pin, Rocket, Search, Star, User, Video, Wrench } from 'lucide-react';
 
 
 const CommunitySupport = () => {
@@ -150,7 +150,7 @@ Généré le ${new Date().toLocaleDateString('fr-FR')}
     ));
 
     // Afficher un message de confirmation
-    alert(`📁 ${resource.title} téléchargé avec succès !`);
+    alert(`${resource.title} téléchargé avec succès !`);
   };
 
   const filteredDiscussions = discussions.filter(discussion =>
@@ -208,14 +208,14 @@ Généré le ${new Date().toLocaleDateString('fr-FR')}
               className={`nav-tab ${activeTab === 'events' ? 'active' : ''}`}
               onClick={() => setActiveTab('events')}
             >
-              <span className="nav-icon">📅</span>
+              <span className="nav-icon"><span className="icon-wrapper"><Calendar size={18} /></span></span>
               <span className="nav-text">Events</span>
             </button>
             <button 
               className={`nav-tab ${activeTab === 'help' ? 'active' : ''}`}
               onClick={() => setActiveTab('help')}
             >
-              <span className="nav-icon">🆘</span>
+              <span className="nav-icon"><span className="icon-wrapper"><LifeBuoy size={18} /></span></span>
               <span className="nav-text">Get Help</span>
             </button>
           </div>
@@ -259,7 +259,7 @@ Généré le ${new Date().toLocaleDateString('fr-FR')}
                           <span className="discussion-time">{discussion.time}</span>
                         </div>
                       </div>
-                      {discussion.isPinned && <span className="pinned-badge">📌 Pinned</span>}
+                      {discussion.isPinned && <span className="pinned-badge"><span className="icon-wrapper"><Pin size={14} /></span> Pinned</span>}
                     </div>
                     
                     <div className="discussion-content">
@@ -298,9 +298,9 @@ Généré le ${new Date().toLocaleDateString('fr-FR')}
                 {resourcesData.map(resource => (
                   <div key={resource.id} className="resource-card">
                     <div className="resource-icon">
-                      {resource.type === 'roadmap' && '🗺️'}
-                      {resource.type === 'cheatsheet' && '<span className="icon-wrapper"><Clipboard size={18} /></span>'}
-                      {resource.type === 'guide' && '<span className="icon-wrapper"><Book size={18} /></span>'}
+                      {resource.type === 'roadmap' && <span className="icon-wrapper"><Map size={18} /></span>}
+                      {resource.type === 'cheatsheet' && <span className="icon-wrapper"><Clipboard size={18} /></span>}
+                      {resource.type === 'guide' && <span className="icon-wrapper"><Book size={18} /></span>}
                     </div>
                     
                     <div className="resource-content">
@@ -310,7 +310,7 @@ Généré le ${new Date().toLocaleDateString('fr-FR')}
                     
                     <div className="resource-meta">
                       <div className="resource-stats">
-                        <span className="stat">⬇️ {resource.downloads}</span>
+                        <span className="stat"><span className="icon-wrapper"><Rocket size={14} /></span> {resource.downloads}</span>
                         <span className="stat"><span className="icon-wrapper"><Star size={18} /></span> {resource.rating}</span>
                       </div>
                       <button 
@@ -344,9 +344,9 @@ Généré le ${new Date().toLocaleDateString('fr-FR')}
                     
                     <div className="event-content">
                       <span className="event-type">
-                        {event.type === 'workshop' && '🛠️ Workshop'}
-                        {event.type === 'study-group' && '<span className="icon-wrapper"><BookOpen size={18} /></span> Study Group'}
-                        {event.type === 'webinar' && '🎥 Webinar'}
+                        {event.type === 'workshop' && <><span className="icon-wrapper"><Wrench size={14} /></span> Workshop</>}
+                        {event.type === 'study-group' && <><span className="icon-wrapper"><BookOpen size={14} /></span> Study Group</>}
+                        {event.type === 'webinar' && <><span className="icon-wrapper"><Video size={14} /></span> Webinar</>}
                       </span>
                       <h3>{event.title}</h3>
                       <div className="attendee-info">
@@ -398,14 +398,14 @@ Généré le ${new Date().toLocaleDateString('fr-FR')}
                   </ul>
                 </div>
 
-                <div className="help-category">
-                  <h3>🆘 Contact Support</h3>
+                <div className="help-category full-width">
+                  <h3><span className="icon-wrapper"><LifeBuoy size={18} /></span> Contact Support</h3>
                   <div className="contact-options">
                     <div className="contact-card ai-assistant-card">
-                      <h4>🤖 AI Assistant</h4>
-                      <p>Obtenez des réponses instantanées à vos questions 24/7</p>
+                      <h4><span className="icon-wrapper"><Brain size={18} /></span> AI Assistant</h4>
+                      <p>Get instant answers to your questions 24/7</p>
                       <Link to="/ai-assistant" className="btn btn-primary">
-                        <span className="icon-wrapper"><MessageSquare size={18} /></span> Chatter avec l'IA
+                        <span className="icon-wrapper"><MessageSquare size={18} /></span> Chat with AI
                       </Link>
                     </div>
                     
@@ -416,13 +416,13 @@ Généré le ${new Date().toLocaleDateString('fr-FR')}
                     </div>
                     
                     <div className="contact-card">
-                      <h4>📧 Email Support</h4>
+                      <h4><span className="icon-wrapper"><MonitorPlay size={18} /></span> Email Support</h4>
                       <p>Get help via email within 24 hours</p>
                       <button className="btn btn-outline">Send Email</button>
                     </div>
                     
                     <div className="contact-card">
-                      <h4>📞 Phone Support</h4>
+                      <h4><span className="icon-wrapper"><Smartphone size={18} /></span> Phone Support</h4>
                       <p>Mon-Fri, 9AM-6PM EST</p>
                       <button className="btn btn-outline">Call Now</button>
                     </div>

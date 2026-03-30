@@ -75,10 +75,10 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildNavItem(LucideLucideLucideLucideLucideIcons.home, 'Home', 0),
-                _buildNavItem(LucideLucideLucideIcons.graduationCap, 'Courses', 1),
-                _buildNavItem(LucideLucideLucideLucideLucideIcons.helpCircleCircleCircle, 'Quiz', 2),
-                _buildNavItem(LucideLucideLucideIcons.user, 'Profile', 3),
+                _buildNavItem(LucideIcons.home, 'Home', 0),
+                _buildNavItem(LucideIcons.graduationCap, 'Courses', 1),
+                _buildNavItem(LucideIcons.helpCircleCircleCircle, 'Quiz', 2),
+                _buildNavItem(LucideIcons.user, 'Profile', 3),
               ],
             ),
           ),
@@ -219,11 +219,11 @@ class HomeTab extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           
-          _buildAdminActionCard(context, 'Manage Users', LucideLucideLucideIcons.users, Colors.blue),
+          _buildAdminActionCard(context, 'Manage Users', LucideIcons.users, Colors.blue),
           const SizedBox(height: 12),
-          _buildAdminActionCard(context, 'Manage Courses', LucideLucideLucideLucideIcons.book, Colors.green),
+          _buildAdminActionCard(context, 'Manage Courses', LucideIcons.book, Colors.green),
           const SizedBox(height: 12),
-          _buildAdminActionCard(context, 'Approve Instructors', LucideLucideLucideIcons.userAdd, Colors.orange),
+          _buildAdminActionCard(context, 'Approve Instructors', LucideIcons.userAdd, Colors.orange),
         ],
       ),
     );
@@ -257,7 +257,7 @@ class HomeTab extends StatelessWidget {
               ),
             ),
           ),
-          const Icon(LucideLucideLucideIcons.chevronRight, color: Colors.grey),
+          const Icon(LucideIcons.chevronRight, color: Colors.grey),
         ],
       ),
     );
@@ -317,7 +317,7 @@ class HomeTab extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Icon(
-                  LucideLucideLucideIcons.playCircle,
+                  LucideIcons.playCircle,
                   color: Color(0xFF00C6FF),
                   size: 20,
                 ),

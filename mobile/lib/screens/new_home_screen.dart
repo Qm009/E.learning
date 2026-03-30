@@ -42,7 +42,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                       return Container(
                         color: Color(0xFF00C6FF),
                         child: Center(
-                          child: Icon(LucideLucideLucideIcons.graduationCap, size: 80, color: Theme.of(context).cardColor,),
+                          child: Icon(LucideIcons.graduationCap, size: 80, color: Theme.of(context).cardColor,),
                         ),
                       );
                     },
@@ -158,10 +158,10 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      _buildStatItem('10,000+', 'Students', LucideLucideLucideIcons.users),
-                      _buildStatItem('500+', 'Courses', LucideLucideLucideLucideIcons.book),
-                      _buildStatItem('50+', 'Instructors', LucideLucideLucideIcons.graduationCap),
-                      _buildStatItem('95%', 'Satisfaction', LucideLucideLucideLucideIcons.star),
+                      _buildStatItem('10,000+', 'Students', LucideIcons.users),
+                      _buildStatItem('500+', 'Courses', LucideIcons.book),
+                      _buildStatItem('50+', 'Instructors', LucideIcons.graduationCap),
+                      _buildStatItem('95%', 'Satisfaction', LucideIcons.star),
                     ],
                   ),
                 ],
@@ -188,17 +188,17 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                       _buildFeatureItem(
                         'Flexible Learning',
                         'Study whenever you want, wherever you want',
-                        LucideLucideIcons.schedule,
+                        LucideIcons.schedule,
                       ),
                       _buildFeatureItem(
                         'Quality Courses',
                         'Content created by domain experts',
-                        LucideLucideIcons.verified,
+                        LucideIcons.verified,
                       ),
                       _buildFeatureItem(
                         'Recognized Certificates',
                         'Get valued certificates',
-                        LucideLucideIcons.emojiEvents,
+                        LucideIcons.emojiEvents,
                       ),
                     ],
                   ),
@@ -321,7 +321,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(LucideLucideLucideIcons.graduationCap, color: Theme.of(context).cardColor, size: 32),
+                      Icon(LucideIcons.graduationCap, color: Theme.of(context).cardColor, size: 32),
                       const SizedBox(width: 12),
                       Text(
                         'E-LEARNING',
@@ -435,7 +435,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
               errorBuilder: (context, error, stackTrace) {
                 return Container(
                   height: 1, color: Colors.grey[300],
-                  child: const Icon(LucideLucideLucideLucideIcons.book, color: Colors.grey, size: 50),
+                  child: const Icon(LucideIcons.book, color: Colors.grey, size: 50),
                 );
               },
             ),
@@ -465,7 +465,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                   children: [
                     Row(
                       children: [
-                        const Icon(LucideLucideLucideLucideIcons.star, size: 20, color: Colors.amber),
+                        const Icon(LucideIcons.star, size: 20, color: Colors.amber),
                         Text(
                           rating,
                           style: const TextStyle(fontSize: 14),

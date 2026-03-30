@@ -295,7 +295,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
                             const SizedBox(height: 8),
                             Row(
                               children: [
-                                Icon(LucideLucideLucideIcons.user, color: Theme.of(context).cardColor, size: 16),
+                                Icon(LucideIcons.user, color: Theme.of(context).cardColor, size: 16),
                                 const SizedBox(width: 6),
                                 Text(
                                   _course!['instructor'],
@@ -305,7 +305,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
                                   ),
                                 ),
                                 const SizedBox(width: 16),
-                                const Icon(LucideLucideLucideLucideIcons.star, color: Colors.amber, size: 16),
+                                const Icon(LucideIcons.star, color: Colors.amber, size: 16),
                                 Text(
                                   '${_course!['rating']}',
                                   style: TextStyle(
@@ -327,7 +327,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
                           ),
                           child: IconButton(
                             icon: Icon(
-                              _isBookmarked ? LucideLucideLucideLucideLucideLucideIcons.bookmark : LucideLucideLucideLucideLucideLucideIcons.bookmarkBorder,
+                              _isBookmarked ? LucideIcons.bookmark : LucideIcons.bookmarkBorder,
                               color: Theme.of(context).cardColor,
                             ),
                             onPressed: () {
@@ -393,7 +393,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
                       onPressed: _currentLessonIndex > 0
                           ? () => _navigateToLesson(_currentModuleIndex, _currentLessonIndex - 1)
                           : null,
-                      icon: const Icon(LucideLucideIcons.skipPrevious),
+                      icon: const Icon(LucideIcons.skipPrevious),
                       label: const Text('Previous lesson'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.grey[300],
@@ -407,7 +407,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
                       onPressed: _currentLessonIndex < _modules[_currentModuleIndex]['lessons'].length - 1
                           ? () => _navigateToLesson(_currentModuleIndex, _currentLessonIndex + 1)
                           : null,
-                      icon: const Icon(LucideLucideIcons.skipNext),
+                      icon: const Icon(LucideIcons.skipNext),
                       label: const Text('Next lesson'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF00BCD4),
@@ -480,9 +480,9 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
           if (content['resources'] != null) ...[
             ...content['resources'].map((resource) {
               return ListTile(
-                leading: Icon(LucideLucideIcons.link, color: Color(0xFF00BCD4)),
+                leading: Icon(LucideIcons.link, color: Color(0xFF00BCD4)),
                 title: Text(resource['title']),
-                trailing: const Icon(LucideLucideIcons.openInNew),
+                trailing: const Icon(LucideIcons.openInNew),
                 onTap: () {},
               );
             }).toList(),
@@ -493,7 +493,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: _markLessonComplete,
-                icon: const Icon(LucideLucideLucideLucideLucideIcons.checkCircle),
+                icon: const Icon(LucideIcons.checkCircle),
                 label: const Text('Mark as completed'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
@@ -538,7 +538,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
                         color: Color(0xFF00BCD4).withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Icon(LucideLucideLucideLucideIcons.menuBookRounded, color: Color(0xFF00BCD4), size: 20),
+                      child: Icon(LucideIcons.menuBookRounded, color: Color(0xFF00BCD4), size: 20),
                     ),
                     const SizedBox(width: 12),
                     const Text(
@@ -580,7 +580,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
             padding: EdgeInsets.only(left: 4, bottom: 12),
             child: Row(
               children: [
-                Icon(LucideLucideIcons.ondemandVideoRounded, color: Colors.grey, size: 18),
+                Icon(LucideIcons.ondemandVideoRounded, color: Colors.grey, size: 18),
                 SizedBox(width: 8),
                 Text(
                   'Video Support (supplementary to text)',
@@ -659,7 +659,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
                                     child: Container(
                                       padding: const EdgeInsets.all(16),
                                       decoration: BoxDecoration(color: Color(0xFF00BCD4), shape: BoxShape.circle, boxShadow: [BoxShadow(blurRadius: 5, spreadRadius: 2.5)]),
-                                      child: Icon(LucideLucideLucideIcons.playRounded, color: Theme.of(context).cardColor, size: 48),
+                                      child: Icon(LucideIcons.playRounded, color: Theme.of(context).cardColor, size: 48),
                                     ),
                                   ),
                                 ),
@@ -746,7 +746,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
                                 }
                               }
                             },
-                            icon: const Icon(LucideLucideIcons.openInNew, size: 14),
+                            icon: const Icon(LucideIcons.openInNew, size: 14),
                             label: const Text('Open on YouTube', style: TextStyle(fontSize: 12)),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.black.withValues(alpha: 0.8),
@@ -793,7 +793,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
                       padding: const EdgeInsets.only(bottom: 8),
                       child: Row(
                         children: [
-                          Icon(LucideLucideLucideLucideLucideIcons.checkCircle, color: Color(0xFF00BCD4), size: 20),
+                          Icon(LucideIcons.checkCircle, color: Color(0xFF00BCD4), size: 20),
                           const SizedBox(width: 12),
                           Expanded(
                             child: Text(
@@ -849,7 +849,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
                         ),
                         child: Row(
                           children: [
-                            Icon(LucideLucideIcons.link, color: Color(0xFF00BCD4)),
+                            Icon(LucideIcons.link, color: Color(0xFF00BCD4)),
                             const SizedBox(width: 12),
                             Expanded(
                               child: Text(
@@ -859,7 +859,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
                                 ),
                               ),
                             ),
-                            Icon(LucideLucideIcons.openInNew, color: Colors.grey.shade600),
+                            Icon(LucideIcons.openInNew, color: Colors.grey.shade600),
                           ],
                         ),
                       ),
@@ -878,7 +878,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: _markLessonComplete,
-                icon: const Icon(LucideLucideLucideLucideLucideIcons.checkCircle),
+                icon: const Icon(LucideIcons.checkCircle),
                 label: const Text('Mark as completed'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
@@ -947,7 +947,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
                         padding: const EdgeInsets.only(bottom: 8),
                         child: Row(
                           children: [
-                            Icon(LucideLucideLucideLucideLucideIcons.checkCircle, color: Color(0xFF00BCD4), size: 20),
+                            Icon(LucideIcons.checkCircle, color: Color(0xFF00BCD4), size: 20),
                             const SizedBox(width: 12),
                             Expanded(
                               child: Text(
@@ -974,7 +974,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: _markLessonComplete,
-                  icon: const Icon(LucideLucideLucideLucideLucideIcons.checkCircle),
+                  icon: const Icon(LucideIcons.checkCircle),
                   label: const Text('Mark as completed'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
@@ -1068,7 +1068,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: _markLessonComplete,
-                icon: const Icon(LucideLucideLucideLucideLucideIcons.checkCircle),
+                icon: const Icon(LucideIcons.checkCircle),
                 label: const Text('Exercise completed'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
@@ -1142,7 +1142,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: _markLessonComplete,
-                icon: const Icon(LucideLucideLucideLucideLucideIcons.checkCircle),
+                icon: const Icon(LucideIcons.checkCircle),
                 label: const Text('Quiz completed'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
@@ -1206,7 +1206,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
                       ),
                       child: Center(
                         child: isCorrect
-                            ? Icon(LucideLucideLucideLucideIcons.check, color: Theme.of(context).cardColor, size: 16)
+                            ? Icon(LucideIcons.check, color: Theme.of(context).cardColor, size: 16)
                             : Text(
                                 '${optionIndex + 1}',
                                 style: TextStyle(
@@ -1239,7 +1239,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
               ),
               child: Row(
                 children: [
-                  const Icon(LucideLucideLucideLucideIcons.info, color: Colors.blue, size: 20),
+                  const Icon(LucideIcons.info, color: Colors.blue, size: 20),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
@@ -1332,7 +1332,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
                         ),
                       );
                     },
-                    icon: const Icon(LucideLucideIcons.save),
+                    icon: const Icon(LucideIcons.save),
                     label: const Text('Save'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF00BCD4),
@@ -1448,7 +1448,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> with TickerProv
                         ),
                       );
                     },
-                    icon: const Icon(LucideLucideIcons.send),
+                    icon: const Icon(LucideIcons.send),
                     label: const Text('Send'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF00BCD4),

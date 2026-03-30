@@ -51,7 +51,7 @@ class ExpertPathScreen extends StatelessWidget {
       
       elevation: 0,
       leading: IconButton(
-        icon: const Icon(LucideLucideLucideIcons.arrowLeft_ios_new_rounded,  size: 20),
+        icon: const Icon(LucideIcons.arrowLeft_ios_new_rounded,  size: 20),
         onPressed: () => Navigator.pop(context),
       ),
       flexibleSpace: FlexibleSpaceBar(
@@ -276,7 +276,7 @@ class ExpertPathScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Icon(LucideLucideIcons.verifiedRounded, color: Color(0xFF38BDF8).withValues(alpha: 0.6), size: 20),
+                Icon(LucideIcons.verifiedRounded, color: Color(0xFF38BDF8).withValues(alpha: 0.6), size: 20),
               ],
             ),
           ),

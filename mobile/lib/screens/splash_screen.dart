@@ -154,7 +154,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                           ],
                         ),
                         child: const Icon(
-                          LucideLucideLucideIcons.graduationCap,
+                          LucideIcons.graduationCap,
                           size: 20, color: Color(0xFF00BCD4),
                         ),
                       ),

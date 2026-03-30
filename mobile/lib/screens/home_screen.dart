@@ -96,25 +96,31 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   '👋 Welcome to',
                   style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 14),
                 ),
-                const Text(
-                  'EduPortal',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 26,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: -0.5,
-                  ),
+                Row(
+                  children: [
+                    Image.asset('assets/images/logo.png', height: 40),
+                    const SizedBox(width: 8),
+                    const Text(
+                      'EduPortal',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 26,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: -0.5,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
           _glassButton(
-            icon: LucideLucideLucideIcons.userOutlineRounded,
+            icon: LucideIcons.userOutlineRounded,
             onTap: () => Navigator.pushNamed(context, '/login'),
           ),
           const SizedBox(width: 10),
           _glassButton(
-            icon: LucideLucideLucideLucideIcons.searchRounded,
+            icon: LucideIcons.searchRounded,
             onTap: () => Navigator.pushNamed(context, '/courses'),
           ),
         ],
@@ -173,7 +179,14 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 color: Colors.white.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Text('🚀 World-class Education', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600)),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(LucideIcons.rocket, color: Colors.white, size: 14),
+                  const SizedBox(width: 6),
+                  const Text('World-class Education', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600)),
+                ],
+              ),
             ),
             const SizedBox(height: 14),
             const Text(
@@ -255,11 +268,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   Widget _buildCategoriesRow(BuildContext context) {
     final cats = [
-      {'label': 'Development', 'icon': '💻', 'color': Color(0xFF38BDF8)},
-      {'label': 'Design', 'icon': '🎨', 'color': Color(0xFF818CF8)},
-      {'label': 'Business', 'icon': '📈', 'color': Color(0xFF34D399)},
-      {'label': 'Marketing', 'icon': '📣', 'color': Color(0xFFF472B6)},
-      {'label': 'Science', 'icon': '🔬', 'color': Color(0xFFFBBF24)},
+      {'label': 'Development', 'icon': LucideIcons.code, 'color': Color(0xFF38BDF8)},
+      {'label': 'Design', 'icon': LucideIcons.palette, 'color': Color(0xFF818CF8)},
+      {'label': 'Business', 'icon': LucideIcons.briefcase, 'color': Color(0xFF34D399)},
+      {'label': 'Marketing', 'icon': LucideIcons.megaphone, 'color': Color(0xFFF472B6)},
+      {'label': 'Science', 'icon': LucideIcons.flaskConical, 'color': Color(0xFFFBBF24)},
     ];
 
     return Padding(
@@ -286,7 +299,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(cat['icon'] as String, style: const TextStyle(fontSize: 26)),
+                    Icon(cat['icon'] as IconData, color: cat['color'] as Color, size: 28),
                     const SizedBox(height: 6),
                     Text(cat['label'] as String, style: TextStyle(color: cat['color'] as Color, fontSize: 11, fontWeight: FontWeight.w600), textAlign: TextAlign.center),
                   ],
@@ -301,10 +314,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   Widget _buildFeatureGrid(BuildContext context) {
     final features = [
-      {'icon': LucideLucideLucideLucideIcons.menuBookRounded, 'title': 'Expert Courses', 'sub': 'Learn from the best', 'color': Color(0xFF38BDF8), 'route': '/expert-courses'},
-      {'icon': LucideLucideLucideIcons.briefcasespacePremiumRounded, 'title': 'Certificates', 'sub': 'Boost your career', 'color': Color(0xFFF472B6), 'route': '/certified-degree'},
-      {'icon': LucideLucideLucideIcons.usersRounded, 'title': 'Community', 'sub': 'Learn together', 'color': Color(0xFF34D399), 'route': '/community-support'},
-      {'icon': LucideLucideLucideLucideIcons.starRounded, 'title': 'Top Quality', 'sub': 'Vetted content', 'color': Color(0xFFFBBF24), 'route': '/quality-education'},
+      {'icon': LucideIcons.menuBookRounded, 'title': 'Expert Courses', 'sub': 'Learn from the best', 'color': Color(0xFF38BDF8), 'route': '/expert-courses'},
+      {'icon': LucideIcons.briefcasespacePremiumRounded, 'title': 'Certificates', 'sub': 'Boost your career', 'color': Color(0xFFF472B6), 'route': '/certified-degree'},
+      {'icon': LucideIcons.usersRounded, 'title': 'Community', 'sub': 'Learn together', 'color': Color(0xFF34D399), 'route': '/community-support'},
+      {'icon': LucideIcons.starRounded, 'title': 'Top Quality', 'sub': 'Vetted content', 'color': Color(0xFFFBBF24), 'route': '/quality-education'},
     ];
 
     return Padding(
@@ -358,7 +371,14 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         ),
         child: Column(
           children: [
-            const Text('🎓 Ready to Start Learning?', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(LucideIcons.graduationCap, color: Color(0xFF38BDF8), size: 24),
+                const SizedBox(width: 10),
+                const Text('Ready to Start Learning?', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+              ],
+            ),
             const SizedBox(height: 8),
             Text('Join thousands of students on EduPortal today.', style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 13), textAlign: TextAlign.center),
             const SizedBox(height: 18),
@@ -390,10 +410,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _NavItem2(icon: LucideLucideLucideLucideIcons.homeFilled, label: 'Home', isActive: true, onTap: () {}),
-          _NavItem2(icon: LucideLucideLucideLucideIcons.menuBookRounded, label: 'Courses', onTap: () => Navigator.pushNamed(context, '/courses')),
-          _NavItem2(icon: LucideLucideLucideIcons.layoutDashboard_rounded, label: 'Dashboard', onTap: () => Navigator.pushNamed(context, '/dashboard')),
-          _NavItem2(icon: LucideLucideLucideIcons.userOutlineRounded, label: 'Profile', onTap: () => Navigator.pushNamed(context, '/login')),
+          _NavItem2(icon: LucideIcons.homeFilled, label: 'Home', isActive: true, onTap: () {}),
+          _NavItem2(icon: LucideIcons.menuBookRounded, label: 'Courses', onTap: () => Navigator.pushNamed(context, '/courses')),
+          _NavItem2(icon: LucideIcons.layoutDashboard_rounded, label: 'Dashboard', onTap: () => Navigator.pushNamed(context, '/dashboard')),
+          _NavItem2(icon: LucideIcons.userOutlineRounded, label: 'Profile', onTap: () => Navigator.pushNamed(context, '/login')),
         ],
       ),
     );

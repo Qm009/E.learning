@@ -88,7 +88,7 @@ class _AdminCoursesScreenState extends State<AdminCoursesScreen> {
           ),
         ),
         leading: IconButton(
-          icon: const Icon(LucideLucideLucideIcons.arrowLeft_ios_new_rounded,  size: 18),
+          icon: const Icon(LucideIcons.arrowLeft_ios_new_rounded,  size: 18),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -108,7 +108,7 @@ class _AdminCoursesScreenState extends State<AdminCoursesScreen> {
                   },
                   decoration: InputDecoration(
                     hintText: 'Search a course...',
-                    prefixIcon: const Icon(LucideLucideLucideLucideIcons.search),
+                    prefixIcon: const Icon(LucideIcons.search),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(color: Colors.grey[300]!),
@@ -185,7 +185,7 @@ class _AdminCoursesScreenState extends State<AdminCoursesScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(LucideLucideLucideLucideIcons.searchOff, size: 20, color: Colors.grey[400]),
+          Icon(LucideIcons.searchOff, size: 20, color: Colors.grey[400]),
           const SizedBox(height: 16),
           Text(
             'No courses found',
@@ -257,7 +257,7 @@ class _AdminCoursesScreenState extends State<AdminCoursesScreen> {
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
                       width: 1, height: 1, color: Colors.grey[300],
-                      child: const Icon(LucideLucideLucideLucideIcons.book, color: Colors.grey),
+                      child: const Icon(LucideIcons.book, color: Colors.grey),
                     );
                   },
                 ),
@@ -300,13 +300,13 @@ class _AdminCoursesScreenState extends State<AdminCoursesScreen> {
                     const SizedBox(height: 8),
                     Row(
                       children: [
-                        const Icon(LucideLucideLucideLucideIcons.star, size: 20, color: Colors.amber),
+                        const Icon(LucideIcons.star, size: 20, color: Colors.amber),
                         Text(
                           '${course['rating']}',
                           style: const TextStyle(fontSize: 12),
                         ),
                         const SizedBox(width: 12),
-                        Icon(LucideLucideLucideIcons.users, size: 20, color: Colors.grey[600]),
+                        Icon(LucideIcons.users, size: 20, color: Colors.grey[600]),
                         Text(
                           '${course['students']} students',
                           style: TextStyle(fontSize: 14, color: Colors.grey[600]),
@@ -334,7 +334,7 @@ class _AdminCoursesScreenState extends State<AdminCoursesScreen> {
               ),
               // Menu actions
               PopupMenuButton<String>(
-                icon: const Icon(LucideLucideLucideIcons.moreVertical),
+                icon: const Icon(LucideIcons.moreVertical),
                 onSelected: (value) => _handleCourseAction(value, course),
                 itemBuilder: (BuildContext context) => [
                   if (course['status'] != 'published')
@@ -342,7 +342,7 @@ class _AdminCoursesScreenState extends State<AdminCoursesScreen> {
                       value: 'publish',
                       child: Row(
                         children: [
-                          Icon(LucideLucideIcons.publish, size: 20, color: Colors.green),
+                          Icon(LucideIcons.publish, size: 20, color: Colors.green),
                           SizedBox(width: 8),
                           Text('Publish'),
                         ],
@@ -353,7 +353,7 @@ class _AdminCoursesScreenState extends State<AdminCoursesScreen> {
                       value: 'unpublish',
                       child: Row(
                         children: [
-                          Icon(LucideLucideIcons.unpublished, size: 20, color: Colors.orange),
+                          Icon(LucideIcons.unpublished, size: 20, color: Colors.orange),
                           SizedBox(width: 8),
                           Text('Unpublish'),
                         ],
@@ -363,7 +363,7 @@ class _AdminCoursesScreenState extends State<AdminCoursesScreen> {
                     value: 'delete',
                     child: Row(
                       children: [
-                        Icon(LucideLucideLucideIcons.trash, size: 20, color: Colors.red),
+                        Icon(LucideIcons.trash, size: 20, color: Colors.red),
                         SizedBox(width: 8),
                         Text('Delete'),
                       ],
@@ -373,7 +373,7 @@ class _AdminCoursesScreenState extends State<AdminCoursesScreen> {
                     value: 'view',
                     child: Row(
                       children: [
-                        Icon(LucideLucideLucideIcons.eye, size: 16),
+                        Icon(LucideIcons.eye, size: 16),
                         SizedBox(width: 8),
                         Text('View course'),
                       ],

@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import API_BASE_URL from '../api';
 import './Courses.css';
-import { BarChart, BookOpen, Clipboard, Laptop, MonitorPlay, Rocket, Search, Smartphone, Target, Users } from 'lucide-react';
+import { BarChart, BookOpen, Brain, Briefcase, Cloud, Code, Clipboard, Laptop, Lock, MonitorPlay, Rocket, Search, Smartphone, Target, Users } from 'lucide-react';
 
 
 const Courses = () => {
@@ -235,13 +235,13 @@ const Courses = () => {
   const categories = [
     { name: 'All', icon: <BookOpen size={18} /> },
     { name: 'Développement Web', icon: <Laptop size={18} /> },
-    { name: 'Framework JavaScript', icon: '⚛️' },
+    { name: 'Framework JavaScript', icon: <Code size={18} /> },
     { name: 'Data Science', icon: <BarChart size={18} /> },
-    { name: 'Design', icon: '🎨' },
-    { name: 'Backend', icon: '🔧' },
-    { name: 'Intelligence Artificielle', icon: '🤖' },
-    { name: 'Cloud', icon: '☁️' },
-    { name: 'Cybersécurité', icon: '🔒' },
+    { name: 'Design', icon: <MonitorPlay size={18} /> },
+    { name: 'Backend', icon: <Briefcase size={18} /> },
+    { name: 'Intelligence Artificielle', icon: <Brain size={18} /> },
+    { name: 'Cloud', icon: <Cloud size={18} /> },
+    { name: 'Cybersécurité', icon: <Lock size={18} /> },
     { name: 'Mobile', icon: <Smartphone size={18} /> }
   ];
 

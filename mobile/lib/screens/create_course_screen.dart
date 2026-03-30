@@ -134,7 +134,7 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
         elevation: 0,
         title: Text('Course Builder', style: TextStyle(color: kSlate900, fontWeight: FontWeight.w800, fontSize: 18)),
         leading: IconButton(
-          icon: Icon(LucideLucideLucideIcons.xRounded, color: kSlate900),
+          icon: Icon(LucideIcons.xRounded, color: kSlate900),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -149,13 +149,13 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
                 children: [
                   _buildSectionHeader('Core Details'),
                   const SizedBox(height: 16),
-                  _buildModernField(_titleController, 'Course Title', LucideLucideIcons.titleRounded),
+                  _buildModernField(_titleController, 'Course Title', LucideIcons.titleRounded),
                   const SizedBox(height: 16),
-                  _buildModernField(_categoryController, 'Category', LucideLucideLucideIcons.layoutGrid_rounded),
+                  _buildModernField(_categoryController, 'Category', LucideIcons.layoutGrid_rounded),
                   const SizedBox(height: 16),
-                  _buildModernField(_durationController, 'Total Duration', LucideLucideLucideLucideIcons.timerRounded),
+                  _buildModernField(_durationController, 'Total Duration', LucideIcons.timerRounded),
                   const SizedBox(height: 16),
-                  _buildModernField(_descriptionController, 'Description', LucideLucideIcons.descriptionRounded, maxLines: 4),
+                  _buildModernField(_descriptionController, 'Description', LucideIcons.descriptionRounded, maxLines: 4),
                   
                   const SizedBox(height: 40),
                   _buildChapterSection(),
@@ -190,7 +190,7 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(LucideLucideLucideIcons.plusPhotoAlternateRounded, color: Colors.black.withValues(alpha: 0.8), size: 48),
+              Icon(LucideIcons.plusPhotoAlternateRounded, color: Colors.black.withValues(alpha: 0.8), size: 48),
               const SizedBox(height: 12),
               Text(
                 'Add Course Thumbnail',
@@ -239,7 +239,7 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
             _buildSectionHeader('Curriculum'),
             TextButton.icon(
               onPressed: _addChapter,
-              icon: Icon(LucideLucideLucideIcons.plusCircleOutline, color: kIndigo600),
+              icon: Icon(LucideIcons.plusCircleOutline, color: kIndigo600),
               label: Text('Add Chapter', style: TextStyle(color: kIndigo600, fontWeight: FontWeight.w800)),
             ),
           ],
@@ -272,7 +272,7 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Chapter ${index + 1}', style: TextStyle(color: kIndigo600, fontWeight: FontWeight.w900, fontSize: 16)),
-              IconButton(onPressed: () => _removeChapter(index), icon: const Icon(LucideLucideLucideIcons.trashRounded, color: Colors.redAccent, size: 20)),
+              IconButton(onPressed: () => _removeChapter(index), icon: const Icon(LucideIcons.trashRounded, color: Colors.redAccent, size: 20)),
             ],
           ),
           const SizedBox(height: 12),

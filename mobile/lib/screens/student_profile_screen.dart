@@ -133,7 +133,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
 
               // Menu Items
               _buildMenuItem(
-                icon: LucideLucideLucideLucideIcons.edit,
+                icon: LucideIcons.edit,
                 title: 'Edit Profile',
                 color: Color(0xFF00C6FF),
                 onTap: () async {
@@ -145,7 +145,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                 },
               ),
               _buildMenuItem(
-                icon: LucideLucideLucideLucideIcons.settings,
+                icon: LucideIcons.settings,
                 title: 'Settings',
                 color: Color(0xFF8B5CF6),
                 onTap: () {
@@ -153,7 +153,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                 },
               ),
               _buildMenuItem(
-                icon: LucideLucideLucideLucideIcons.helpCircleCircle,
+                icon: LucideIcons.helpCircleCircle,
                 title: 'Help & Support',
                 color: Color(0xFF10B981),
                 onTap: () {
@@ -161,7 +161,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                 },
               ),
               _buildMenuItem(
-                icon: LucideLucideLucideIcons.logOut,
+                icon: LucideIcons.logOut,
                 title: 'Logout',
                 color: Color(0xFFDC2626),
                 onTap: _logout,
@@ -209,7 +209,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
           ),
         ),
         trailing: const Icon(
-          LucideLucideLucideIcons.chevronRight,
+          LucideIcons.chevronRight,
           color: Color(0xFF94A3B8),
         ),
         onTap: onTap,

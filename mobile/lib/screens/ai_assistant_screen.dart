@@ -104,7 +104,7 @@ class _AIAssistantScreenState extends State<AIAssistantScreen> {
       appBar: AppBar(
         title: const Text('EduPortal AI Assistant'),
         leading: IconButton(
-          icon: const Icon(LucideLucideLucideIcons.arrowLeft),
+          icon: const Icon(LucideIcons.arrowLeft),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -228,7 +228,7 @@ class _AIAssistantScreenState extends State<AIAssistantScreen> {
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
-                      LucideLucideIcons.sendRounded,
+                      LucideIcons.sendRounded,
                       color: Theme.of(context).cardColor,
                       size: 20,
                     ),
@@ -336,7 +336,7 @@ class _AIAssistantScreenState extends State<AIAssistantScreen> {
             const SizedBox(width: 8),
             CircleAvatar(
               backgroundColor: Color(0xFF042444),
-              radius: 20, child: Icon(LucideLucideLucideIcons.user, size: 20, color: Theme.of(context).cardColor,),
+              radius: 20, child: Icon(LucideIcons.user, size: 20, color: Theme.of(context).cardColor,),
             ),
           ],
         ],

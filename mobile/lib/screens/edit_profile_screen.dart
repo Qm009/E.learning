@@ -138,7 +138,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 controller: _nameController,
                 decoration: InputDecoration(
                   labelText: 'Full Name',
-                  prefixIcon: const Icon(LucideLucideLucideIcons.userOutline),
+                  prefixIcon: const Icon(LucideIcons.userOutline),
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
@@ -160,7 +160,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   labelText: 'Email Address',
-                  prefixIcon: const Icon(LucideLucideLucideIcons.mailOutlined),
+                  prefixIcon: const Icon(LucideIcons.mailOutlined),
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(

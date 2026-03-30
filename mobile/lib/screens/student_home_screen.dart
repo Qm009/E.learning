@@ -449,7 +449,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen>
                                       ),
                                       // Bouton IA Assistant
                                       child: IconButton(
-                                        icon: Icon(LucideLucideIcons.smartToyRounded, color: Theme.of(context).cardColor,),
+                                        icon: Icon(LucideIcons.smartToyRounded, color: Theme.of(context).cardColor,),
                                         onPressed: () {
                                           Navigator.pushNamed(context, '/ai_assistant');
                                         },
@@ -463,7 +463,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen>
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       child: IconButton(
-                                        icon: Icon(LucideLucideLucideIcons.bellNoneRounded, color: Theme.of(context).cardColor,),
+                                        icon: Icon(LucideIcons.bellNoneRounded, color: Theme.of(context).cardColor,),
                                         onPressed: () {},
                                       ),
                                     ),
@@ -490,14 +490,14 @@ class _StudentHomeScreenState extends State<StudentHomeScreen>
                                     decoration: InputDecoration(
                                       hintText: 'Search for a course, a topic...',
                                       hintStyle: TextStyle(color: Colors.black.withValues(alpha: 0.6), fontSize: 14),
-                                      prefixIcon: Icon(LucideLucideLucideLucideIcons.searchRounded, color: Theme.of(context).cardColor,),
+                                      prefixIcon: Icon(LucideIcons.searchRounded, color: Theme.of(context).cardColor,),
                                       suffixIcon: Container(
                                         margin: const EdgeInsets.all(8),
                                         decoration: BoxDecoration(
                                           color: Color(0xFF00BCD4),
                                           borderRadius: BorderRadius.circular(10),
                                         ),
-                                        child: Icon(LucideLucideIcons.tuneRounded, color: Theme.of(context).cardColor, size: 20),
+                                        child: Icon(LucideIcons.tuneRounded, color: Theme.of(context).cardColor, size: 20),
                                       ),
                                       border: InputBorder.none,
                                       contentPadding: const EdgeInsets.symmetric(vertical: 15),
@@ -534,11 +534,11 @@ class _StudentHomeScreenState extends State<StudentHomeScreen>
                   ),
                   child: Row(
                     children: [
-                      Expanded(child: _buildQuickStat('3', 'Active courses', LucideLucideLucideLucideIcons.bookRounded, Color(0xFF00BCD4))),
+                      Expanded(child: _buildQuickStat('3', 'Active courses', LucideIcons.bookRounded, Color(0xFF00BCD4))),
                       Container(width: 1, height: 30, color: Colors.grey.shade200),
-                      Expanded(child: _buildQuickStat('67%', 'Progress', LucideLucideIcons.trendingUpRounded, Color(0xFF1976D2))),
+                      Expanded(child: _buildQuickStat('67%', 'Progress', LucideIcons.trendingUpRounded, Color(0xFF1976D2))),
                       Container(width: 1, height: 30, color: Colors.grey.shade200),
-                      Expanded(child: _buildQuickStat('12 h', 'Total time', LucideLucideLucideLucideIcons.timerRounded, Color(0xFF042444))),
+                      Expanded(child: _buildQuickStat('12 h', 'Total time', LucideIcons.timerRounded, Color(0xFF042444))),
                     ],
                   ),
                 ),
@@ -571,7 +571,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen>
                           color: Colors.black.withValues(alpha: 0.25),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Icon(LucideLucideIcons.pending, color: Theme.of(context).cardColor, size: 32),
+                        child: Icon(LucideIcons.pending, color: Theme.of(context).cardColor, size: 32),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
@@ -745,7 +745,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen>
                                 ),
                               ),
                               SizedBox(width: 8),
-                              Icon(LucideLucideLucideIcons.arrowRight, color: Color(0xFF00BCD4), size: 20),
+                              Icon(LucideIcons.arrowRight, color: Color(0xFF00BCD4), size: 20),
                             ],
                           ),
                         ),
@@ -872,11 +872,11 @@ class _StudentHomeScreenState extends State<StudentHomeScreen>
                     const SizedBox(height: 4),
                     Row(
                       children: [
-                        const Icon(LucideLucideLucideLucideIcons.starRounded, color: Colors.amber, size: 16),
+                        const Icon(LucideIcons.starRounded, color: Colors.amber, size: 16),
                         const SizedBox(width: 4),
                         Text('${course['rating']}', style: TextStyle(color: Theme.of(context).cardColor, fontSize: 14, fontWeight: FontWeight.bold)),
                         const SizedBox(width: 12),
-                        Icon(LucideLucideLucideIcons.usersAltRounded, color: Theme.of(context).cardColor, size: 16),
+                        Icon(LucideIcons.usersAltRounded, color: Theme.of(context).cardColor, size: 16),
                         const SizedBox(width: 4),
                         Text('${course['students']}', style: TextStyle(color: Theme.of(context).cardColor, fontSize: 12)),
                       ],
@@ -914,7 +914,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen>
                   children: [
                     CircleAvatar(
                       radius: 12, backgroundColor: Color(0xFF042444).withValues(alpha: 0.1),
-                      child: const Icon(LucideLucideLucideIcons.playRounded, size: 16, ),
+                      child: const Icon(LucideIcons.playRounded, size: 16, ),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
@@ -990,7 +990,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen>
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Icon(
-                    LucideLucideLucideLucideLucideIcons.helpCircleCircleCircle,
+                    LucideIcons.helpCircleCircleCircle,
                     color: Theme.of(context).cardColor,
                     size: 32,
                   ),
@@ -1086,19 +1086,19 @@ class _StudentHomeScreenState extends State<StudentHomeScreen>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _buildQuizInfoChip(LucideLucideIcons.questionAnswer, '${quiz['questions']} questions'),
-                      _buildQuizInfoChip(LucideLucideIcons.schedule, quiz['duration']),
-                      _buildQuizInfoChip(LucideLucideLucideLucideIcons.star, '${quiz['points']} points'),
+                      _buildQuizInfoChip(LucideIcons.questionAnswer, '${quiz['questions']} questions'),
+                      _buildQuizInfoChip(LucideIcons.schedule, quiz['duration']),
+                      _buildQuizInfoChip(LucideIcons.star, '${quiz['points']} points'),
                     ],
                   ),
                   const SizedBox(height: 12),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _buildQuizInfoChip(LucideLucideIcons.trendingUp, 'Score: ${quiz['passingScore']}%'),
-                      _buildQuizInfoChip(LucideLucideIcons.repeat, 'Attempts: ${quiz['attempts']}/${quiz['maxAttempts']}'),
+                      _buildQuizInfoChip(LucideIcons.trendingUp, 'Score: ${quiz['passingScore']}%'),
+                      _buildQuizInfoChip(LucideIcons.repeat, 'Attempts: ${quiz['attempts']}/${quiz['maxAttempts']}'),
                       if (quiz['certificate'] ?? false)
-                        _buildQuizInfoChip(LucideLucideIcons.cardMembership, 'Certificate'),
+                        _buildQuizInfoChip(LucideIcons.cardMembership, 'Certificate'),
                     ],
                   ),
                 ],
@@ -1116,7 +1116,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen>
               ),
               child: Row(
                 children: [
-                  Icon(LucideLucideLucideIcons.clock, size: 20, color: Theme.of(context).cardColor,),
+                  Icon(LucideIcons.clock, size: 20, color: Theme.of(context).cardColor,),
                   const SizedBox(width: 12),
                   Text(
                     'Deadline: ${quiz['deadline']}',
@@ -1222,7 +1222,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen>
                     child: Container(
                       padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(color: Theme.of(context).cardColor, shape: BoxShape.circle),
-                      child: const Icon(LucideLucideIcons.favoriteBorder, size: 20, color: Colors.red),
+                      child: const Icon(LucideIcons.favoriteBorder, size: 20, color: Colors.red),
                     ),
                   ),
                 ],
@@ -1243,7 +1243,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen>
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      const Icon(LucideLucideLucideLucideIcons.starRounded, color: Colors.amber, size: 14),
+                      const Icon(LucideIcons.starRounded, color: Colors.amber, size: 14),
                       const SizedBox(width: 4),
                       Text('${course['rating']}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                       const Spacer(),

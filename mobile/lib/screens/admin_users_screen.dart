@@ -90,7 +90,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
           ),
         ),
         leading: IconButton(
-          icon: const Icon(LucideLucideLucideIcons.arrowLeft_ios_new_rounded,  size: 18),
+          icon: const Icon(LucideIcons.arrowLeft_ios_new_rounded,  size: 18),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -110,7 +110,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                   },
                   decoration: InputDecoration(
                     hintText: 'Search a user...',
-                    prefixIcon: const Icon(LucideLucideLucideLucideIcons.search),
+                    prefixIcon: const Icon(LucideIcons.search),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(color: Colors.grey[300]!),
@@ -181,7 +181,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(LucideLucideLucideLucideIcons.searchOff, size: 20, color: Colors.grey[400]),
+          Icon(LucideIcons.searchOff, size: 20, color: Colors.grey[400]),
           const SizedBox(height: 16),
           Text(
             'No users found',
@@ -333,14 +333,14 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                 ),
                 // Menu actions
                 PopupMenuButton<String>(
-                  icon: const Icon(LucideLucideLucideIcons.moreVertical),
+                  icon: const Icon(LucideIcons.moreVertical),
                   onSelected: (value) => _handleUserAction(value, user),
                   itemBuilder: (BuildContext context) => [
                     const PopupMenuItem<String>(
                       value: 'change_role',
                       child: Row(
                         children: [
-                          Icon(LucideLucideIcons.swapHoriz, size: 16),
+                          Icon(LucideIcons.swapHoriz, size: 16),
                           SizedBox(width: 8),
                           Text('Change role'),
                         ],
@@ -351,7 +351,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                         value: 'suspend',
                         child: Row(
                           children: [
-                            Icon(LucideLucideIcons.block, size: 20, color: Colors.red),
+                            Icon(LucideIcons.block, size: 20, color: Colors.red),
                             SizedBox(width: 8),
                             Text('Suspend'),
                           ],
@@ -362,7 +362,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                         value: 'reactivate',
                         child: Row(
                           children: [
-                            Icon(LucideLucideLucideLucideLucideIcons.checkCircle, size: 20, color: Colors.green),
+                            Icon(LucideIcons.checkCircle, size: 20, color: Colors.green),
                             SizedBox(width: 8),
                             Text('Reactivate'),
                           ],
@@ -372,7 +372,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                       value: 'delete',
                       child: Row(
                         children: [
-                          Icon(LucideLucideLucideIcons.trash, size: 20, color: Colors.red),
+                          Icon(LucideIcons.trash, size: 20, color: Colors.red),
                           SizedBox(width: 8),
                           Text('Delete'),
                         ],

@@ -30,10 +30,10 @@ class BottomNavBar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildNavItem(context, LucideLucideLucideLucideLucideIcons.home, 'Home', 0, '/dashboard'),
-              _buildNavItem(context, LucideLucideLucideIcons.graduationCap, 'Courses', 1, '/courses'),
-              _buildNavItem(context, LucideLucideLucideLucideLucideIcons.helpCircleCircleCircle, 'Quiz', 2, '/quiz'),
-              _buildNavItem(context, LucideLucideLucideIcons.user, 'Profile', 3, '/student_dashboard'),
+              _buildNavItem(context, LucideIcons.home, 'Home', 0, '/dashboard'),
+              _buildNavItem(context, LucideIcons.graduationCap, 'Courses', 1, '/courses'),
+              _buildNavItem(context, LucideIcons.helpCircleCircleCircle, 'Quiz', 2, '/quiz'),
+              _buildNavItem(context, LucideIcons.user, 'Profile', 3, '/student_dashboard'),
             ],
           ),
         ),
