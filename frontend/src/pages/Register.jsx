@@ -23,7 +23,7 @@ const Register = () => {
     
     if (programParam) {
       setSelectedProgram(decodeURIComponent(programParam));
-      console.log(`<span className="icon-wrapper"><Target size={18} /></span> User interested in program: ${programParam}`);
+      console.log(`User interested in program: ${programParam}`);
     }
   }, [location.search]);
 
@@ -34,16 +34,16 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('<span className="icon-wrapper"><Rocket size={18} /></span> Create Account button clicked!');
-    console.log('<span className="icon-wrapper"><FileText size={18} /></span> Form data:', formData);
+    console.log('Create Account button clicked!');
+    console.log('Form data:', formData);
     setLoading(true);
     try {
       const res = await axios.post(`${API_BASE_URL}/api/auth/register`, formData);
-      console.log('<span className="icon-wrapper"><Check size={18} /></span> Registration successful:', res.data);
+      console.log('Registration successful:', res.data);
       login(res.data.token);
       navigate('/dashboard');
     } catch (err) {
-      console.error('<span className="icon-wrapper"><X size={18} /></span> Registration error:', err);
+      console.error('Registration error:', err);
       setError(err.response?.data?.message || 'Registration failed. Please try again.');
     } finally {
       setLoading(false);
