@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import API_BASE_URL from '../api';
 import './DashboardModern.css';
 import '../components/CourseFiles.css';
-import { BarChart, Book, BookOpen, Briefcase, Camera, Check, Circle, Clipboard, Clock, FileText, GraduationCap, Lightbulb, Lock, MonitorPlay, Rocket, Search, Settings, Target, Timer, TrendingUp, Trophy, User, Users, X } from 'lucide-react';
+import { BarChart, Book, BookOpen, Briefcase, Camera, Check, Circle, Clipboard, Clock, DollarSign, FileText, GraduationCap, Lightbulb, Lock, MonitorPlay, Rocket, Search, Settings, Star, Target, Timer, TrendingUp, Trophy, User, Users, X } from 'lucide-react';
 
 
 const Dashboard = () => {
@@ -258,34 +258,36 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      {/* Modern Header */}
+      {/* Premium Header */}
       <div className="dashboard-header">
         <div className="header-background"></div>
         <div className="header-content">
           <div className="user-profile">
-            <div className="user-avatar large">{user?.name?.charAt(0)?.toUpperCase() || 'U'}</div>
+            <div className="user-avatar large">
+              {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+            </div>
             <div className="user-info">
-              <h1>Welcome back, {user?.name || 'User'}!</h1>
-              <p className="user-role">
-                {user.role === 'student' && user.status === 'pending'
-                  ? <><span className="icon-wrapper"><GraduationCap size={18} /></span> Student (Instructor Request Pending)</>
-                  : user.role === 'student'
-                    ? <><span className="icon-wrapper"><GraduationCap size={18} /></span> Student</>
-                    : user.role === 'instructor'
-                      ? <><span className="icon-wrapper"><MonitorPlay size={18} /></span> Instructor</>
-                      : user.role === 'admin'
-                        ? <><span className="icon-wrapper"><Briefcase size={18} /></span> Administrator</>
-                        : <><span className="icon-wrapper"><User size={18} /></span> User</>
-                }
-              </p>
+              <span className="welcome-tag">Bienvenue sur votre espace</span>
+              <h1>{user?.name || 'Utilisateur'}</h1>
+              <div className="user-meta-info">
+                <span className="role-badge">
+                  {user.role === 'student' && <><span className="icon-wrapper"><GraduationCap size={16} /></span> Étudiant</>}
+                  {user.role === 'instructor' && <><span className="icon-wrapper"><MonitorPlay size={16} /></span> Instructeur</>}
+                  {user.role === 'admin' && <><span className="icon-wrapper"><Briefcase size={16} /></span> Administrateur</>}
+                </span>
+                <span className="last-login">Dernière connexion: Aujourd'hui</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {message && (
-        <div className={`message ${message.includes('success') ? 'success' : 'error'}`}>
-          {message}
+        <div className={`message-banner ${message.includes('success') ? 'success' : 'error'}`}>
+          <div className="message-content">
+            {message.includes('success') ? <Check size={20} /> : <X size={20} />}
+            <span>{message}</span>
+          </div>
         </div>
       )}
 
@@ -396,6 +398,61 @@ const Dashboard = () => {
 
       {(user.role === 'instructor' || user.role === 'teacher' || user.role === 'prof') && (
         <div className="instructor-dashboard">
+          {/* Instructor Insights */}
+          <div className="stats-grid">
+            <div className="stat-card" style={{ borderColor: 'var(--primary)' }}>
+              <div className="stat-icon" style={{ background: '#eef2ff', color: 'var(--primary)' }}>
+                <Users size={28} />
+              </div>
+              <div className="stat-content">
+                <span className="stat-label">Total Étudiants</span>
+                <div className="stat-value-group">
+                  <h3>1,248</h3>
+                  <span className="trend positive">+12%</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="stat-card" style={{ borderColor: 'var(--secondary)' }}>
+              <div className="stat-icon" style={{ background: '#ecfdf5', color: 'var(--secondary)' }}>
+                <DollarSign size={28} />
+              </div>
+              <div className="stat-content">
+                <span className="stat-label">Revenus (MTN)</span>
+                <div className="stat-value-group">
+                  <h3>45.2K</h3>
+                  <span className="trend positive">+8.4K</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="stat-card" style={{ borderColor: 'var(--accent)' }}>
+              <div className="stat-icon" style={{ background: '#ecfeff', color: 'var(--accent)' }}>
+                <BookOpen size={28} />
+              </div>
+              <div className="stat-content">
+                <span className="stat-label">Cours Actifs</span>
+                <div className="stat-value-group">
+                  <h3>{stats.enrolledCourses || 4}</h3>
+                  <span className="trend neutral">Stable</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="stat-card" style={{ borderColor: '#8b5cf6' }}>
+              <div className="stat-icon" style={{ background: '#f5f3ff', color: '#8b5cf6' }}>
+                <Star size={28} />
+              </div>
+              <div className="stat-content">
+                <span className="stat-label">Note Moyenne</span>
+                <div className="stat-value-group">
+                  <h3>4.8</h3>
+                  <span className="trend positive">+0.2</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Create Course Section */}
           <div className="dashboard-card">
             <div className="card-header">
@@ -583,57 +640,86 @@ const Dashboard = () => {
 
       {user.role === 'student' && user.status !== 'pending' && (
         <div className="student-dashboard">
-          {/* Stats Cards */}
+          {/* High-Impact Info Cards */}
           <div className="stats-grid">
-            <div className="stat-card">
-              <div className="stat-icon"><span className="icon-wrapper"><BookOpen size={18} /></span></div>
+            <div className="stat-card" style={{ borderColor: 'var(--primary)' }}>
+              <div className="stat-icon" style={{ background: '#eef2ff', color: 'var(--primary)' }}>
+                <BookOpen size={28} />
+              </div>
               <div className="stat-content">
-                <h3>{stats.enrolledCourses}</h3>
-                <p>Courses Enrolled</p>
+                <span className="stat-label">Cours Inscrits</span>
+                <div className="stat-value-group">
+                  <h3>{stats.enrolledCourses}</h3>
+                  <span className="trend positive">+2 nouveaux</span>
+                </div>
               </div>
             </div>
-            <div className="stat-card">
-              <div className="stat-icon"><span className="icon-wrapper"><Trophy size={18} /></span></div>
+            
+            <div className="stat-card" style={{ borderColor: 'var(--secondary)' }}>
+              <div className="stat-icon" style={{ background: '#ecfdf5', color: 'var(--secondary)' }}>
+                <Trophy size={28} />
+              </div>
               <div className="stat-content">
-                <h3>{stats.completedQuizzes}</h3>
-                <p>Completed Quizzes</p>
+                <span className="stat-label">Quiz Réussis</span>
+                <div className="stat-value-group">
+                  <h3>{stats.completedQuizzes}</h3>
+                  <span className="trend positive">+15%</span>
+                </div>
               </div>
             </div>
-            <div className="stat-card">
-              <div className="stat-icon"><span className="icon-wrapper"><BarChart size={18} /></span></div>
+
+            <div className="stat-card" style={{ borderColor: 'var(--accent)' }}>
+              <div className="stat-icon" style={{ background: '#ecfeff', color: 'var(--accent)' }}>
+                <BarChart size={28} />
+              </div>
               <div className="stat-content">
-                <h3>{stats.averageScore}%</h3>
-                <p>Average Score</p>
+                <span className="stat-label">Score Moyen</span>
+                <div className="stat-value-group">
+                  <h3>{stats.averageScore}%</h3>
+                  <span className="trend neutral">Stable</span>
+                </div>
               </div>
             </div>
-            <div className="stat-card">
-              <div className="stat-icon"><span className="icon-wrapper"><Clock size={18} /></span></div>
+
+            <div className="stat-card" style={{ borderColor: '#f59e0b' }}>
+              <div className="stat-icon" style={{ background: '#fffbeb', color: '#f59e0b' }}>
+                <Clock size={28} />
+              </div>
               <div className="stat-content">
-                <h3>{stats.totalLearningHours}h</h3>
-                <p>Learning Hours</p>
+                <span className="stat-label">Heures d'Étude</span>
+                <div className="stat-value-group">
+                  <h3>{stats.totalLearningHours}h</h3>
+                  <span className="trend positive">+5h cette semaine</span>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Learning Progress */}
+          {/* Data Visualization - Activity Chart */}
           <div className="dashboard-card">
             <div className="card-header">
-              <h3><span className="icon-wrapper"><Target size={18} /></span> Learning Progress</h3>
-              <span className="card-badge">Active</span>
+              <h3><span className="icon-wrapper"><TrendingUp size={22} /></span> Votre Activité Hebdomadaire</h3>
+              <span className="card-badge success">En hausse de 24%</span>
             </div>
-            <div className="card-content">
-              <div className="progress-section">
-                <div className="progress-item">
-                  <span>Overall Progress</span>
-                  <div className="progress-bar">
-                    <div className="progress-fill" style={{ width: '65%' }}></div>
+            <div className="activity-chart">
+              <div className="chart-bars">
+                {[
+                  { day: 'Lun', val: 45, h: '45%' },
+                  { day: 'Mar', val: 65, h: '65%' },
+                  { day: 'Mer', val: 30, h: '30%' },
+                  { day: 'Jeu', val: 85, h: '85%' },
+                  { day: 'Ven', val: 55, h: '55%' },
+                  { day: 'Sam', val: 25, h: '25%' },
+                  { day: 'Dim', val: 10, h: '10%' }
+                ].map((item, idx) => (
+                  <div key={idx} className="chart-bar-wrapper">
+                    <div className="bar" style={{ height: item.h }}>
+                      <span className="bar-tooltip">{item.val} min</span>
+                    </div>
+                    <span className="bar-label">{item.day}</span>
                   </div>
-                  <span className="progress-text">65% Complete</span>
-                </div>
+                ))}
               </div>
-              <p className="card-text">
-                You're doing great! Keep up the momentum and complete more courses to unlock achievements.
-              </p>
             </div>
           </div>
 
