@@ -58,9 +58,13 @@ const Dashboard = () => {
 
       // Update stats based on actual data
       setStats({
-        enrolledCourses: coursesResponse.data.filter(course => 
-          course.enrolledStudents && course.enrolledStudents.includes(user._id)
-        ).length,
+        enrolledCourses: coursesResponse.data.filter(course => {
+          const userId = user.id || user._id;
+          return course.enrolledStudents && (
+            course.enrolledStudents.includes(userId) || 
+            course.enrolledStudents.includes(String(userId))
+          );
+        }).length,
         completedQuizzes: Math.floor(Math.random() * 10) + 5,
         averageScore: Math.floor(Math.random() * 30) + 70,
         totalLearningHours: Math.floor(Math.random() * 50) + 20
@@ -156,7 +160,7 @@ const Dashboard = () => {
         price: 0,
         duration: newCourse.duration || 'Not specified',
         image: newCourse.image.trim() || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&h=200&fit=crop&auto=format',
-        instructor: user._id,
+        instructor: user.id || user._id,
         status: 'draft',
         chapters: newCourse.chapters.map(ch => ({
           title: ch.title.trim(),

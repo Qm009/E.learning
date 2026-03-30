@@ -12,10 +12,10 @@
   padding: 0 2rem;
 }
 
-/* Hero Section - Optimisé */
+/* Hero Section - Premium & Focused */
 .hero {
   position: relative;
-  min-height: 85vh;
+  min-height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,15 +25,21 @@
 
 .hero-background {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-image: url('https://picsum.photos/seed/education-learning-hero/1920/1080.jpg');
+  top: -5%;
+  left: -5%;
+  right: -5%;
+  bottom: -5%;
+  background-image: url('/assets/hero_bg.png');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  filter: brightness(0.7);
+  animation: bgZoom 15s ease-in-out infinite alternate;
+  z-index: 1;
+}
+
+@keyframes bgZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
 }
 
 .hero-overlay {
@@ -42,7 +48,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at center, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.8) 100%);
+  background: radial-gradient(circle at 30% 50%, rgba(15, 23, 42, 0) 0%, rgba(15, 23, 42, 0.8) 100%);
   z-index: 2;
 }
 
@@ -50,27 +56,28 @@
   position: relative;
   z-index: 3;
   text-align: center;
-  max-width: 1200px;
+  max-width: 1000px;
   padding: 0 2rem;
+  animation: fadeIn 1.2s ease-out;
 }
 
-.hero-text {
-  max-width: 800px;
-  margin: 0 auto;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .hero-title {
-  font-size: 4.5rem;
+  font-size: clamp(3rem, 8vw, 5rem);
   font-weight: 800;
   color: white;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   line-height: 1.1;
-  text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
-  animation: fadeInUp 1s ease-out;
+  letter-spacing: -1px;
 }
 
 .hero-title .highlight {
-  background: linear-gradient(135deg, #38BDF8 0%, #6366F1 100%);
+  display: inline-block;
+  background: linear-gradient(135deg, #4ade80 0%, #2dd4bf 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -78,25 +85,58 @@
   position: relative;
 }
 
-.hero-title .highlight::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #00BCD4, #0097A7);
-  border-radius: 2px;
+.hero-subtitle {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 3.5rem;
+  line-height: 1.7;
+  font-weight: 300;
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.hero-subtitle {
-  font-size: 1.4rem;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 3rem;
-  line-height: 1.6;
-  font-weight: 400;
-  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
-  animation: fadeInUp 1.2s ease-out;
+.hero-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  text-transform: none; /* Premium look: avoid all caps if possible, or use sparingly */
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #4ade80 0%, #2dd4bf 100%);
+  color: #0f172a;
+  box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3);
+  border: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(74, 222, 128, 0.45);
+  background: linear-gradient(135deg, #2dd4bf 0%, #4ade80 100%);
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-5px);
 }
 
 .hero-auth-buttons {
