@@ -13,7 +13,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <img src="/logo.png" alt="EduPortal Logo" height="32" style={{marginRight: '10px'}} />
+          <img src="/logo.png" alt="EduPortal Logo" className="navbar-logo-img" />
           EduPortal
         </Link>
 

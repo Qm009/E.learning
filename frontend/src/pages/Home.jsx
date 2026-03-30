@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import './Home.css';
-import { Book, ChevronRight, GraduationCap, Rocket, Trophy, User, Users } from 'lucide-react';
+import { Book, Brain, ChevronRight, GraduationCap, Rocket, Trophy, User, Users } from 'lucide-react';
 
 
 const Home = () => {
@@ -109,6 +109,19 @@ const Home = () => {
               <p>High-quality content with interactive lessons and real-world projects.</p>
               <Link to="/courses" className="feature-link">
                 Learn More <ChevronRight size={14} />
+              </Link>
+            </div>
+
+            <div className="feature-card">
+              <div className="feature-icon">
+                <div className="icon-circle">
+                  <span><span className="icon-wrapper"><Brain size={18} /></span></span>
+                </div>
+              </div>
+              <h3>AI Assistant</h3>
+              <p>Get personalized guidance and answers from our advanced AI mentor.</p>
+              <Link to="/ai-assistant" className="feature-link">
+                Try AI Mentor <ChevronRight size={14} />
               </Link>
             </div>
 

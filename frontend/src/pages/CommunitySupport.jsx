@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CommunitySupport.css';
-import { Book, BookOpen, Calendar, Check, Clipboard, Heart, LifeBuoy, Map, MessageSquare, MonitorPlay, Pin, Rocket, Search, Star, User, Video, Wrench } from 'lucide-react';
+import { Brain, Book, BookOpen, Calendar, Check, Clipboard, Heart, LifeBuoy, Map, MessageSquare, MonitorPlay, Pin, Rocket, Search, Star, User, Video, Wrench } from 'lucide-react';
 
 
 const CommunitySupport = () => {
@@ -167,6 +167,14 @@ Généré le ${new Date().toLocaleDateString('fr-FR')}
             <div className="header-text">
               <h1>Community Support</h1>
               <p>Connect, learn, and grow with fellow learners from around the world</p>
+              <div className="header-actions">
+                <Link to="/ai-assistant" className="btn btn-primary">
+                  <span className="icon-wrapper"><Brain size={18} /></span> Ask our AI Assistant
+                </Link>
+                <button className="btn btn-outline" onClick={() => setActiveTab('discussions')}>
+                  Browse Discussions
+                </button>
+              </div>
             </div>
             <div className="header-stats">
               <div className="stat">
@@ -441,9 +449,9 @@ Généré le ${new Date().toLocaleDateString('fr-FR')}
             <h2>Ready to Join Our Community?</h2>
             <p>Get help, share knowledge, and connect with learners worldwide</p>
             <div className="cta-buttons">
-              <button className="btn btn-primary btn-large">
+              <Link to="/register" className="btn btn-primary btn-large">
                 <span className="icon-wrapper"><Rocket size={18} /></span> Get Started Free
-              </button>
+              </Link>
               <Link to="/courses" className="btn btn-outline btn-large">
                 <span className="icon-wrapper"><BookOpen size={18} /></span> Browse Courses
               </Link>
