@@ -8,8 +8,8 @@ import { Book, GraduationCap, Rocket, Trophy, User, Users } from 'lucide-react';
 const Home = () => {
   const { user } = useContext(AuthContext);
 
-  console.log('<span className="icon-wrapper"><Rocket size={18} /></span> Home component rendered');
-  console.log('<span className="icon-wrapper"><User size={18} /></span> User state:', user);
+  console.log('Home component rendered');
+  console.log('User state:', user);
 
   return (
     <div className="home">

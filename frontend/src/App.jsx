@@ -131,7 +131,7 @@ function App() {
               </>
             } />
             <Route path="/certified-degree" element={<CertifiedDegree />} />
-            <Route path="/quality-education" element={<FeaturePage title="Quality Education" description="High-quality content with interactive lessons and real-world projects." icon="<span className='icon-wrapper'><Trophy size={18} /></span>" />} />
+            <Route path="/quality-education" element={<FeaturePage title="Quality Education" description="High-quality content with interactive lessons and real-world projects." icon={<Trophy size={18} />} />} />
             <Route path="/community-support" element={<CommunitySupport />} />
             <Route path="/ai-assistant" element={<AIAssistant />} />
           </Routes>

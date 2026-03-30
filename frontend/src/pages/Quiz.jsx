@@ -549,7 +549,7 @@ const Quiz = () => {
     const fetchCourses = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('http://localhost:5050/api/courses');
+        const response = await axios.get(`${API_BASE_URL}/api/courses`);
         // Always show sample courses for demo purposes
         setCourses([
           { _id: 'course1', title: 'Introduction to Programming', category: 'Development', description: 'Learn the fundamentals of programming with this comprehensive course.' },
@@ -655,7 +655,7 @@ const Quiz = () => {
 
   const saveQuizResult = async (finalScore) => {
     try {
-      await axios.post('http://localhost:5050/api/quizzes/results', {
+      await axios.post(`${API_BASE_URL}/api/quizzes/results`, {
         userId: user._id,
         courseId: selectedCourse._id,
         score: finalScore,

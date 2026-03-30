@@ -47,13 +47,13 @@ const Dashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      console.log('<span className="icon-wrapper"><Search size={18} /></span> Fetching dashboard data...');
+      console.log('Fetching dashboard data...');
       
       // Fetch courses
       const coursesResponse = await axios.get(`${API_BASE_URL}/api/courses`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      console.log('<span className="icon-wrapper"><BookOpen size={18} /></span> Courses fetched:', coursesResponse.data);
+      console.log('Courses fetched:', coursesResponse.data);
       setCoursesData(coursesResponse.data);
 
       // Update stats based on actual data
@@ -111,9 +111,9 @@ const Dashboard = () => {
   // Course creation functions
   const handleCreateCourse = async (e) => {
     e.preventDefault();
-    console.log('<span className="icon-wrapper"><Rocket size={18} /></span> Create Course button clicked!');
-    console.log('<span className="icon-wrapper"><FileText size={18} /></span> Form data:', newCourse);
-    console.log('<span className="icon-wrapper"><User size={18} /></span> User:', user);
+    console.log('Create Course button clicked!');
+    console.log('Form data:', newCourse);
+    console.log('User:', user);
     console.log('🔑 Token:', token ? 'Present' : 'Missing');
     
     try {
@@ -174,7 +174,7 @@ const Dashboard = () => {
         }
       });
 
-      console.log('<span className="icon-wrapper"><Check size={18} /></span> Course created successfully:', response.data);
+      console.log('Course created successfully:', response.data);
 
       setMessage('Course created successfully!');
       setNewCourse({
@@ -190,8 +190,8 @@ const Dashboard = () => {
       fetchDashboardData();
       setTimeout(() => setMessage(''), 3000);
     } catch (error) {
-      console.error('<span className="icon-wrapper"><X size={18} /></span> Error creating course:', error);
-      console.error('<span className="icon-wrapper"><X size={18} /></span> Error response:', error.response?.data);
+      console.error('Error creating course:', error);
+      console.error('Error response:', error.response?.data);
       const errorMessage = error.response?.data?.message || error.message || 'Unknown error';
       setMessage('Error creating course: ' + errorMessage);
       setTimeout(() => setMessage(''), 5000);
@@ -221,7 +221,7 @@ const Dashboard = () => {
     const updatedChapters = newCourse.chapters.map((chapter, i) =>
       i === index ? { ...chapter, [field]: value } : chapter
     );
-    console.log('<span className="icon-wrapper"><FileText size={18} /></span> Updated chapters:', updatedChapters);
+    console.log('Updated chapters:', updatedChapters);
     setNewCourse({ ...newCourse, chapters: updatedChapters });
   };
 
@@ -264,14 +264,14 @@ const Dashboard = () => {
               <h1>Welcome back, {user?.name || 'User'}!</h1>
               <p className="user-role">
                 {user.role === 'student' && user.status === 'pending'
-                  ? '<span className="icon-wrapper"><GraduationCap size={18} /></span> Student (Instructor Request Pending)'
+                  ? <><span className="icon-wrapper"><GraduationCap size={18} /></span> Student (Instructor Request Pending)</>
                   : user.role === 'student'
-                    ? '👨‍<span className="icon-wrapper"><GraduationCap size={18} /></span> Student'
+                    ? <><span className="icon-wrapper"><GraduationCap size={18} /></span> Student</>
                     : user.role === 'instructor'
-                      ? '<span className="icon-wrapper"><MonitorPlay size={18} /></span> Instructor'
+                      ? <><span className="icon-wrapper"><MonitorPlay size={18} /></span> Instructor</>
                       : user.role === 'admin'
-                        ? '<span className="icon-wrapper"><Briefcase size={18} /></span> Administrator'
-                        : '<span className="icon-wrapper"><User size={18} /></span> User'
+                        ? <><span className="icon-wrapper"><Briefcase size={18} /></span> Administrator</>
+                        : <><span className="icon-wrapper"><User size={18} /></span> User</>
                 }
               </p>
             </div>

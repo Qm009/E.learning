@@ -31,10 +31,10 @@ const Courses = () => {
       
       const mappedCategory = categoryMap[categoryParam] || 'All';
       setFilterCategory(mappedCategory);
-      console.log(`<span className="icon-wrapper"><Target size={18} /></span> Filtering courses by category: ${mappedCategory}`);
+      console.log(`Filtering courses by category: ${mappedCategory}`);
     }
     
-    console.log('<span className="icon-wrapper"><Rocket size={18} /></span> Loading default courses immediately...');
+    console.log('Loading default courses immediately...');
     const defaultCourses = getDefaultCourses();
     setCourses(defaultCourses);
     setLoading(false);
@@ -42,12 +42,12 @@ const Courses = () => {
     // Récupérer les cours depuis l'API pour inclure les cours des instructeurs
     const fetchCoursesFromAPI = async () => {
       try {
-        console.log('<span className="icon-wrapper"><Search size={18} /></span> Fetching courses from API in background...');
+        console.log('Fetching courses from API in background...');
         const res = await axios.get(`${API_BASE_URL}/api/courses`);
         let apiCourses = res.data;
         
-        console.log('<span className="icon-wrapper"><BookOpen size={18} /></span> API courses loaded:', apiCourses.length);
-        console.log('<span className="icon-wrapper"><Clipboard size={18} /></span> API courses details:', apiCourses.map(c => ({ id: c._id, title: c.title, instructor: c.instructor })));
+        console.log('API courses loaded:', apiCourses.length);
+        console.log('API courses details:', apiCourses.map(c => ({ id: c._id, title: c.title, instructor: c.instructor })));
         
         // Combiner avec les cours par défaut
         const existingIds = new Set(apiCourses.map(c => c._id));
@@ -55,8 +55,8 @@ const Courses = () => {
         
         const allCourses = [...apiCourses, ...additionalDefaultCourses];
         
-        console.log('<span className="icon-wrapper"><Clipboard size={18} /></span> Final courses list:', allCourses.length);
-        console.log('<span className="icon-wrapper"><Clipboard size={18} /></span> Final courses details:', allCourses.map(c => ({ id: c._id, title: c.title, instructor: c.instructor })));
+        console.log('Final courses list:', allCourses.length);
+        console.log('Final courses details:', allCourses.map(c => ({ id: c._id, title: c.title, instructor: c.instructor })));
         setCourses(allCourses);
       } catch (error) {
         console.error('Error fetching courses from API:', error);
@@ -233,16 +233,16 @@ const Courses = () => {
   });
 
   const categories = [
-    { name: 'All', icon: '<span className="icon-wrapper"><BookOpen size={18} /></span>' },
-    { name: 'Développement Web', icon: '<span className="icon-wrapper"><Laptop size={18} /></span>' },
+    { name: 'All', icon: <BookOpen size={18} /> },
+    { name: 'Développement Web', icon: <Laptop size={18} /> },
     { name: 'Framework JavaScript', icon: '⚛️' },
-    { name: 'Data Science', icon: '<span className="icon-wrapper"><BarChart size={18} /></span>' },
+    { name: 'Data Science', icon: <BarChart size={18} /> },
     { name: 'Design', icon: '🎨' },
     { name: 'Backend', icon: '🔧' },
     { name: 'Intelligence Artificielle', icon: '🤖' },
     { name: 'Cloud', icon: '☁️' },
     { name: 'Cybersécurité', icon: '🔒' },
-    { name: 'Mobile', icon: '<span className="icon-wrapper"><Smartphone size={18} /></span>' }
+    { name: 'Mobile', icon: <Smartphone size={18} /> }
   ];
 
   if (loading) {
