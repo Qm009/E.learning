@@ -18,7 +18,7 @@
 
 .auth-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .auth-header h2 {
@@ -48,6 +48,64 @@
   font-size: 14px;
 }
 
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+  -webkit-text-fill-color: #000000 !important;
+  text-shadow: 0 0 0 #000000 !important;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+  -webkit-text-fill-color: #000000 !important;
+  text-shadow: 0 0 0 #000000 !important;
+}
+
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="text"]::placeholder,
+input[type="number"]::placeholder,
+textarea::placeholder {
+  color: #666666 !important;
+  opacity: 1 !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+
+input::-webkit-credentials-auto-fill-button,
+input::-webkit-strong-password-auto-fill-button {
+  background-color: #ffffff !important;
+}
+
+input:-moz-autofill,
+input:-moz-autofill:hover,
+input:-moz-autofill:focus,
+input:-moz-autofill:active {
+  -moz-text-fill-color: #000000 !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
 .form-group input,
 .form-group select {
   width: 100%;
@@ -57,6 +115,10 @@
   font-size: 16px;
   font-family: 'Poppins', sans-serif;
   transition: all 0.3s ease;
+  color: #000000 !important;
+  background-color: #ffffff !important;
+  -webkit-text-fill-color: #000000 !important;
+  text-shadow: 0 0 0 #000000 !important;
 }
 
 .form-group input:focus,
@@ -64,10 +126,15 @@
   outline: none;
   border-color: #00BCD4;
   box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1);
+  color: #000000 !important;
+  background-color: #ffffff !important;
+  -webkit-text-fill-color: #000000 !important;
+  text-shadow: 0 0 0 #000000 !important;
 }
 
 .form-group input::placeholder {
-  color: #bdbdbd;
+  color: #666666 !important;
+  opacity: 1 !important;
 }
 
 .btn {
@@ -170,5 +237,25 @@
 
   .form-group {
     margin-bottom: 16px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    font-size: 16px; /* Prevent zoom on iOS */
+    color: #000000 !important;
+    background-color: #ffffff !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-text-fill-color: #000000 !important;
+    text-shadow: 0 0 0 #000000 !important;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+    -webkit-text-fill-color: #000000 !important;
+    text-shadow: 0 0 0 #000000 !important;
   }
 }

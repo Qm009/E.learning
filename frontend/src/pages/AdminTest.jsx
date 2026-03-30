@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { Check, X } from 'lucide-react';
+
 
 const AdminTest = () => {
   const { user } = useContext(AuthContext);
@@ -13,7 +15,7 @@ const AdminTest = () => {
       
       {user ? (
         <div>
-          <h2>✅ User is authenticated</h2>
+          <h2><span className="icon-wrapper"><Check size={18} /></span> User is authenticated</h2>
           <p><strong>Name:</strong> {user.name || 'Unknown'}</p>
           <p><strong>Email:</strong> {user.email || 'Unknown'}</p>
           <p><strong>Role:</strong> {user.role || 'Unknown'}</p>
@@ -21,7 +23,7 @@ const AdminTest = () => {
         </div>
       ) : (
         <div>
-          <h2>❌ No user found</h2>
+          <h2><span className="icon-wrapper"><X size={18} /></span> No user found</h2>
           <p>Please login first</p>
         </div>
       )}

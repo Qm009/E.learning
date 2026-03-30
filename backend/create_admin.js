@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 require('dotenv').config();
 const User = require('./models/User');
 
-const mongoURI = 'mongodb://localhost:27017/learning-platform';
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/learning-platform';
 
 async function createAdmin() {
   try {

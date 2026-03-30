@@ -2,24 +2,20 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import './Home.css';
+import { Book, GraduationCap, Rocket, Trophy, User, Users } from 'lucide-react';
+
 
 const Home = () => {
   const { user } = useContext(AuthContext);
+
+  console.log('<span className="icon-wrapper"><Rocket size={18} /></span> Home component rendered');
+  console.log('<span className="icon-wrapper"><User size={18} /></span> User state:', user);
 
   return (
     <div className="home">
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-background">
-          <img 
-            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1920&h=1080&fit=crop&auto=format" 
-            alt="Education and learning" 
-            className="hero-bg-image"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=1920&h=1080&fit=crop&auto=format";
-            }}
-          />
           <div className="hero-overlay"></div>
         </div>
         
@@ -31,12 +27,13 @@ const Home = () => {
             <p className="hero-subtitle">
               Start, switch, or advance your career with more than 5,000 courses, Professional Certificates, and degrees from world-class universities and companies.
             </p>
+            
             <div className="hero-buttons">
               <Link to="/courses" className="btn btn-primary btn-large">
-                Start Learning
+                <span className="icon-wrapper"><Rocket size={18} /></span> Start Learning
               </Link>
               <Link to="/certified-degree" className="btn btn-outline btn-large">
-                View Certifications
+                <span className="icon-wrapper"><GraduationCap size={18} /></span> View Certifications
               </Link>
             </div>
           </div>
@@ -79,7 +76,7 @@ const Home = () => {
             <div className="feature-card">
               <div className="feature-icon">
                 <div className="icon-circle">
-                  <span>📖</span>
+                  <span><span className="icon-wrapper"><Book size={18} /></span></span>
                 </div>
               </div>
               <h3>Expert Courses</h3>
@@ -92,7 +89,7 @@ const Home = () => {
             <div className="feature-card">
               <div className="feature-icon">
                 <div className="icon-circle">
-                  <span>🎓</span>
+                  <span><span className="icon-wrapper"><GraduationCap size={18} /></span></span>
                 </div>
               </div>
               <h3>Certified Degrees</h3>
@@ -105,7 +102,7 @@ const Home = () => {
             <div className="feature-card">
               <div className="feature-icon">
                 <div className="icon-circle">
-                  <span>🏆</span>
+                  <span><span className="icon-wrapper"><Trophy size={18} /></span></span>
                 </div>
               </div>
               <h3>Quality Education</h3>
@@ -118,7 +115,7 @@ const Home = () => {
             <div className="feature-card">
               <div className="feature-icon">
                 <div className="icon-circle">
-                  <span>👥</span>
+                  <span><span className="icon-wrapper"><Users size={18} /></span></span>
                 </div>
               </div>
               <h3>Community Support</h3>
@@ -142,7 +139,7 @@ const Home = () => {
           <div className="courses-grid">
             <div className="course-card">
               <div className="course-image">
-                <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400&h=250&fit=crop&auto=format" alt="JavaScript" />
+                <img src="https://picsum.photos/seed/javascript-home/400/250.jpg" alt="JavaScript" />
                 <div className="course-badge">Popular</div>
               </div>
               <div className="course-content">
@@ -158,7 +155,7 @@ const Home = () => {
 
             <div className="course-card">
               <div className="course-image">
-                <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=250&fit=crop&auto=format" alt="React" />
+                <img src="https://picsum.photos/seed/react-home/400/250.jpg" alt="React" />
                 <div className="course-badge">Trending</div>
               </div>
               <div className="course-content">
@@ -174,7 +171,7 @@ const Home = () => {
 
             <div className="course-card">
               <div className="course-image">
-                <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400&h=250&fit=crop&auto=format" alt="Python" />
+                <img src="https://picsum.photos/seed/python-home/400/250.jpg" alt="Python" />
                 <div className="course-badge">New</div>
               </div>
               <div className="course-content">
@@ -204,9 +201,6 @@ const Home = () => {
             <h2>Ready to Start Your Learning Journey?</h2>
             <p>Join thousands of students achieving their goals with EduPortal</p>
             <div className="cta-buttons">
-              <Link to="/register" className="btn btn-primary btn-large">
-                Get Started Free
-              </Link>
               <Link to="/courses" className="btn btn-outline btn-large">
                 Browse Courses
               </Link>

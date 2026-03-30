@@ -1,8 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
+import API_BASE_URL from '../api';
 import AdminInstructorRequests from './AdminInstructorRequests';
 import './AdminDashboard.css';
+import { BarChart, BookOpen, Check, Clipboard, FileText, GraduationCap, MonitorPlay, Search, Settings, TrendingUp, User, Users, X } from 'lucide-react';
+
 
 const AdminDashboard = () => {
   const { user, token } = useContext(AuthContext);
@@ -36,6 +39,7 @@ const AdminDashboard = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [showUserDetails, setShowUserDetails] = useState(false);
   const [userFilter, setUserFilter] = useState('all');
+  const [courseCategory, setCourseCategory] = useState('all');
 
   useEffect(() => {
     if (!user || user.role !== 'admin') return;
@@ -45,10 +49,10 @@ const AdminDashboard = () => {
   const fetchData = async () => {
     try {
       const [usersRes, coursesRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/users', {
+        axios.get(`${API_BASE_URL}/api/users`, {
           headers: { Authorization: `Bearer ${token}` }
         }),
-        axios.get('http://localhost:5000/api/courses', {
+        axios.get(`${API_BASE_URL}/api/courses`, {
           headers: { Authorization: `Bearer ${token}` }
         })
       ]);
@@ -644,7 +648,7 @@ const AdminDashboard = () => {
   const handleDeleteCourse = async (courseId) => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer ce cours ?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/courses/${courseId}`, {
+        await axios.delete(`${API_BASE_URL}/api/courses/${courseId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         
@@ -665,7 +669,7 @@ const AdminDashboard = () => {
 
   const handleUserAction = async (action, userId) => {
     try {
-      const response = await axios.post(`http://localhost:5000/api/users/${action}/${userId}`, {}, {
+      const response = await axios.post(`${API_BASE_URL}/api/users/${action}/${userId}`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -701,7 +705,7 @@ const AdminDashboard = () => {
         updateData.password = userForm.password;
       }
 
-      await axios.put(`http://localhost:5000/api/users/${selectedUser._id}`, updateData, {
+      await axios.put(`${API_BASE_URL}/api/users/${selectedUser._id}`, updateData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -720,7 +724,7 @@ const AdminDashboard = () => {
   const handleDeleteUser = async (userId) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/users/${userId}`, {
+        await axios.delete(`${API_BASE_URL}/api/users/${userId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         
@@ -746,6 +750,11 @@ const AdminDashboard = () => {
     return matchesSearch && matchesFilter;
   });
 
+  const filteredCourses = courses.filter(course => {
+    if (courseCategory === 'all') return true;
+    return course.category?.toLowerCase() === courseCategory.toLowerCase();
+  });
+
   const recentCourses = courses.slice(0, 5);
   const pendingUsers = users.filter(u => u.status === 'pending');
 
@@ -766,9 +775,6 @@ const AdminDashboard = () => {
         <div className="access-denied-content">
           <h2>🚫 Access Denied</h2>
           <p>You need admin privileges to access this page.</p>
-          <button className="btn btn-primary" onClick={() => window.location.href = '/login'}>
-            Go to Login
-          </button>
         </div>
       </div>
     );
@@ -781,7 +787,7 @@ const AdminDashboard = () => {
       <aside className="admin-sidebar">
         <div className="sidebar-header">
           <div className="logo">
-            <span className="logo-icon">🎓</span>
+            <span className="logo-icon"><span className="icon-wrapper"><GraduationCap size={18} /></span></span>
             <span className="logo-text">E-Learning Admin</span>
           </div>
         </div>
@@ -791,42 +797,42 @@ const AdminDashboard = () => {
             className={`nav-item ${activeSection === 'overview' ? 'active' : ''}`}
             onClick={() => setActiveSection('overview')}
           >
-            <span className="nav-icon">📊</span>
+            <span className="nav-icon"><span className="icon-wrapper"><BarChart size={18} /></span></span>
             <span className="nav-text">Overview</span>
           </button>
           <button 
             className={`nav-item ${activeSection === 'users' ? 'active' : ''}`}
             onClick={() => setActiveSection('users')}
           >
-            <span className="nav-icon">👥</span>
+            <span className="nav-icon"><span className="icon-wrapper"><Users size={18} /></span></span>
             <span className="nav-text">Users</span>
           </button>
           <button 
             className={`nav-item ${activeSection === 'courses' ? 'active' : ''}`}
             onClick={() => setActiveSection('courses')}
           >
-            <span className="nav-icon">📚</span>
+            <span className="nav-icon"><span className="icon-wrapper"><BookOpen size={18} /></span></span>
             <span className="nav-text">Courses</span>
           </button>
           <button 
             className={`nav-item ${activeSection === 'requests' ? 'active' : ''}`}
             onClick={() => setActiveSection('requests')}
           >
-            <span className="nav-icon">📋</span>
+            <span className="nav-icon"><span className="icon-wrapper"><Clipboard size={18} /></span></span>
             <span className="nav-text">Instructor Requests</span>
           </button>
           <button 
             className={`nav-item ${activeSection === 'analytics' ? 'active' : ''}`}
             onClick={() => setActiveSection('analytics')}
           >
-            <span className="nav-icon">📈</span>
+            <span className="nav-icon"><span className="icon-wrapper"><TrendingUp size={18} /></span></span>
             <span className="nav-text">Analytics</span>
           </button>
           <button 
             className={`nav-item ${activeSection === 'settings' ? 'active' : ''}`}
             onClick={() => setActiveSection('settings')}
           >
-            <span className="nav-icon">⚙️</span>
+            <span className="nav-icon"><span className="icon-wrapper"><Settings size={18} /></span></span>
             <span className="nav-text">Settings</span>
           </button>
         </nav>
@@ -866,12 +872,8 @@ const AdminDashboard = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="search-input"
               />
-              <span className="search-icon">🔍</span>
+              <span className="search-icon"><span className="icon-wrapper"><Search size={18} /></span></span>
             </div>
-            <button className="btn btn-primary" onClick={() => setShowCreateUser(true)}>
-              <span className="btn-icon">➕</span>
-              Add User
-            </button>
           </div>
         </header>
 
@@ -890,7 +892,7 @@ const AdminDashboard = () => {
               {/* Stats Cards */}
               <div className="stats-grid">
                 <div className="stat-card animated">
-                  <div className="stat-icon students">👥</div>
+                  <div className="stat-icon students"><span className="icon-wrapper"><Users size={18} /></span></div>
                   <div className="stat-content">
                     <h3>{stats.totalStudents}</h3>
                     <p>Total Students</p>
@@ -898,7 +900,7 @@ const AdminDashboard = () => {
                   </div>
                 </div>
                 <div className="stat-card animated">
-                  <div className="stat-icon instructors">👨‍🏫</div>
+                  <div className="stat-icon instructors"><span className="icon-wrapper"><MonitorPlay size={18} /></span></div>
                   <div className="stat-content">
                     <h3>{stats.totalInstructors}</h3>
                     <p>Active Instructors</p>
@@ -906,7 +908,7 @@ const AdminDashboard = () => {
                   </div>
                 </div>
                 <div className="stat-card animated">
-                  <div className="stat-icon courses">📚</div>
+                  <div className="stat-icon courses"><span className="icon-wrapper"><BookOpen size={18} /></span></div>
                   <div className="stat-content">
                     <h3>{stats.totalCourses}</h3>
                     <p>Total Courses</p>
@@ -923,39 +925,13 @@ const AdminDashboard = () => {
                 </div>
               </div>
 
-              {/* Quick Actions */}
-              <div className="quick-actions">
-                <h2>Quick Actions</h2>
-                <div className="actions-grid">
-                  <button className="action-card" onClick={() => setActiveSection('users')}>
-                    <span className="action-icon">👥</span>
-                    <h3>Manage Users</h3>
-                    <p>View and manage all platform users</p>
-                  </button>
-                  <button className="action-card" onClick={() => setActiveSection('requests')}>
-                    <span className="action-icon">📋</span>
-                    <h3>Review Requests</h3>
-                    <p>{pendingUsers.length} pending instructor requests</p>
-                  </button>
-                  <button className="action-card" onClick={() => setActiveSection('courses')}>
-                    <span className="action-icon">📚</span>
-                    <h3>Course Management</h3>
-                    <p>Review and manage all courses</p>
-                  </button>
-                  <button className="action-card" onClick={() => setActiveSection('analytics')}>
-                    <span className="action-icon">📈</span>
-                    <h3>View Analytics</h3>
-                    <p>Platform performance metrics</p>
-                  </button>
-                </div>
-              </div>
-
+              
               {/* Recent Activity */}
               <div className="recent-activity">
                 <h2>Recent Activity</h2>
                 <div className="activity-list">
                   <div className="activity-item">
-                    <span className="activity-icon">👤</span>
+                    <span className="activity-icon"><span className="icon-wrapper"><User size={18} /></span></span>
                     <div className="activity-content">
                       <h4>New User Registration</h4>
                       <p>John Doe joined as a student</p>
@@ -963,7 +939,7 @@ const AdminDashboard = () => {
                     </div>
                   </div>
                   <div className="activity-item">
-                    <span className="activity-icon">📚</span>
+                    <span className="activity-icon"><span className="icon-wrapper"><BookOpen size={18} /></span></span>
                     <div className="activity-content">
                       <h4>New Course Published</h4>
                       <p>"Advanced JavaScript" by Jane Smith</p>
@@ -971,7 +947,7 @@ const AdminDashboard = () => {
                     </div>
                   </div>
                   <div className="activity-item">
-                    <span className="activity-icon">📋</span>
+                    <span className="activity-icon"><span className="icon-wrapper"><Clipboard size={18} /></span></span>
                     <div className="activity-content">
                       <h4>Instructor Request</h4>
                       <p>Mike Johnson requested instructor access</p>
@@ -1024,21 +1000,29 @@ const AdminDashboard = () => {
                         <td>{user.email}</td>
                         <td>
                           <span className={`role-badge ${user.role}`}>
-                            {user.role === 'admin' ? '👑' : user.role === 'instructor' ? '👨‍🏫' : '👨‍🎓'} {user.role}
+                            {user.role === 'admin' ? '👑' : user.role === 'instructor' ? '<span className="icon-wrapper"><MonitorPlay size={18} /></span>' : '👨‍<span className="icon-wrapper"><GraduationCap size={18} /></span>'} {user.role}
                           </span>
                         </td>
                         <td>
                           <span className={`status-badge ${user.status}`}>
-                            {user.status === 'approved' ? '✅' : user.status === 'pending' ? '⏳' : '❌'} {user.status}
+                            {user.status === 'approved' ? '<span className="icon-wrapper"><Check size={18} /></span>' : user.status === 'pending' ? '⏳' : '<span className="icon-wrapper"><X size={18} /></span>'} {user.status}
                           </span>
                         </td>
                         <td>{new Date(user.createdAt || Date.now()).toLocaleDateString()}</td>
                         <td>
                           <div className="action-buttons">
-                            <button className="action-btn edit" onClick={() => handleEditUser(user)}>
+                            <button 
+                              onClick={() => handleEditUser(user)}
+                              className="btn btn-sm btn-primary"
+                              title="Edit user"
+                            >
                               ✏️
                             </button>
-                            <button className="action-btn delete" onClick={() => handleDeleteUser(user._id)}>
+                            <button 
+                              onClick={() => handleDeleteUser(user._id)}
+                              className="btn btn-sm btn-danger"
+                              title="Delete user"
+                            >
                               🗑️
                             </button>
                           </div>
@@ -1063,8 +1047,60 @@ const AdminDashboard = () => {
                 </div>
               </div>
               
+              {/* Course Categories */}
+              <div className="course-categories">
+                <button 
+                  className={`category-btn ${courseCategory === 'all' ? 'active' : ''}`}
+                  onClick={() => setCourseCategory('all')}
+                >
+                  All Courses
+                </button>
+                <button 
+                  className={`category-btn ${courseCategory === 'Développement Web' ? 'active' : ''}`}
+                  onClick={() => setCourseCategory('Développement Web')}
+                >
+                  Développement Web
+                </button>
+                <button 
+                  className={`category-btn ${courseCategory === 'Framework JavaScript' ? 'active' : ''}`}
+                  onClick={() => setCourseCategory('Framework JavaScript')}
+                >
+                  Framework JavaScript
+                </button>
+                <button 
+                  className={`category-btn ${courseCategory === 'Data Science' ? 'active' : ''}`}
+                  onClick={() => setCourseCategory('Data Science')}
+                >
+                  Data Science
+                </button>
+                <button 
+                  className={`category-btn ${courseCategory === 'Design' ? 'active' : ''}`}
+                  onClick={() => setCourseCategory('Design')}
+                >
+                  Design
+                </button>
+                <button 
+                  className={`category-btn ${courseCategory === 'Backend' ? 'active' : ''}`}
+                  onClick={() => setCourseCategory('Backend')}
+                >
+                  Backend
+                </button>
+                <button 
+                  className={`category-btn ${courseCategory === 'Mobile' ? 'active' : ''}`}
+                  onClick={() => setCourseCategory('Mobile')}
+                >
+                  Mobile
+                </button>
+                <button 
+                  className={`category-btn ${courseCategory === 'Cloud' ? 'active' : ''}`}
+                  onClick={() => setCourseCategory('Cloud')}
+                >
+                  Cloud
+                </button>
+              </div>
+              
               <div className="courses-grid">
-                {courses.map(course => (
+                {filteredCourses.map(course => (
                   <div key={course._id} className="course-card-admin">
                     <div className="course-image">
                       <img 
@@ -1077,7 +1113,7 @@ const AdminDashboard = () => {
                       />
                       <div className="course-status">
                         <span className={`status-badge ${course.status}`}>
-                          {course.status === 'published' ? '✅' : '📝'} {course.status}
+                          {course.status === 'published' ? '<span className="icon-wrapper"><Check size={18} /></span>' : '<span className="icon-wrapper"><FileText size={18} /></span>'} {course.status}
                         </span>
                       </div>
                     </div>
@@ -1093,7 +1129,7 @@ const AdminDashboard = () => {
                       {/* Chapters Display */}
                       {course.chapters && course.chapters.length > 0 && (
                         <div className="course-chapters">
-                          <h4>📚 {course.chapters.length} Chapitres</h4>
+                          <h4><span className="icon-wrapper"><BookOpen size={18} /></span> {course.chapters.length} Chapitres</h4>
                           <div className="chapters-list">
                             {course.chapters.slice(0, 2).map((chapter, index) => (
                               <div key={index} className="chapter-item">
@@ -1110,12 +1146,21 @@ const AdminDashboard = () => {
                         </div>
                       )}
                       
+                      {/* Action Buttons */}
                       <div className="course-actions">
-                        <button className="action-btn edit" onClick={() => handleEditCourse(course)}>
-                          ✏️ Modifier
+                        <button 
+                          onClick={() => handleEditCourse(course)}
+                          className="btn btn-sm btn-primary"
+                          title="Edit course"
+                        >
+                          ✏️ Edit
                         </button>
-                        <button className="action-btn delete" onClick={() => handleDeleteCourse(course._id)}>
-                          🗑️ Supprimer
+                        <button 
+                          onClick={() => handleDeleteCourse(course._id)}
+                          className="btn btn-sm btn-danger"
+                          title="Delete course"
+                        >
+                          🗑️ Delete
                         </button>
                       </div>
                     </div>
@@ -1158,7 +1203,7 @@ const AdminDashboard = () => {
 
               <div className="analytics-grid">
                 <div className="analytics-card">
-                  <h3>📊 User Growth</h3>
+                  <h3><span className="icon-wrapper"><BarChart size={18} /></span> User Growth</h3>
                   <div className="chart-container">
                     <div className="bar-chart">
                       <div className="bar" style={{height: '60%'}}></div>
@@ -1184,7 +1229,7 @@ const AdminDashboard = () => {
                 </div>
                 
                 <div className="analytics-card">
-                  <h3>📈 Course Completion</h3>
+                  <h3><span className="icon-wrapper"><TrendingUp size={18} /></span> Course Completion</h3>
                   <div className="chart-container">
                     <div className="progress-chart">
                       <div className="progress-segment" style={{width: '75%', background: '#48bb78'}}></div>
@@ -1239,17 +1284,14 @@ const AdminDashboard = () => {
                 <div className="setting-card">
                   <h3>Platform Configuration</h3>
                   <p>Manage platform-wide settings and preferences</p>
-                  <button className="btn btn-outline">Configure</button>
                 </div>
                 <div className="setting-card">
                   <h3>Email Templates</h3>
                   <p>Customize email notifications and templates</p>
-                  <button className="btn btn-outline">Manage</button>
                 </div>
                 <div className="setting-card">
                   <h3>Security Settings</h3>
                   <p>Configure security policies and permissions</p>
-                  <button className="btn btn-outline">Secure</button>
                 </div>
               </div>
             </div>
@@ -1306,15 +1348,7 @@ const AdminDashboard = () => {
                   placeholder="New password"
                 />
               </div>
-              <div className="form-actions">
-                <button type="button" className="btn btn-outline" onClick={() => setShowUserDetails(false)}>
-                  Cancel
-                </button>
-                <button type="submit" className="btn btn-primary">
-                  Update User
-                </button>
-              </div>
-            </form>
+                          </form>
           </div>
         </div>
       )}

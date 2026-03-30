@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons/lucide_icons.dart';
+
 
 class ChapterDetailScreen extends StatelessWidget {
   final String courseId;
@@ -42,7 +44,7 @@ class ChapterDetailScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.play_circle_fill, color: Colors.white, size: 60),
+                      Icon(LucideLucideLucideIcons.playCircle, color: Colors.white, size: 60),
                       SizedBox(height: 8),
                       Text('Video Playback Placeholder', style: TextStyle(color: Colors.white)),
                     ],
@@ -94,7 +96,7 @@ class ChapterDetailScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: const Center(
-                              child: Icon(Icons.play_circle_fill, color: Colors.white, size: 40),
+                              child: Icon(LucideLucideLucideIcons.playCircle, color: Colors.white, size: 40),
                             ),
                           ),
                         ],

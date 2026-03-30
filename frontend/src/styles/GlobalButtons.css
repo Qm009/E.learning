@@ -1,7 +1,7 @@
 /* GLOBAL BUTTONS FIX - Make ALL buttons work perfectly */
 
 /* Reset and force all buttons to be clickable */
-button, .btn, input[type="button"], input[type="submit"] {
+button, .btn, input[type="button"], input[type="submit"], .btn-primary, .btn-outline, .btn-large, .cta-buttons .btn {
   cursor: pointer !important;
   pointer-events: auto !important;
   user-select: none !important;
@@ -9,7 +9,7 @@ button, .btn, input[type="button"], input[type="submit"] {
   -moz-user-select: none !important;
   -ms-user-select: none !important;
   position: relative !important;
-  z-index: 1 !important;
+  z-index: 1000 !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -23,6 +23,9 @@ button, .btn, input[type="button"], input[type="submit"] {
   background: none !important;
   padding: 0 !important;
   margin: 0 !important;
+  min-height: 44px !important;
+  border-radius: 8px !important;
+  white-space: nowrap !important;
 }
 
 /* Base button styles */
@@ -37,20 +40,20 @@ button, .btn, input[type="button"], input[type="submit"] {
 }
 
 /* Primary buttons */
-.btn-primary, .btn.btn-primary {
+.btn-primary, .btn.btn-primary, .cta-buttons .btn-primary {
   background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important;
   color: white !important;
   box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3) !important;
   border: none !important;
 }
 
-.btn-primary:hover, .btn.btn-primary:hover {
+.btn-primary:hover, .btn.btn-primary:hover, .cta-buttons .btn-primary:hover {
   background: linear-gradient(135deg, #2563eb, #7c3aed) !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4) !important;
 }
 
-.btn-primary:disabled, .btn.btn-primary:disabled {
+.btn-primary:disabled, .btn.btn-primary:disabled, .cta-buttons .btn-primary:disabled {
   background: #9ca3af !important;
   cursor: not-allowed !important;
   transform: none !important;
@@ -58,37 +61,64 @@ button, .btn, input[type="button"], input[type="submit"] {
   opacity: 0.6 !important;
 }
 
-/* Secondary buttons */
-.btn-secondary, .btn.btn-secondary {
-  background: transparent !important;
-  color: #ef4444 !important;
-  border: 2px solid #ef4444 !important;
-}
-
-.btn-secondary:hover, .btn.btn-secondary:hover {
-  background: #ef4444 !important;
-  color: white !important;
-  transform: translateY(-2px) !important;
-}
-
-/* Outline buttons */
-.btn-outline, .btn.btn-outline {
+/* Secondary/Outline buttons */
+.btn-outline, .btn.btn-outline, .cta-buttons .btn-outline {
   background: rgba(255, 255, 255, 0.1) !important;
   color: white !important;
   border: 2px solid rgba(255, 255, 255, 0.3) !important;
   backdrop-filter: blur(10px) !important;
 }
 
-.btn-outline:hover, .btn.btn-outline:hover {
+.btn-outline:hover, .btn.btn-outline:hover, .cta-buttons .btn-outline:hover {
   background: rgba(255, 255, 255, 0.2) !important;
   transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Large buttons */
+.btn-large, .btn.btn-large {
+  padding: 16px 32px !important;
+  font-size: 18px !important;
+  min-height: 56px !important;
+}
+
+/* CTA specific buttons */
+.cta-buttons .btn {
+  padding: 1rem 2.5rem !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  border-radius: 50px !important;
+  min-height: 44px !important;
+}
+
+.cta-buttons .btn-primary {
+  background: linear-gradient(135deg, #00BCD4, #0097A7) !important;
+  color: white !important;
+  box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3) !important;
+}
+
+.cta-buttons .btn-primary:hover {
+  background: linear-gradient(135deg, #0097A7, #00838F) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(0, 188, 212, 0.4) !important;
+}
+
+.cta-buttons .btn-outline {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #00BCD4 !important;
+  border: 2px solid #00BCD4 !important;
+}
+
+.cta-buttons .btn-outline:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(0, 188, 212, 0.2) !important;
 }
 
 /* Success buttons */
 .btn-success, .btn.btn-success, .btn-add-chapter {
   background: linear-gradient(135deg, #10b981, #059669) !important;
   color: white !important;
-  border: none !important;
   box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3) !important;
 }
 
@@ -102,111 +132,67 @@ button, .btn, input[type="button"], input[type="submit"] {
 .btn-danger, .btn.btn-danger, .btn-remove-chapter {
   background: linear-gradient(135deg, #ef4444, #dc2626) !important;
   color: white !important;
-  border: none !important;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3) !important;
 }
 
 .btn-danger:hover, .btn.btn-danger:hover, .btn-remove-chapter:hover {
   background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
   transform: scale(1.05) !important;
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4) !important;
 }
 
-/* Block buttons */
-.btn-block, .btn.btn-block {
-  width: 100% !important;
-  display: flex !important;
-  justify-content: center !important;
-}
-
-/* Large buttons */
-.btn-lg, .btn.btn-lg {
-  padding: 16px 32px !important;
-  font-size: 18px !important;
-  min-height: 56px !important;
-}
-
-/* Small buttons */
-.btn-sm, .btn.btn-sm {
-  padding: 8px 16px !important;
-  font-size: 14px !important;
-  min-height: 36px !important;
-}
-
-/* Admin action buttons */
-.admin-action-btn {
-  padding: 16px !important;
-  background: white !important;
-  border: 2px solid #e5e7eb !important;
-  border-radius: 12px !important;
-  color: #374151 !important;
-  text-align: center !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 8px !important;
-  transition: all 0.3s ease !important;
-}
-
-.admin-action-btn:hover {
-  border-color: #3b82f6 !important;
-  background: #f8fafc !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15) !important;
-}
-
-/* Course action buttons */
-.course-actions .btn {
+/* Specific page buttons */
+.course-actions .btn, .course-actions .btn-primary {
   padding: 8px 16px !important;
   font-size: 14px !important;
   min-height: 36px !important;
   border-radius: 6px !important;
 }
 
-/* Modal buttons */
-.modal-close {
-  background: none !important;
-  border: none !important;
-  font-size: 24px !important;
-  color: #6b7280 !important;
-  cursor: pointer !important;
-  padding: 4px !important;
-  border-radius: 4px !important;
+.course-actions .btn-primary:hover {
+  background: linear-gradient(135deg, #0097A7, #00838F) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(0, 188, 212, 0.3) !important;
 }
 
-.modal-close:hover {
-  background: #f3f4f6 !important;
-  color: #374151 !important;
+.course-actions .btn-secondary {
+  background: transparent !important;
+  color: #ef4444 !important;
+  border: 1px solid #ef4444 !important;
+}
+
+.course-actions .btn-secondary:hover {
+  background: #ef4444 !important;
+  color: white !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3) !important;
 }
 
 /* Form buttons */
-.form-actions .btn {
-  margin-right: 12px !important;
-}
-
-.form-actions .btn:last-child {
-  margin-right: 0 !important;
-}
-
-/* Fix any overlays or z-index issues */
-.btn, button, input[type="button"], input[type="submit"] {
-  z-index: 1000 !important;
-}
-
-/* Ensure buttons work in all containers */
-* .btn, * button, * input[type="button"], * input[type="submit"] {
-  pointer-events: auto !important;
-  cursor: pointer !important;
+.form-actions .btn, .form-actions .btn-primary {
+  padding: 12px 24px !important;
+  font-size: 16px !important;
+  border-radius: 8px !important;
 }
 
 /* Mobile fix */
 @media (max-width: 768px) {
-  .btn, button {
+  .btn, .btn-primary, .btn-outline, .btn-large, .cta-buttons .btn {
     min-height: 48px !important;
     padding: 12px 20px !important;
     font-size: 16px !important;
   }
   
-  .btn-lg, .btn.btn-lg {
+  .btn-large, .btn.btn-large {
     min-height: 56px !important;
     padding: 16px 24px !important;
+    font-size: 18px !important;
+  }
+  
+  .cta-buttons .btn {
+    min-height: 48px !important;
+    padding: 12px 20px !important;
+    font-size: 16px !important;
   }
 }
 

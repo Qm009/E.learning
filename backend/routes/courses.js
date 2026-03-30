@@ -1,12 +1,11 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
-const Course = require('../models/Course');
 const { auth, roleAuth } = require('../middleware/auth');
 
 const router = express.Router();
 
-// Configuration de multer pour l'upload d'images
+// Configuration de multer pour l'upload d'images local (inchangé)
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/');
@@ -18,16 +17,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ 
   storage: storage,
-  limits: {
-    fileSize: 5 * 1024 * 1024 // 5MB limit
-  },
+  limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: function (req, file, cb) {
-    // Si pas de fichier, continuer
-    if (!file) {
-      return cb(null, false);
-    }
-    
-    // Vérifier si c'est une image
+    if (!file) return cb(null, false);
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
       return cb(new Error('Seuls les fichiers image sont autorisés'), false);
     }
@@ -38,9 +30,19 @@ const upload = multer({
 // Get all courses
 router.get('/', async (req, res) => {
   try {
-    const courses = await Course.find().populate('instructor', 'name email');
-    res.json(courses);
+    // Dans Supabase, pour faire l'équivalent d'un .populate('instructor'), 
+    // on demande explicitement les colonnes liées si la clé étrangère est configurée.
+    const { data: courses, error } = await req.supabase
+      .from('courses')
+      .select(`
+        *,
+        instructor (id, name, email)
+      `);
+      
+    if (error) throw error;
+    res.json(courses || []);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -48,7 +50,16 @@ router.get('/', async (req, res) => {
 // Get course by ID
 router.get('/:id', async (req, res) => {
   try {
-    const course = await Course.findById(req.params.id).populate('instructor', 'name email').populate('enrolledStudents', 'name email');
+    const { data: course, error } = await req.supabase
+      .from('courses')
+      .select(`
+        *,
+        instructor (id, name, email)
+      `)
+      .eq('id', req.params.id)
+      .maybeSingle();
+
+    if (error) throw error;
     if (!course) {
       return res.status(404).json({ message: 'Course not found' });
     }
@@ -61,52 +72,60 @@ router.get('/:id', async (req, res) => {
 // Get instructor's courses
 router.get('/instructor', auth, roleAuth(['instructor', 'admin']), async (req, res) => {
   try {
-    const courses = await Course.find({ instructor: req.user.id }).populate('enrolledStudents', 'name email');
-    res.json(courses);
+    const { data: courses, error } = await req.supabase
+      .from('courses')
+      .select('*')
+      // Selon ton schéma, la colonne référençant l'instructeur peut s'appeler "instructor" (UUID) ou "instructor_id"
+      .eq('instructor', req.user.id);
+
+    if (error) throw error;
+    res.json(courses || []);
   } catch (err) {
     console.error('❌ Error getting instructor courses:', err);
-    console.error('❌ Error stack:', err.stack);
     res.status(500).json({ message: 'Server error' });
   }
 });
 
 // Create course (instructor/admin only)
-router.post('/', auth, roleAuth(['instructor', 'admin']), async (req, res) => {
+router.post('/', (req, res, next) => {
+  upload.single('image')(req, res, (err) => {
+    if (err) {
+      return res.status(400).json({ message: 'Error parsing form data/image', error: err.message });
+    }
+    next();
+  });
+}, auth, roleAuth(['instructor', 'admin']), async (req, res) => {
   try {
-    console.log('🔍 Creating course...');
-    console.log('👤 User from req.user:', req.user);
-    console.log('👤 User role:', req.user.role);
-    console.log('📝 req.body:', req.body);
-    console.log('📝 req.body.duration:', req.body.duration);
-    console.log('📝 req.body.files:', req.body.files);
-    console.log('📝 req.body.chapters:', req.body.chapters);
-    console.log('📝 req.body keys:', Object.keys(req.body));
-    
+    let chapters = req.body.chapters;
+    if (typeof chapters === 'string') {
+      try { chapters = JSON.parse(chapters); } 
+      catch (e) { chapters = []; }
+    }
+
     const courseData = {
       title: req.body.title,
       description: req.body.description,
       category: req.body.category,
-      price: req.body.price,
+      price: req.body.price ? Number(req.body.price) : 0,
       duration: req.body.duration,
-      instructor: req.user.id,
-      image: req.body.image || '',
+      instructor: req.user.id, // ID local UUID
+      image: req.file ? `/uploads/${req.file.filename}` : (req.body.image || ''),
       files: req.body.files || [],
-      chapters: req.body.chapters || [],
-      status: req.body.status || 'draft'
+      chapters: chapters || [],
+      status: req.body.status || 'draft',
+      enrolledStudents: [] // initialisé vide
     };
     
-    console.log('✅ Course data prepared:', courseData);
-    console.log('📁 Files in courseData:', courseData.files);
-    
-    const course = new Course(courseData);
-    await course.save();
-    
-    console.log('✅ Course created successfully:', course);
-    console.log('📁 Files in saved course:', course.files);
-    res.json(course);
+    const { data: course, error } = await req.supabase
+      .from('courses')
+      .insert([courseData])
+      .select()
+      .single();
+
+    if (error) throw error;
+    res.status(201).json(course);
   } catch (err) {
     console.error('❌ Error creating course:', err);
-    console.error('❌ Error stack:', err.stack);
     res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
@@ -114,20 +133,23 @@ router.post('/', auth, roleAuth(['instructor', 'admin']), async (req, res) => {
 // Update course (instructor/admin only)
 router.put('/:id', auth, async (req, res) => {
   try {
-    console.log('🔍 Updating course...');
-    console.log('👤 User from req.user:', req.user);
-    console.log('👤 User role:', req.user.role);
-    console.log('📝 req.body:', req.body);
-    console.log('📝 req.body keys:', Object.keys(req.body));
+    // Vérifier l'appartenance
+    const { data: course } = await req.supabase.from('courses').select('instructor').eq('id', req.params.id).maybeSingle();
     
-    const course = await Course.findById(req.params.id);
-    if (!course) {
-      return res.status(404).json({ message: 'Course not found' });
-    }
-    if (course.instructor.toString() !== req.user.id && req.user.role !== 'admin') {
+    if (!course) return res.status(404).json({ message: 'Course not found' });
+    
+    if (course.instructor !== req.user.id && req.user.role !== 'admin') {
       return res.status(403).json({ message: 'Access denied' });
     }
-    const updatedCourse = await Course.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    
+    const { data: updatedCourse, error } = await req.supabase
+      .from('courses')
+      .update(req.body)
+      .eq('id', req.params.id)
+      .select()
+      .single();
+
+    if (error) throw error;
     res.json(updatedCourse);
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
@@ -137,14 +159,16 @@ router.put('/:id', auth, async (req, res) => {
 // Delete course (instructor/admin only)
 router.delete('/:id', auth, async (req, res) => {
   try {
-    const course = await Course.findById(req.params.id);
-    if (!course) {
-      return res.status(404).json({ message: 'Course not found' });
-    }
-    if (course.instructor.toString() !== req.user.id && req.user.role !== 'admin') {
+    const { data: course } = await req.supabase.from('courses').select('instructor').eq('id', req.params.id).maybeSingle();
+    
+    if (!course) return res.status(404).json({ message: 'Course not found' });
+    if (course.instructor !== req.user.id && req.user.role !== 'admin') {
       return res.status(403).json({ message: 'Access denied' });
     }
-    await Course.findByIdAndDelete(req.params.id);
+    
+    const { error } = await req.supabase.from('courses').delete().eq('id', req.params.id);
+    if (error) throw error;
+    
     res.json({ message: 'Course deleted' });
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
@@ -154,17 +178,27 @@ router.delete('/:id', auth, async (req, res) => {
 // Enroll in course
 router.post('/:id/enroll', auth, async (req, res) => {
   try {
-    const course = await Course.findById(req.params.id);
-    if (!course) {
-      return res.status(404).json({ message: 'Course not found' });
-    }
-    if (course.enrolledStudents.includes(req.user.id)) {
+    const { data: course, error } = await req.supabase.from('courses').select('enrolledStudents').eq('id', req.params.id).maybeSingle();
+    
+    if (error || !course) return res.status(404).json({ message: 'Course not found' });
+    
+    const enrolledIds = course.enrolledStudents || [];
+    
+    if (enrolledIds.includes(req.user.id)) {
       return res.status(400).json({ message: 'Already enrolled' });
     }
-    course.enrolledStudents.push(req.user.id);
-    await course.save();
+    
+    enrolledIds.push(req.user.id);
+    
+    const { error: updateError } = await req.supabase
+      .from('courses')
+      .update({ enrolledStudents: enrolledIds })
+      .eq('id', req.params.id);
+      
+    if (updateError) throw updateError;
     res.json({ message: 'Enrolled successfully' });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: 'Server error' });
   }
 });

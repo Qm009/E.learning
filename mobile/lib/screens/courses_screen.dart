@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../utils/api_config.dart';
+import 'package:lucide_icons/lucide_icons.dart';
+
 
 class CoursesScreen extends StatefulWidget {
   const CoursesScreen({super.key});
@@ -69,7 +71,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
         'level': 'Débutant',
         'price': 0,
         'lessons': List.filled(9, {}),
-        'image': 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=300&h=200&fit=crop&auto=format',
+        'image': 'https://images.unsplash.com/photo-1627398242454-45 a1465, c2479?w=300&h=200&fit=crop&auto=format',
       },
       {
         '_id': '2',
@@ -80,7 +82,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
         'level': 'Intermédiaire',
         'price': 49,
         'lessons': List.filled(6, {}),
-        'image': 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=300&h=200&fit=crop&auto=format',
+        'image': 'https://images.unsplash.com/photo-1633356122544-f134324 a6, cee?w=300&h=200&fit=crop&auto=format',
       },
       {
         '_id': '3',
@@ -91,7 +93,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
         'level': 'Intermédiaire',
         'price': 39,
         'lessons': List.filled(6, {}),
-        'image': 'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=300&h=200&fit=crop&auto=format',
+        'image': 'https://images.unsplash.com/photo-1526379095098-d400 fd0, bf935?w=300&h=200&fit=crop&auto=format',
       },
       {
         '_id': '4',
@@ -102,7 +104,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
         'level': 'Débutant',
         'price': 29,
         'lessons': List.filled(3, {}),
-        'image': 'https://images.unsplash.com/photo-1555949963-aa79dcee981c3?w=300&h=200&fit=crop&auto=format',
+        'image': 'https://images.unsplash.com/photo-1555949963-aa79 dcee981, c3?w=300&h=200&fit=crop&auto=format',
       },
       {
         '_id': '5',
@@ -113,7 +115,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
         'level': 'Intermédiaire',
         'price': 59,
         'lessons': List.filled(3, {}),
-        'image': 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=300&h=200&fit=crop&auto=format',
+        'image': 'https://images.unsplash.com/photo-1627398242454-45 a1465, c2479?w=300&h=200&fit=crop&auto=format',
       },
       {
         '_id': '6',
@@ -124,7 +126,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
         'level': 'Débutant',
         'price': 19,
         'lessons': List.filled(6, {}),
-        'image': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=200&fit=crop&auto=format',
+        'image': 'https://images.unsplash.com/photo-1507003211169-0 a1, dd7228, f2, d?w=300&h=200&fit=crop&auto=format',
       },
       {
         '_id': '7',
@@ -135,7 +137,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
         'level': 'Intermédiaire',
         'price': 49,
         'lessons': List.filled(3, {}),
-        'image': 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=300&h=200&fit=crop&auto=format',
+        'image': 'https://images.unsplash.com/photo-1633356122544-f134324 a6, cee?w=300&h=200&fit=crop&auto=format',
       },
       {
         '_id': '8',
@@ -146,7 +148,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
         'level': 'Avancé',
         'price': 89,
         'lessons': List.filled(3, {}),
-        'image': 'https://images.unsplash.com/photo-1555255707-c07966088b7b?w=300&h=200&fit=crop&auto=format',
+        'image': 'https://images.unsplash.com/photo-1555255707-c07966088 b7, b?w=300&h=200&fit=crop&auto=format',
       },
       {
         '_id': '9',
@@ -157,7 +159,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
         'level': 'Intermédiaire',
         'price': 39,
         'lessons': List.filled(3, {}),
-        'image': 'https://images.unsplash.com/photo-1603895123512-6a4f2a4e5b7f?w=300&h=200&fit=crop&auto=format',
+        'image': 'https://images.unsplash.com/photo-1603895123512-6 a4, f2, a4, e5, b7, f?w=300&h=200&fit=crop&auto=format',
       },
       {
         '_id': '10',
@@ -168,7 +170,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
         'level': 'Débutant',
         'price': 19,
         'lessons': List.filled(6, {}),
-        'image': 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=300&h=200&fit=crop&auto=format',
+        'image': 'https://images.unsplash.com/photo-1618401471353-b98 afee0, b2, eb?w=300&h=200&fit=crop&auto=format',
       },
       {
         '_id': '11',
@@ -179,7 +181,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
         'level': 'Débutant',
         'price': 29,
         'lessons': List.filled(3, {}),
-        'image': 'https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=300&h=200&fit=crop&auto=format',
+        'image': 'https://images.unsplash.com/photo-1559028006-448665 bd7, c7, f?w=300&h=200&fit=crop&auto=format',
       },
       {
         '_id': '12',
@@ -190,7 +192,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
         'level': 'Intermédiaire',
         'price': 59,
         'lessons': List.filled(3, {}),
-        'image': 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=300&h=200&fit=crop&auto=format',
+        'image': 'https://images.unsplash.com/photo-1627398242454-45 a1465, c2479?w=300&h=200&fit=crop&auto=format',
       },
       {
         '_id': '13',
@@ -201,7 +203,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
         'level': 'Débutant',
         'price': 39,
         'lessons': List.filled(3, {}),
-        'image': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&h=200&fit=crop&auto=format',
+        'image': 'https://images.unsplash.com/photo-1460925895917-afdab827 c52, f?w=300&h=200&fit=crop&auto=format',
       },
       {
         '_id': '14',
@@ -212,7 +214,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
         'level': 'Avancé',
         'price': 99,
         'lessons': List.filled(3, {}),
-        'image': 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=300&h=200&fit=crop&auto=format',
+        'image': 'https://images.unsplash.com/photo-1563013544-824 ae1, b704, d3?w=300&h=200&fit=crop&auto=format',
       },
       {
         '_id': '15',
@@ -223,7 +225,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
         'level': 'Intermédiaire',
         'price': 69,
         'lessons': List.filled(3, {}),
-        'image': 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=300&h=200&fit=crop&auto=format',
+        'image': 'https://images.unsplash.com/photo-1639762681485-074 b7, f938, ba0?w=300&h=200&fit=crop&auto=format',
       },
     ];
   }
@@ -283,7 +285,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
                     controller: _searchController,
                     decoration: InputDecoration(
                       hintText: 'Search courses by name or description...',
-                      prefixIcon: const Icon(Icons.search),
+                      prefixIcon: const Icon(LucideLucideLucideLucideIcons.search),
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
@@ -293,7 +295,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
                       contentPadding: const EdgeInsets.symmetric(vertical: 0),
                       suffixIcon: _searchController.text.isNotEmpty
                           ? IconButton(
-                              icon: const Icon(Icons.clear),
+                              icon: const Icon(LucideLucideIcons.clear),
                               onPressed: () {
                                 _searchController.clear();
                                 setState(() {});
@@ -321,11 +323,11 @@ class _CoursesScreenState extends State<CoursesScreen> {
                               _selectedCategory = category;
                             });
                           },
-                          // selectedColor: const Color(0xFF00C6FF).withOpacity(0.2), // Deprecated
-                          selectedColor: const Color(0xFF00C6FF).withOpacity(0.2),
-                          checkmarkColor: const Color(0xFF0052D4),
+                          // selectedColor: Color(0xFF00C6FF).withValues(alpha: 0.2), // Deprecated
+                          selectedColor: Color(0xFF00C6FF).withValues(alpha: 0.2),
+                          checkmarkColor: Color(0xFF0052D4),
                           labelStyle: TextStyle(
-                            color: isSelected ? const Color(0xFF0052D4) : Colors.black87,
+                            color: isSelected ? Color(0xFF0052D4) : Colors.black87,
                             fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                           ),
                         ),
@@ -394,23 +396,23 @@ class _CoursesScreenState extends State<CoursesScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _NavItem(
-                    icon: Icons.home_outlined,
+                    icon: LucideLucideLucideLucideIcons.homeOutlined,
                     label: 'Home',
                     onTap: () => Navigator.pushReplacementNamed(context, '/'),
                   ),
                   _NavItem(
-                    icon: Icons.menu_book_rounded,
+                    icon: LucideLucideLucideLucideIcons.menuBookRounded,
                     label: 'Courses',
                     isActive: true,
                     onTap: () {},
                   ),
                   _NavItem(
-                    icon: Icons.dashboard_outlined,
+                    icon: LucideLucideLucideIcons.layoutDashboard_outlined,
                     label: 'Admin',
                     onTap: () => Navigator.pushReplacementNamed(context, '/dashboard'),
                   ),
                   _NavItem(
-                    icon: Icons.person_outline_rounded,
+                    icon: LucideLucideLucideIcons.userOutlineRounded,
                     label: 'Profile',
                     onTap: () => Navigator.pushReplacementNamed(context, '/instructor'),
                   ),
@@ -431,7 +433,6 @@ class _CourseCard extends StatelessWidget {
   final String lessons;
 
   const _CourseCard({
-    super.key,
     required this.title,
     required this.instructor,
     required this.imagePath,
@@ -502,7 +503,7 @@ class _CourseCard extends StatelessWidget {
                   Row(
                     children: [
                       const Icon(
-                        Icons.schedule,
+                        LucideLucideIcons.schedule,
                         size: 14,
                         color: Color(0xFF6B7A90),
                       ),
@@ -534,7 +535,6 @@ class _NavItem extends StatelessWidget {
   final VoidCallback onTap;
 
   const _NavItem({
-    super.key,
     required this.icon,
     required this.label,
     this.isActive = false,
@@ -550,13 +550,13 @@ class _NavItem extends StatelessWidget {
         children: [
           Icon(
             icon,
-            color: isActive ? const Color(0xFF00C6FF) : const Color(0xFF6B7A90),
+            color: isActive ? Color(0xFF00C6FF) : Color(0xFF6B7A90),
           ),
           const SizedBox(height: 4),
           Text(
             label,
             style: TextStyle(
-              color: isActive ? const Color(0xFF00C6FF) : const Color(0xFF6B7A90),
+              color: isActive ? Color(0xFF00C6FF) : Color(0xFF6B7A90),
               fontSize: 12,
             ),
           ),

@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../utils/api_config.dart';
+import 'package:lucide_icons/lucide_icons.dart';
+
 
 class InstructorDashboardScreen extends StatefulWidget {
   const InstructorDashboardScreen({super.key});
@@ -97,7 +99,7 @@ class _InstructorDashboardScreenState extends State<InstructorDashboardScreen> {
         children: [
           CircleAvatar(
             radius: 24,
-            backgroundColor: const Color(0xFF00C6FF),
+            backgroundColor: Color(0xFF00C6FF),
             child: Text(
               _userName.isNotEmpty ? _userName[0].toUpperCase() : 'I',
               style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
@@ -110,7 +112,7 @@ class _InstructorDashboardScreenState extends State<InstructorDashboardScreen> {
               children: [
                 Text(
                   'Welcome back,',
-                  style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 13),
+                  style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 13),
                 ),
                 Text(
                   _userName,
@@ -122,15 +124,15 @@ class _InstructorDashboardScreenState extends State<InstructorDashboardScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
-              color: const Color(0xFF00C6FF).withOpacity(0.2),
+              color: Color(0xFF00C6FF).withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: const Color(0xFF00C6FF).withOpacity(0.5)),
+              border: Border.all(color: Color(0xFF00C6FF).withValues(alpha: 0.5)),
             ),
-            child: const Text('INSTRUCTOR', style: TextStyle(color: Color(0xFF00C6FF), fontSize: 11, fontWeight: FontWeight.bold)),
+            child: Text('INSTRUCTOR', style: TextStyle(color: Color(0xFF00C6FF), fontSize: 11, fontWeight: FontWeight.bold)),
           ),
           const SizedBox(width: 8),
           IconButton(
-            icon: const Icon(Icons.logout_rounded, color: Colors.white70),
+            icon: const Icon(LucideLucideLucideIcons.logOut_rounded, color: Colors.white70),
             onPressed: _logout,
           ),
         ],
@@ -140,9 +142,9 @@ class _InstructorDashboardScreenState extends State<InstructorDashboardScreen> {
 
   Widget _buildStatCards() {
     final stats = [
-      {'label': 'My Courses', 'value': '${_myCourses.length}', 'icon': Icons.book_outlined, 'color': const Color(0xFF00C6FF)},
-      {'label': 'Students', 'value': '0', 'icon': Icons.people_outline, 'color': const Color(0xFF4CAF50)},
-      {'label': 'Reviews', 'value': '0', 'icon': Icons.star_outline, 'color': const Color(0xFFFFC107)},
+      {'label': 'My Courses', 'value': '${_myCourses.length}', 'icon': LucideLucideLucideLucideIcons.bookOutlined, 'color': Color(0xFF00C6FF)},
+      {'label': 'Students', 'value': '0', 'icon': LucideLucideLucideIcons.usersOutline, 'color': Color(0xFF4CAF50)},
+      {'label': 'Reviews', 'value': '0', 'icon': LucideLucideLucideLucideIcons.starOutline, 'color': Color(0xFFFFC107)},
     ];
 
     return SizedBox(
@@ -157,7 +159,7 @@ class _InstructorDashboardScreenState extends State<InstructorDashboardScreen> {
             width: 130,
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.08),
+              color: Colors.white.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(color: Colors.white12),
             ),
@@ -170,7 +172,7 @@ class _InstructorDashboardScreenState extends State<InstructorDashboardScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(s['value'] as String, style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
-                    Text(s['label'] as String, style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 11)),
+                    Text(s['label'] as String, style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 11)),
                   ],
                 ),
               ],
@@ -191,18 +193,18 @@ class _InstructorDashboardScreenState extends State<InstructorDashboardScreen> {
           children: [
             Expanded(
               child: _ActionCard(
-                icon: Icons.add_circle_outline,
+                icon: LucideLucideLucideIcons.plusCircleOutline,
                 label: 'Create Course',
-                color: const Color(0xFF00C6FF),
+                color: Color(0xFF00C6FF),
                 onTap: () => Navigator.pushNamed(context, '/instructor_courses'),
               ),
             ),
             const SizedBox(width: 12),
             Expanded(
               child: _ActionCard(
-                icon: Icons.bar_chart_outlined,
+                icon: LucideLucideLucideIcons.barChart_outlined,
                 label: 'My Courses',
-                color: const Color(0xFF4CAF50),
+                color: Color(0xFF4CAF50),
                 onTap: () => Navigator.pushNamed(context, '/courses'),
               ),
             ),
@@ -221,7 +223,7 @@ class _InstructorDashboardScreenState extends State<InstructorDashboardScreen> {
         if (_myCourses.isEmpty)
           Container(
             padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(color: Colors.white.withOpacity(0.05), borderRadius: BorderRadius.circular(16)),
+            decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.05), borderRadius: BorderRadius.circular(16)),
             child: const Center(child: Text('No courses yet.', style: TextStyle(color: Colors.white60))),
           )
         else
@@ -231,7 +233,7 @@ class _InstructorDashboardScreenState extends State<InstructorDashboardScreen> {
               margin: const EdgeInsets.only(bottom: 10),
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.06),
+                color: Colors.white.withValues(alpha: 0.06),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: Colors.white12),
               ),
@@ -239,12 +241,12 @@ class _InstructorDashboardScreenState extends State<InstructorDashboardScreen> {
                 children: [
                   Container(
                     width: 42, height: 42,
-                    decoration: BoxDecoration(color: const Color(0xFF00C6FF).withOpacity(0.2), borderRadius: BorderRadius.circular(10)),
-                    child: const Icon(Icons.play_circle_outline, color: Color(0xFF00C6FF)),
+                    decoration: BoxDecoration(color: Color(0xFF00C6FF).withValues(alpha: 0.2), borderRadius: BorderRadius.circular(10)),
+                    child: Icon(LucideLucideIcons.playCircleOutline, color: Color(0xFF00C6FF)),
                   ),
                   const SizedBox(width: 12),
                   Expanded(child: Text(title.toString(), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600))),
-                  const Icon(Icons.chevron_right, color: Colors.white38),
+                  const Icon(LucideLucideLucideIcons.chevronRight, color: Colors.white38),
                 ],
               ),
             );
@@ -269,9 +271,9 @@ class _ActionCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: color.withOpacity(0.4)),
+          border: Border.all(color: color.withValues(alpha: 0.4)),
         ),
         child: Column(
           children: [

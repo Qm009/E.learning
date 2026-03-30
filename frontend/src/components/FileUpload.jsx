@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { BarChart, FileText, X } from 'lucide-react';
+
 
 const FileUpload = ({ onFileUploaded, onFileRemoved, uploadedFiles, maxFiles = 5 }) => {
   const [uploading, setUploading] = useState(false);
@@ -35,7 +37,7 @@ const FileUpload = ({ onFileUploaded, onFileRemoved, uploadedFiles, maxFiles = 5
         formData.append('files', file);
       });
 
-      const response = await axios.post('http://localhost:5000/api/upload/course-files', formData, {
+      const response = await axios.post('http://localhost:5050/api/upload/course-files', formData, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
@@ -61,7 +63,7 @@ const FileUpload = ({ onFileUploaded, onFileRemoved, uploadedFiles, maxFiles = 5
       }, 1000);
 
     } catch (err) {
-      console.error('❌ Error uploading files:', err);
+      console.error('<span className="icon-wrapper"><X size={18} /></span> Error uploading files:', err);
       setError(err.response?.data?.message || 'Erreur lors de l\'upload');
       setUploading(false);
       setUploadProgress(0);
@@ -72,7 +74,7 @@ const FileUpload = ({ onFileUploaded, onFileRemoved, uploadedFiles, maxFiles = 5
     try {
       const token = localStorage.getItem('token');
       
-      await axios.delete(`http://localhost:5000/api/upload/file/${file.filename}`, {
+      await axios.delete(`http://localhost:5050/api/upload/file/${file.filename}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -80,7 +82,7 @@ const FileUpload = ({ onFileUploaded, onFileRemoved, uploadedFiles, maxFiles = 5
 
       onFileRemoved(file);
     } catch (err) {
-      console.error('❌ Error removing file:', err);
+      console.error('<span className="icon-wrapper"><X size={18} /></span> Error removing file:', err);
       setError('Erreur lors de la suppression du fichier');
     }
   };
@@ -91,9 +93,9 @@ const FileUpload = ({ onFileUploaded, onFileRemoved, uploadedFiles, maxFiles = 5
     } else if (mimeType.includes('pdf')) {
       return '📄';
     } else if (mimeType.includes('word') || mimeType.includes('document')) {
-      return '📝';
+      return '<span className="icon-wrapper"><FileText size={18} /></span>';
     } else if (mimeType.includes('excel') || mimeType.includes('spreadsheet')) {
-      return '📊';
+      return '<span className="icon-wrapper"><BarChart size={18} /></span>';
     } else if (mimeType.includes('powerpoint') || mimeType.includes('presentation')) {
       return '📽️';
     } else if (mimeType.includes('zip') || mimeType.includes('rar')) {
@@ -147,7 +149,7 @@ const FileUpload = ({ onFileUploaded, onFileRemoved, uploadedFiles, maxFiles = 5
         
         {error && (
           <div className="upload-error">
-            ❌ {error}
+            <span className="icon-wrapper"><X size={18} /></span> {error}
           </div>
         )}
       </div>
@@ -172,7 +174,7 @@ const FileUpload = ({ onFileUploaded, onFileRemoved, uploadedFiles, maxFiles = 5
                   onClick={() => handleRemoveFile(file)}
                   title="Supprimer le fichier"
                 >
-                  ❌
+                  <span className="icon-wrapper"><X size={18} /></span>
                 </button>
               </div>
             ))}

@@ -1,8 +1,11 @@
 import { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import API_BASE_URL from '../api';
 import './DashboardModern.css';
 import '../components/CourseFiles.css';
+import { BarChart, Book, BookOpen, Briefcase, Camera, Check, Circle, Clipboard, Clock, FileText, GraduationCap, Lightbulb, Lock, MonitorPlay, Rocket, Search, Settings, Target, Timer, TrendingUp, Trophy, User, Users, X } from 'lucide-react';
+
 
 const Dashboard = () => {
   const { user, token, login } = useContext(AuthContext);
@@ -24,6 +27,8 @@ const Dashboard = () => {
     category: '',
     price: 0,
     duration: '',
+    image: '',
+    imageFile: null,
     chapters: [{ title: '', content: '', duration: '' }]
   });
 
@@ -42,13 +47,13 @@ const Dashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      console.log('🔍 Fetching dashboard data...');
+      console.log('<span className="icon-wrapper"><Search size={18} /></span> Fetching dashboard data...');
       
       // Fetch courses
-      const coursesResponse = await axios.get('http://localhost:5000/api/courses', {
+      const coursesResponse = await axios.get(`${API_BASE_URL}/api/courses`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      console.log('📚 Courses fetched:', coursesResponse.data);
+      console.log('<span className="icon-wrapper"><BookOpen size={18} /></span> Courses fetched:', coursesResponse.data);
       setCoursesData(coursesResponse.data);
 
       // Update stats based on actual data
@@ -70,7 +75,7 @@ const Dashboard = () => {
 
   const checkNotifications = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/notifications', {
+      const response = await axios.get(`${API_BASE_URL}/api/notifications`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setNotifications(response.data);
@@ -81,12 +86,34 @@ const Dashboard = () => {
 
   const hasPendingInstructorRequest = user.role === 'student' && user.status === 'pending' && user.requestedRole === 'instructor';
 
+  // Gestion du téléchargement d'image
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Vérifier le type de fichier
+      if (!file.type.startsWith('image/')) {
+        setMessage('Please select an image file (JPG, PNG, GIF)');
+        setTimeout(() => setMessage(''), 3000);
+        return;
+      }
+      
+      // Vérifier la taille (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        setMessage('Image size must be less than 5MB');
+        setTimeout(() => setMessage(''), 3000);
+        return;
+      }
+      
+      setNewCourse({ ...newCourse, imageFile: file, image: URL.createObjectURL(file) });
+    }
+  };
+
   // Course creation functions
   const handleCreateCourse = async (e) => {
     e.preventDefault();
-    console.log('🚀 Create Course button clicked!');
-    console.log('📝 Form data:', newCourse);
-    console.log('👤 User:', user);
+    console.log('<span className="icon-wrapper"><Rocket size={18} /></span> Create Course button clicked!');
+    console.log('<span className="icon-wrapper"><FileText size={18} /></span> Form data:', newCourse);
+    console.log('<span className="icon-wrapper"><User size={18} /></span> User:', user);
     console.log('🔑 Token:', token ? 'Present' : 'Missing');
     
     try {
@@ -128,6 +155,7 @@ const Dashboard = () => {
         category: newCourse.category.trim(),
         price: 0,
         duration: newCourse.duration || 'Not specified',
+        image: newCourse.image.trim() || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&h=200&fit=crop&auto=format',
         instructor: user._id,
         status: 'draft',
         chapters: newCourse.chapters.map(ch => ({
@@ -139,14 +167,14 @@ const Dashboard = () => {
 
       console.log('📦 Course data prepared:', courseData);
 
-      const response = await axios.post('http://localhost:5000/api/courses', courseData, {
+      const response = await axios.post(`${API_BASE_URL}/api/courses`, courseData, {
         headers: { 
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });
 
-      console.log('✅ Course created successfully:', response.data);
+      console.log('<span className="icon-wrapper"><Check size={18} /></span> Course created successfully:', response.data);
 
       setMessage('Course created successfully!');
       setNewCourse({
@@ -155,68 +183,23 @@ const Dashboard = () => {
         category: '',
         price: 0,
         duration: '',
+        image: '',
+        imageFile: null,
         chapters: [{ title: '', content: '', duration: '' }]
       });
       fetchDashboardData();
       setTimeout(() => setMessage(''), 3000);
     } catch (error) {
-      console.error('❌ Error creating course:', error);
-      console.error('❌ Error response:', error.response?.data);
+      console.error('<span className="icon-wrapper"><X size={18} /></span> Error creating course:', error);
+      console.error('<span className="icon-wrapper"><X size={18} /></span> Error response:', error.response?.data);
       const errorMessage = error.response?.data?.message || error.message || 'Unknown error';
       setMessage('Error creating course: ' + errorMessage);
       setTimeout(() => setMessage(''), 5000);
     }
   };
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      // Check file size (max 2MB)
-      if (file.size > 2 * 1024 * 1024) {
-        setMessage('Image is too large (max 2MB)');
-        setTimeout(() => setMessage(''), 3000);
-        return;
-      }
-      
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        // Compress image if necessary
-        const img = new Image();
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          const ctx = canvas.getContext('2d');
-          
-          // Resize if too large
-          let width = img.width;
-          let height = img.height;
-          const maxSize = 800;
-          
-          if (width > maxSize || height > maxSize) {
-            if (width > height) {
-              height = (height * maxSize) / width;
-              width = maxSize;
-            } else {
-              width = (width * maxSize) / height;
-              height = maxSize;
-            }
-          }
-          
-          canvas.width = width;
-          canvas.height = height;
-          ctx.drawImage(img, 0, 0, width, height);
-          
-          // Convert to base64 with compression
-          const compressedImage = canvas.toDataURL('image/jpeg', 0.7);
-          setNewCourse({ ...newCourse, image: compressedImage });
-        };
-        img.src = reader.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   const removeImage = () => {
-    setNewCourse({ ...newCourse, image: null });
+    setNewCourse({ ...newCourse, image: null, imageFile: null });
   };
 
   const addChapter = () => {
@@ -238,7 +221,7 @@ const Dashboard = () => {
     const updatedChapters = newCourse.chapters.map((chapter, i) =>
       i === index ? { ...chapter, [field]: value } : chapter
     );
-    console.log('📝 Updated chapters:', updatedChapters);
+    console.log('<span className="icon-wrapper"><FileText size={18} /></span> Updated chapters:', updatedChapters);
     setNewCourse({ ...newCourse, chapters: updatedChapters });
   };
 
@@ -257,7 +240,7 @@ const Dashboard = () => {
     return (
       <div className="dashboard-auth-required">
         <div className="auth-required-content">
-          <h2>🔐 Connexion requise</h2>
+          <h2><span className="icon-wrapper"><Lock size={18} /></span> Connexion requise</h2>
           <p>Veuillez vous connecter pour accéder à votre tableau de bord.</p>
           <button className="btn btn-primary" onClick={() => window.location.href = '/login'}>
             Go to Login
@@ -281,14 +264,14 @@ const Dashboard = () => {
               <h1>Welcome back, {user?.name || 'User'}!</h1>
               <p className="user-role">
                 {user.role === 'student' && user.status === 'pending'
-                  ? '🎓 Student (Instructor Request Pending)'
+                  ? '<span className="icon-wrapper"><GraduationCap size={18} /></span> Student (Instructor Request Pending)'
                   : user.role === 'student'
-                    ? '👨‍🎓 Student'
+                    ? '👨‍<span className="icon-wrapper"><GraduationCap size={18} /></span> Student'
                     : user.role === 'instructor'
-                      ? '👨‍🏫 Instructor'
+                      ? '<span className="icon-wrapper"><MonitorPlay size={18} /></span> Instructor'
                       : user.role === 'admin'
-                        ? '👨‍💼 Administrator'
-                        : '👤 User'
+                        ? '<span className="icon-wrapper"><Briefcase size={18} /></span> Administrator'
+                        : '<span className="icon-wrapper"><User size={18} /></span> User'
                 }
               </p>
             </div>
@@ -307,7 +290,7 @@ const Dashboard = () => {
           <div className="pending-card">
             <div className="pending-header">
               <div className="pending-icon-container">
-                <div className="pending-icon">🎓</div>
+                <div className="pending-icon"><span className="icon-wrapper"><GraduationCap size={18} /></span></div>
                 <div className="pending-ring"></div>
               </div>
               <div className="pending-title">
@@ -320,7 +303,7 @@ const Dashboard = () => {
               <div className="pending-status">
                 <div className="status-timeline">
                   <div className="timeline-item completed">
-                    <div className="timeline-dot">✓</div>
+                    <div className="timeline-dot"><span className="icon-wrapper"><Check size={18} /></span></div>
                     <div className="timeline-text">
                       <span className="timeline-title">Request Submitted</span>
                       <span className="timeline-date">Your application is in</span>
@@ -336,7 +319,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <div className="timeline-item">
-                    <div className="timeline-dot">○</div>
+                    <div className="timeline-dot"><span className="icon-wrapper"><Circle size={18} /></span></div>
                     <div className="timeline-text">
                       <span className="timeline-title">Approval</span>
                       <span className="timeline-date">Final decision pending</span>
@@ -348,21 +331,21 @@ const Dashboard = () => {
               <div className="pending-details">
                 <div className="detail-grid">
                   <div className="detail-card">
-                    <div className="detail-icon">📋</div>
+                    <div className="detail-icon"><span className="icon-wrapper"><Clipboard size={18} /></span></div>
                     <div className="detail-info">
                       <span className="detail-label">Application Type</span>
                       <span className="detail-value">Instructor Role</span>
                     </div>
                   </div>
                   <div className="detail-card">
-                    <div className="detail-icon">⏱️</div>
+                    <div className="detail-icon"><span className="icon-wrapper"><Timer size={18} /></span></div>
                     <div className="detail-info">
                       <span className="detail-label">Review Time</span>
                       <span className="detail-value">24-48 hours</span>
                     </div>
                   </div>
                   <div className="detail-card">
-                    <div className="detail-icon">👤</div>
+                    <div className="detail-icon"><span className="icon-wrapper"><User size={18} /></span></div>
                     <div className="detail-info">
                       <span className="detail-label">Current Access</span>
                       <span className="detail-value">Student Features</span>
@@ -372,20 +355,20 @@ const Dashboard = () => {
               </div>
 
               <div className="pending-message">
-                <div className="message-icon">💡</div>
+                <div className="message-icon"><span className="icon-wrapper"><Lightbulb size={18} /></span></div>
                 <div className="message-content">
                   <h3>While you wait, explore these features:</h3>
                   <div className="feature-list">
                     <div className="feature-item">
-                      <span className="feature-icon">📚</span>
+                      <span className="feature-icon"><span className="icon-wrapper"><BookOpen size={18} /></span></span>
                       <span>Continue learning with available courses</span>
                     </div>
                     <div className="feature-item">
-                      <span className="feature-icon">🏆</span>
+                      <span className="feature-icon"><span className="icon-wrapper"><Trophy size={18} /></span></span>
                       <span>Earn certificates and achievements</span>
                     </div>
                     <div className="feature-item">
-                      <span className="feature-icon">👥</span>
+                      <span className="feature-icon"><span className="icon-wrapper"><Users size={18} /></span></span>
                       <span>Join study groups and discussions</span>
                     </div>
                   </div>
@@ -395,11 +378,11 @@ const Dashboard = () => {
 
             <div className="pending-actions">
               <button className="btn btn-primary btn-lg" onClick={() => window.location.href = '/courses'}>
-                <span className="btn-icon">📚</span>
+                <span className="btn-icon"><span className="icon-wrapper"><BookOpen size={18} /></span></span>
                 Browse Courses
               </button>
               <button className="btn btn-outline btn-lg" onClick={() => window.location.href = '/settings'}>
-                <span className="btn-icon">⚙️</span>
+                <span className="btn-icon"><span className="icon-wrapper"><Settings size={18} /></span></span>
                 Update Profile
               </button>
             </div>
@@ -412,7 +395,7 @@ const Dashboard = () => {
           {/* Create Course Section */}
           <div className="dashboard-card">
             <div className="card-header">
-              <h3>📝 Create New Course</h3>
+              <h3><span className="icon-wrapper"><FileText size={18} /></span> Create New Course</h3>
             </div>
             <div className="card-content">
               <form onSubmit={handleCreateCourse} className="course-form">
@@ -445,6 +428,44 @@ const Dashboard = () => {
                       onChange={(e) => setNewCourse({ ...newCourse, description: e.target.value })}
                       required
                     />
+                  </div>
+
+                  <div className="form-group full-width">
+                    <label>Course Image</label>
+                    <div className="image-upload-container">
+                      <input
+                        type="file"
+                        id="course-image"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="image-input"
+                      />
+                      <label htmlFor="course-image" className="image-upload-label">
+                        {newCourse.image ? (
+                          <div className="image-preview">
+                            <img src={newCourse.image} alt="Course preview" className="preview-img" />
+                            <div className="image-overlay">
+                              <span><span className="icon-wrapper"><Camera size={18} /></span> Change Image</span>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="upload-placeholder">
+                            <span className="upload-icon"><span className="icon-wrapper"><Camera size={18} /></span></span>
+                            <span>Click to upload image</span>
+                            <small>JPG, PNG, GIF (max 5MB)</small>
+                          </div>
+                        )}
+                      </label>
+                      {newCourse.image && (
+                        <button
+                          type="button"
+                          onClick={removeImage}
+                          className="remove-image-btn"
+                        >
+                          <span className="icon-wrapper"><X size={18} /></span> Remove
+                        </button>
+                      )}
+                    </div>
                   </div>
 
                   {/* Chapters */}
@@ -561,28 +582,28 @@ const Dashboard = () => {
           {/* Stats Cards */}
           <div className="stats-grid">
             <div className="stat-card">
-              <div className="stat-icon">📚</div>
+              <div className="stat-icon"><span className="icon-wrapper"><BookOpen size={18} /></span></div>
               <div className="stat-content">
                 <h3>{stats.enrolledCourses}</h3>
                 <p>Courses Enrolled</p>
               </div>
             </div>
             <div className="stat-card">
-              <div className="stat-icon">🏆</div>
+              <div className="stat-icon"><span className="icon-wrapper"><Trophy size={18} /></span></div>
               <div className="stat-content">
                 <h3>{stats.completedQuizzes}</h3>
                 <p>Completed Quizzes</p>
               </div>
             </div>
             <div className="stat-card">
-              <div className="stat-icon">📊</div>
+              <div className="stat-icon"><span className="icon-wrapper"><BarChart size={18} /></span></div>
               <div className="stat-content">
                 <h3>{stats.averageScore}%</h3>
                 <p>Average Score</p>
               </div>
             </div>
             <div className="stat-card">
-              <div className="stat-icon">⏰</div>
+              <div className="stat-icon"><span className="icon-wrapper"><Clock size={18} /></span></div>
               <div className="stat-content">
                 <h3>{stats.totalLearningHours}h</h3>
                 <p>Learning Hours</p>
@@ -593,7 +614,7 @@ const Dashboard = () => {
           {/* Learning Progress */}
           <div className="dashboard-card">
             <div className="card-header">
-              <h3>🎯 Learning Progress</h3>
+              <h3><span className="icon-wrapper"><Target size={18} /></span> Learning Progress</h3>
               <span className="card-badge">Active</span>
             </div>
             <div className="card-content">
@@ -615,27 +636,27 @@ const Dashboard = () => {
           {/* Recent Activity */}
           <div className="dashboard-card">
             <div className="card-header">
-              <h3>📈 Recent Activity</h3>
+              <h3><span className="icon-wrapper"><TrendingUp size={18} /></span> Recent Activity</h3>
               <span className="card-badge">New</span>
             </div>
             <div className="card-content">
               <div className="activity-list">
                 <div className="activity-item">
-                  <div className="activity-icon">📚</div>
+                  <div className="activity-icon"><span className="icon-wrapper"><BookOpen size={18} /></span></div>
                   <div className="activity-details">
                     <span className="activity-title">Completed JavaScript Basics</span>
                     <span className="activity-time">2 hours ago</span>
                   </div>
                 </div>
                 <div className="activity-item">
-                  <div className="activity-icon">🏆</div>
+                  <div className="activity-icon"><span className="icon-wrapper"><Trophy size={18} /></span></div>
                   <div className="activity-details">
                     <span className="activity-title">Earned React Certificate</span>
                     <span className="activity-time">Yesterday</span>
                   </div>
                 </div>
                 <div className="activity-item">
-                  <div className="activity-icon">📖</div>
+                  <div className="activity-icon"><span className="icon-wrapper"><Book size={18} /></span></div>
                   <div className="activity-details">
                     <span className="activity-title">Started Advanced CSS Course</span>
                     <span className="activity-time">3 days ago</span>
@@ -648,7 +669,7 @@ const Dashboard = () => {
           {/* Enrolled Courses */}
           <div className="dashboard-card full-width">
             <div className="card-header">
-              <h3>📚 My Courses</h3>
+              <h3><span className="icon-wrapper"><BookOpen size={18} /></span> My Courses</h3>
               <button className="btn btn-sm btn-outline" onClick={() => window.location.href = '/courses'}>
                 View All
               </button>
@@ -703,25 +724,25 @@ const Dashboard = () => {
           {/* Admin Actions */}
           <div className="dashboard-card">
             <div className="card-header">
-              <h3>👨‍💼 Admin Panel</h3>
+              <h3><span className="icon-wrapper"><Briefcase size={18} /></span> Admin Panel</h3>
               <span className="card-badge">Administrator</span>
             </div>
             <div className="card-content">
               <div className="admin-actions-grid">
                 <button className="admin-action-btn" onClick={() => window.location.href = '/admin/users'}>
-                  <span className="admin-icon">👥</span>
+                  <span className="admin-icon"><span className="icon-wrapper"><Users size={18} /></span></span>
                   <span>Manage Users</span>
                 </button>
                 <button className="admin-action-btn" onClick={() => window.location.href = '/admin/courses'}>
-                  <span className="admin-icon">📚</span>
+                  <span className="admin-icon"><span className="icon-wrapper"><BookOpen size={18} /></span></span>
                   <span>Manage Courses</span>
                 </button>
                 <button className="admin-action-btn" onClick={() => window.location.href = '/admin/instructor-requests'}>
-                  <span className="admin-icon">🎓</span>
+                  <span className="admin-icon"><span className="icon-wrapper"><GraduationCap size={18} /></span></span>
                   <span>Instructor Requests</span>
                 </button>
                 <button className="admin-action-btn" onClick={() => window.location.href = '/admin/analytics'}>
-                  <span className="admin-icon">📊</span>
+                  <span className="admin-icon"><span className="icon-wrapper"><BarChart size={18} /></span></span>
                   <span>Analytics</span>
                 </button>
               </div>
@@ -731,33 +752,33 @@ const Dashboard = () => {
           {/* System Stats */}
           <div className="dashboard-card">
             <div className="card-header">
-              <h3>📊 System Statistics</h3>
+              <h3><span className="icon-wrapper"><BarChart size={18} /></span> System Statistics</h3>
             </div>
             <div className="card-content">
               <div className="stats-grid">
                 <div className="stat-card">
-                  <div className="stat-icon">👥</div>
+                  <div className="stat-icon"><span className="icon-wrapper"><Users size={18} /></span></div>
                   <div className="stat-content">
                     <h3>1,234</h3>
                     <p>Total Users</p>
                   </div>
                 </div>
                 <div className="stat-card">
-                  <div className="stat-icon">📚</div>
+                  <div className="stat-icon"><span className="icon-wrapper"><BookOpen size={18} /></span></div>
                   <div className="stat-content">
                     <h3>56</h3>
                     <p>Total Courses</p>
                   </div>
                 </div>
                 <div className="stat-card">
-                  <div className="stat-icon">🎓</div>
+                  <div className="stat-icon"><span className="icon-wrapper"><GraduationCap size={18} /></span></div>
                   <div className="stat-content">
                     <h3>89</h3>
                     <p>Instructors</p>
                   </div>
                 </div>
                 <div className="stat-card">
-                  <div className="stat-icon">🏆</div>
+                  <div className="stat-icon"><span className="icon-wrapper"><Trophy size={18} /></span></div>
                   <div className="stat-content">
                     <h3>456</h3>
                     <p>Certificates Issued</p>

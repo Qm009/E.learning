@@ -12,7 +12,7 @@ const ChapterDetail = () => {
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/courses/${courseId}`);
+        const res = await axios.get(`http://localhost:5050/api/courses/${courseId}`);
         if (res.data && res.data._id) {
           setCourse(res.data);
           if (res.data.lessons && res.data.lessons[chapterIndex]) {

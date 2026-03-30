@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { X } from 'lucide-react';
+
 
 const ProtectedRoute = ({ children, requiredRole }) => {
   const { user } = useContext(AuthContext);
@@ -37,7 +39,7 @@ const ProtectedRoute = ({ children, requiredRole }) => {
       return (
         <div className="access-denied">
           <div className="access-denied-content">
-            <h2>❌ Demande rejetée</h2>
+            <h2><span className="icon-wrapper"><X size={18} /></span> Demande rejetée</h2>
             <p>Votre demande pour devenir instructeur n'a pas été approuvée.</p>
             <p>Contactez notre support pour plus d'informations.</p>
             <button className="btn btn-primary" onClick={() => window.location.href = '/dashboard'}>

@@ -11,10 +11,10 @@ class ApiConfig {
       return _productionBackendUrl;
     }
     if (kIsWeb) {
-      return 'http://127.0.0.1:5000';
+      return 'http://localhost:5050';
     } else {
       // For Android Emulator (10.0.2.2 points to host machine)
-      return 'http://10.0.2.2:5000';
+      return 'http://10.0.2.2:5050';
     }
   }
 
@@ -22,4 +22,10 @@ class ApiConfig {
   static String get registerUrl => '$baseUrl/api/auth/register';
   static String get usersUrl => '$baseUrl/api/users';
   static String get coursesUrl => '$baseUrl/api/courses';
+  
+  // Missing endpoints identified by analyzer
+  static String courseUrl(String id) => '$baseUrl/api/courses/$id';
+  static String get pendingInstructorsUrl => '$baseUrl/api/users/instructors/pending';
+  static String approveInstructorUrl(String id) => '$baseUrl/api/users/instructors/$id/approve';
+  static String rejectInstructorUrl(String id) => '$baseUrl/api/users/instructors/$id/reject';
 }

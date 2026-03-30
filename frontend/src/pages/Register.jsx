@@ -1,15 +1,31 @@
-import { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useState, useContext, useEffect } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import API_BASE_URL from '../api';
 import './Auth.css';
+import { Check, FileText, Rocket, Target, X } from 'lucide-react';
+
 
 const Register = () => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '', requestedRole: 'student', instructorName: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [selectedProgram, setSelectedProgram] = useState('');
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Vérifier s'il y a un paramètre de programme dans l'URL
+    const urlParams = new URLSearchParams(location.search);
+    const programParam = urlParams.get('program');
+    
+    if (programParam) {
+      setSelectedProgram(decodeURIComponent(programParam));
+      console.log(`<span className="icon-wrapper"><Target size={18} /></span> User interested in program: ${programParam}`);
+    }
+  }, [location.search]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,16 +34,16 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('🚀 Create Account button clicked!');
-    console.log('📝 Form data:', formData);
+    console.log('<span className="icon-wrapper"><Rocket size={18} /></span> Create Account button clicked!');
+    console.log('<span className="icon-wrapper"><FileText size={18} /></span> Form data:', formData);
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', formData);
-      console.log('✅ Registration successful:', res.data);
+      const res = await axios.post(`${API_BASE_URL}/api/auth/register`, formData);
+      console.log('<span className="icon-wrapper"><Check size={18} /></span> Registration successful:', res.data);
       login(res.data.token);
       navigate('/dashboard');
     } catch (err) {
-      console.error('❌ Registration error:', err);
+      console.error('<span className="icon-wrapper"><X size={18} /></span> Registration error:', err);
       setError(err.response?.data?.message || 'Registration failed. Please try again.');
     } finally {
       setLoading(false);
@@ -40,6 +56,11 @@ const Register = () => {
         <div className="auth-header">
           <h2>Create Account</h2>
           <p>Join thousands of learners on EduPortal</p>
+          {selectedProgram && (
+            <div className="selected-program-notice">
+              <strong><span className="icon-wrapper"><Target size={18} /></span> Programme sélectionné:</strong> {selectedProgram}
+            </div>
+          )}
         </div>
 
         {error && <div className="error-message">{error}</div>}

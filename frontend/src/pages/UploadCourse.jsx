@@ -1,7 +1,10 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
+import API_BASE_URL from '../api';
 import './UploadCourse.css';
+import { Clipboard, X } from 'lucide-react';
+
 
 const UploadCourse = () => {
   const { user } = useContext(AuthContext);
@@ -9,10 +12,11 @@ const UploadCourse = () => {
     title: '',
     description: '',
     category: '',
-    price: '',
-    image: '',
-    lessons: [{ title: '', content: '', videoUrl: '' }]
+    lessons: [{ title: '', content: '', duration: '' }],
+    files: []
   });
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -41,7 +45,7 @@ const UploadCourse = () => {
   const addLesson = () => {
     setFormData(prev => ({
       ...prev,
-      lessons: [...prev.lessons, { title: '', content: '', videoUrl: '' }]
+      lessons: [...prev.lessons, { title: '', content: '', duration: '' }]
     }));
   };
 
@@ -55,34 +59,81 @@ const UploadCourse = () => {
     }
   };
 
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    setFormData(prev => ({
+      ...prev,
+      files: files
+    }));
+  };
+
+  const removeFile = (index) => {
+    const updatedFiles = formData.files.filter((_, i) => i !== index);
+    setFormData(prev => ({
+      ...prev,
+      files: updatedFiles
+    }));
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeImage = () => {
+    setImageFile(null);
+    setImagePreview(null);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
 
     try {
-      const courseData = {
-        ...formData,
-        instructor: user._id,
-        instructorName: user.name,
-        price: parseFloat(formData.price) || 0
-      };
+      const data = new FormData();
+      data.append('title', formData.title);
+      data.append('description', formData.description);
+      data.append('category', formData.category);
+      data.append('instructor', user._id);
+      data.append('lessons', JSON.stringify(formData.lessons));
+      
+      if (imageFile) {
+        data.append('image', imageFile);
+      }
 
-      const response = await axios.post('http://localhost:5000/api/courses', courseData, {
+      // Ajouter les autres fichiers si nécessaire
+      if (formData.files && formData.files.length > 0) {
+        formData.files.forEach(file => {
+          data.append('files', file);
+        });
+      }
+
+      const response = await axios.post(`${API_BASE_URL}/api/courses`, data, {
         headers: {
+          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       });
 
-      setMessage('Course uploaded successfully!');
+      setMessage('Course uploaded successfully! 🎉');
       setFormData({
         title: '',
         description: '',
         category: '',
         price: '',
-        image: '',
-        lessons: [{ title: '', content: '', videoUrl: '' }]
+        lessons: [{ title: '', content: '', duration: '' }],
+        files: []
       });
+      setImageFile(null);
+      setImagePreview(null);
     } catch (error) {
       console.error('Upload error:', error);
       setMessage(error.response?.data?.message || 'Failed to upload course');
@@ -168,16 +219,32 @@ const UploadCourse = () => {
                   />
                 </div>
 
-                <div className="form-group">
-                  <label htmlFor="image">Course Image URL</label>
-                  <input
-                    type="url"
-                    id="image"
-                    name="image"
-                    value={formData.image}
-                    onChange={handleInputChange}
-                    placeholder="https://example.com/image.jpg"
-                  />
+                <div className="form-group full-width">
+                  <label>Course Thumbnail *</label>
+                  <div className={`image-upload-container ${imagePreview ? 'has-image' : ''}`}>
+                    {imagePreview ? (
+                      <div className="image-preview">
+                        <img src={imagePreview} alt="Preview" />
+                        <button type="button" onClick={removeImage} className="remove-image-btn">
+                          ✕
+                        </button>
+                      </div>
+                    ) : (
+                      <label htmlFor="image-upload" className="image-upload-label">
+                        <div className="upload-placeholder">
+                          <i className="fas fa-image"></i>
+                          <span>Click to upload course image</span>
+                        </div>
+                        <input
+                          type="file"
+                          id="image-upload"
+                          accept="image/*"
+                          onChange={handleImageChange}
+                          style={{ display: 'none' }}
+                        />
+                      </label>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -225,6 +292,17 @@ const UploadCourse = () => {
                     </div>
 
                     <div className="form-group">
+                      <label>Lesson Duration *</label>
+                      <input
+                        type="text"
+                        value={lesson.duration}
+                        onChange={(e) => handleLessonChange(index, 'duration', e.target.value)}
+                        required
+                        placeholder="e.g., 2 hours, 30 minutes"
+                      />
+                    </div>
+
+                    <div className="form-group">
                       <label>Lesson Content *</label>
                       <textarea
                         value={lesson.content}
@@ -247,10 +325,46 @@ const UploadCourse = () => {
                   </div>
                 </div>
               ))}
+            </div>
 
-              <button type="button" onClick={addLesson} className="add-lesson-btn">
-                + Add Another Lesson
-              </button>
+            {/* Section pour les fichiers */}
+            <div className="form-section">
+              <h3>📁 Course Files</h3>
+              <div className="files-upload">
+                <div className="form-group">
+                  <label htmlFor="files">Upload Files (PDF, Images, Videos)</label>
+                  <input
+                    type="file"
+                    id="files"
+                    name="files"
+                    multiple
+                    accept=".pdf,.jpg,.jpeg,.png,.gif,.mp4,.avi,.mov"
+                    onChange={handleFileChange}
+                    className="file-input"
+                  />
+                  <p className="file-help">
+                    Supported formats: PDF, Images (JPG, PNG, GIF), Videos (MP4, AVI, MOV)
+                  </p>
+                </div>
+                {formData.files && formData.files.length > 0 && (
+                  <div className="files-list">
+                    <h4><span className="icon-wrapper"><Clipboard size={18} /></span> Files to Upload ({formData.files.length})</h4>
+                    {formData.files.map((file, index) => (
+                      <div key={index} className="file-item">
+                        <span className="file-name">{file.name}</span>
+                        <span className="file-size">{(file.size / 1024 / 1024).toFixed(2)} MB</span>
+                        <button
+                          type="button"
+                          onClick={() => removeFile(index)}
+                          className="remove-file-btn"
+                        >
+                          <span className="icon-wrapper"><X size={18} /></span> Remove
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="form-actions">

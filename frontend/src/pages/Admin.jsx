@@ -2,7 +2,10 @@ import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import AdminInstructorRequests from './AdminInstructorRequests';
+import API_BASE_URL from '../api';
 import './Admin.css';
+import { BarChart, BookOpen, Clipboard, MonitorPlay, Users } from 'lucide-react';
+
 
 const AdminDashboard = () => {
   const { user, token } = useContext(AuthContext);
@@ -46,11 +49,11 @@ const AdminDashboard = () => {
 
   const fetchData = async () => {
     try {
-      const usersRes = await axios.get('http://localhost:5000/api/users', {
+      const usersRes = await axios.get(`${API_BASE_URL}/api/users`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      const coursesRes = await axios.get('http://localhost:5000/api/courses');
+      const coursesRes = await axios.get(`${API_BASE_URL}/api/courses`);
 
       const allUsers = usersRes.data;
       const students = allUsers.filter(u => u.role === 'student');
@@ -74,7 +77,7 @@ const AdminDashboard = () => {
   const handleCreateUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/auth/register', userForm, {
+      await axios.post(`${API_BASE_URL}/api/auth/register`, userForm, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMessage('User created successfully!');
@@ -101,7 +104,7 @@ const AdminDashboard = () => {
   const handleUpdateUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/api/users/${editingUser._id}`, {
+      await axios.put(`${API_BASE_URL}/api/users/${editingUser._id}`, {
         name: userForm.name,
         email: userForm.email,
         role: userForm.role
@@ -123,7 +126,7 @@ const AdminDashboard = () => {
     if (!window.confirm('Are you sure you want to delete this user?')) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/users/${userId}`, {
+      await axios.delete(`${API_BASE_URL}/api/users/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMessage('User deleted successfully!');
@@ -214,25 +217,25 @@ const AdminDashboard = () => {
         {/* Stats Grid */}
         <div className="stats-grid">
           <div className="stat-card">
-            <div className="stat-icon">👥</div>
+            <div className="stat-icon"><span className="icon-wrapper"><Users size={18} /></span></div>
             <h3>{stats.totalStudents}</h3>
             <p>Total Students</p>
             <span className="stat-trend">↑ +12% this month</span>
           </div>
           <div className="stat-card">
-            <div className="stat-icon">👨‍🏫</div>
+            <div className="stat-icon"><span className="icon-wrapper"><MonitorPlay size={18} /></span></div>
             <h3>{stats.totalInstructors}</h3>
             <p>Active Instructors</p>
             <span className="stat-trend">↑ +3% this month</span>
           </div>
           <div className="stat-card">
-            <div className="stat-icon">📚</div>
+            <div className="stat-icon"><span className="icon-wrapper"><BookOpen size={18} /></span></div>
             <h3>{stats.totalCourses}</h3>
             <p>Total Courses</p>
             <span className="stat-trend">🔄 No change</span>
           </div>
           <div className="stat-card">
-            <div className="stat-icon">📊</div>
+            <div className="stat-icon"><span className="icon-wrapper"><BarChart size={18} /></span></div>
             <h3>{stats.totalEnrollments}</h3>
             <p>Total Enrollments</p>
             <span className="stat-trend">↑ +8% this month</span>
@@ -261,7 +264,7 @@ const AdminDashboard = () => {
                   className={`tab-btn ${activeTab === 'requests' ? 'active' : ''}`}
                   onClick={() => setActiveTab('requests')}
                 >
-                  📋 Instructor Requests
+                  <span className="icon-wrapper"><Clipboard size={18} /></span> Instructor Requests
                 </button>
                 <button
                   className={`tab-btn ${activeTab === 'all' ? 'active' : ''}`}

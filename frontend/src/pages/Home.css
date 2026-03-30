@@ -12,15 +12,15 @@
   padding: 0 2rem;
 }
 
-/* Hero Section */
+/* Hero Section - Optimisé */
 .hero {
   position: relative;
-  height: 100vh;
-  min-height: 600px;
+  min-height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .hero-background {
@@ -29,14 +29,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 1;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.hero-bg-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  background-image: url('https://picsum.photos/seed/education-learning-hero/1920/1080.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .hero-overlay {
@@ -45,7 +42,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%);
   z-index: 2;
 }
 
@@ -53,9 +50,123 @@
   position: relative;
   z-index: 3;
   text-align: center;
-  color: white;
-  max-width: 900px;
+  max-width: 1200px;
   padding: 0 2rem;
+}
+
+.hero-text {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-size: 4.5rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 1s ease-out;
+}
+
+.hero-title .highlight {
+  color: #00BCD4;
+  font-weight: 900;
+  position: relative;
+}
+
+.hero-title .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00BCD4, #0097A7);
+  border-radius: 2px;
+}
+
+.hero-subtitle {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 3rem;
+  line-height: 1.6;
+  font-weight: 400;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 1.2s ease-out;
+}
+
+.hero-auth-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  animation: fadeInUp 1.4s ease-out;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeInUp 1.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-cta {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.hero-cta .btn {
+  margin: 0 1rem;
+  min-width: 200px;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero-cta .btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.hero-buttons .btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.hero-buttons .btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
 }
 
 .hero-title {
@@ -83,11 +194,34 @@
   margin-right: auto;
 }
 
-.hero-buttons {
+.hero-auth-buttons {
   display: flex;
   gap: 1rem;
   justify-content: center;
+  margin-bottom: 1.5rem;
   flex-wrap: wrap;
+}
+
+.hero-auth-buttons .btn {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.hero-auth-buttons .btn-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: 2px solid #10b981;
+}
+
+.hero-auth-buttons .btn-success:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
 }
 
 /* Buttons */
@@ -130,6 +264,7 @@
 .btn-large {
   padding: 1.25rem 2.5rem;
   font-size: 1.1rem;
+  min-height: 44px;
 }
 
 /* Stats Section */

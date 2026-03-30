@@ -79,32 +79,53 @@
 
 .filter-buttons {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .filter-btn {
-  padding: 8px 18px;
+  padding: 12px 20px;
   border: 2px solid #e0e0e0;
   background: white;
-  border-radius: 20px;
+  border-radius: 25px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 600;
   font-size: 14px;
   color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .filter-btn:hover {
-  border-color: #00BCD4;
   color: #00BCD4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 188, 212, 0.15);
 }
 
 .filter-btn.active {
   background: linear-gradient(135deg, #00BCD4 0%, #0097A7 100%);
   color: white;
   border-color: transparent;
-  box-shadow: 0 4px 12px rgba(0, 188, 212, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
+  transform: translateY(-1px);
+}
+
+.filter-btn.active .filter-icon {
+  color: white;
+}
+
+.filter-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.filter-text {
+  font-weight: 500;
 }
 
 /* Courses Section */
@@ -416,34 +437,187 @@
   }
 
   .price {
-    text-align: left;
-  }
-}
 
 /* Course Detail Styles */
 .course-detail-layout {
   display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 40px;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
   align-items: start;
 }
 
 .course-detail-main {
-  background: white;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  min-width: 0;
+}
+
+.course-detail-info {
+  margin-bottom: 2rem;
 }
 
 .course-detail-info h2 {
-  color: #1a1a1a;
-  margin-bottom: 20px;
+  color: #1a202c;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
 }
 
 .course-detail-text {
-  color: #666;
+  color: #4a5568;
   line-height: 1.6;
-  margin-bottom: 30px;
+  margin-bottom: 1.5rem;
+}
+
+/* Progress Section */
+.progress-section {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.progress-section h3 {
+  color: #1a202c;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.progress-bar-container {
+  margin-bottom: 1rem;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.progress-percentage {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.progress-text {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+  border-radius: 4px;
+}
+
+/* Certification Section */
+.certification-section {
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  border: 1px solid #22c55e;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.certification-section h3 {
+  color: #166534;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.certification-section p {
+  color: #166534;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.certification-btn {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: white;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+}
+
+.certification-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+}
+
+.btn-large {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  min-width: 200px;
+}
+
+/* Course Files Section */
+.course-files-section {
+  margin-top: 2rem;
+}
+
+.course-files-section h3 {
+  color: #1a202c;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.files-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.file-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.file-card:hover {
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+  transform: translateY(-2px);
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.file-icon {
+  font-size: 2rem;
+}
+
+.file-details {
+  flex: 1;
+}
+
+.file-name {
+  color: #1a202c;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.file-meta {
+  color: #6b7280;
+  font-size: 0.9rem;
 }
 
 .course-detail-meta {

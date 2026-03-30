@@ -5,6 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'dart:ui';
 import '../utils/api_config.dart';
+import 'package:lucide_icons/lucide_icons.dart';
+
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -20,9 +22,9 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
   int _stat3 = 0;
   List<dynamic> _users = [];
   List<dynamic> _pendingInstructors = [];
-  String _roleFilter = 'All';
+  final String _roleFilter = 'All';
   bool _isLoading = false;
-  int _selectedTabIndex = 0;
+  final int _selectedTabIndex = 0;
   Map<dynamic, dynamic>? _user;
   int _stat4 = 0; // pending count
 
@@ -88,10 +90,12 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
           ).timeout(const Duration(seconds: 5));
           if (pendingResponse.statusCode == 200) {
             final pending = jsonDecode(pendingResponse.body);
-            if (mounted) setState(() {
+            if (mounted) {
+              setState(() {
               _pendingInstructors = pending is List ? pending : [];
               _stat4 = _pendingInstructors.length;
             });
+            }
           }
         } catch (_) {}
       } catch (e) {
@@ -110,9 +114,7 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
     if (mounted) {
       setState(() {
         if (_role.isEmpty) _role = 'Admin';
-        if (_user == null) {
-          _user = {'name': 'Demo Admin', 'email': 'admin@eduportal.com'};
-        }
+        _user ??= {'name': 'Demo Admin', 'email': 'admin@eduportal.com'};
         
         _stat1 = 1250;
         _stat2 = 45;
@@ -179,7 +181,7 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+      backgroundColor: Color(0xFFF8FAFC),
       body: Stack(
         children: [
           // Vibrant Background Gradient
@@ -262,7 +264,7 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
             ),
             child: CircleAvatar(
               radius: 28,
-              backgroundColor: const Color(0xFF38BDF8).withOpacity(0.2),
+              backgroundColor: Color(0xFF38BDF8).withValues(alpha: 0.2),
               child: Text(
                 _user?['name']?.toString().substring(0, 1).toUpperCase() ?? 'A',
                 style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
@@ -287,15 +289,15 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
                   ),
                   child: Text(
                     _role.toUpperCase(),
-                    style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 10, fontWeight: FontWeight.w600, letterSpacing: 1),
+                    style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 10, fontWeight: FontWeight.w600, letterSpacing: 1),
                   ),
                 ),
               ],
             ),
           ),
-          _buildGlassIconButton(Icons.notifications_none_rounded, () {}),
+          _buildGlassIconButton(LucideLucideLucideIcons.bellNoneRounded, () {}),
           const SizedBox(width: 12),
-          _buildGlassIconButton(Icons.logout_rounded, _logout),
+          _buildGlassIconButton(LucideLucideLucideIcons.logOut_rounded, _logout),
         ],
       ),
     );
@@ -310,7 +312,7 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: Container(
             padding: const EdgeInsets.all(10),
-            color: Colors.white.withOpacity(0.1),
+            color: Colors.white.withValues(alpha: 0.1),
             child: Icon(icon, color: Colors.white, size: 22),
           ),
         ),
@@ -324,11 +326,11 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
       physics: const BouncingScrollPhysics(),
       child: Row(
         children: [
-          _buildGlassStatCard('Total Users', _stat1.toString(), '+12.5%', Icons.people_alt_rounded, [const Color(0xFF38BDF8), const Color(0xFF0EA5E9)]),
-          _buildGlassStatCard('Instructors', _stat2.toString(), '+3.2%', Icons.school_rounded, [const Color(0xFF818CF8), const Color(0xFF6366F1)]),
-          _buildGlassStatCard('Live Courses', _stat3.toString(), '+8.0%', Icons.auto_stories_rounded, [const Color(0xFFF472B6), const Color(0xFFEC4899)]),
+          _buildGlassStatCard('Total Users', _stat1.toString(), '+12.5%', LucideLucideLucideIcons.usersAltRounded, [Color(0xFF38BDF8), Color(0xFF0EA5E9)]),
+          _buildGlassStatCard('Instructors', _stat2.toString(), '+3.2%', LucideLucideLucideIcons.graduationCap, [Color(0xFF818CF8), Color(0xFF6366F1)]),
+          _buildGlassStatCard('Live Courses', _stat3.toString(), '+8.0%', LucideLucideIcons.autoStoriesRounded, [Color(0xFFF472B6), Color(0xFFEC4899)]),
           if (_stat4 > 0)
-            _buildGlassStatCard('Pending', _stat4.toString(), 'Awaiting', Icons.pending_actions_rounded, [const Color(0xFFFFA500), const Color(0xFFFF6B00)]),
+            _buildGlassStatCard('Pending', _stat4.toString(), 'Awaiting', LucideLucideIcons.pendingActionsRounded, [Color(0xFFFFA500), Color(0xFFFF6B00)]),
         ],
       ),
     );
@@ -344,7 +346,7 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: colors[0].withOpacity(0.1),
+            color: colors[0].withValues(alpha: 0.1),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -356,21 +358,21 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: colors[0].withOpacity(0.1),
+              color: colors[0].withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: colors[0], size: 20),
           ),
           const SizedBox(height: 20),
-          Text(value, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w800, color: Color(0xFF1E293B))),
+          Text(value, style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800, color: Color(0xFF1E293B))),
           const SizedBox(height: 4),
-          Text(label, style: const TextStyle(fontSize: 12, color: Color(0xFF64748B), fontWeight: FontWeight.w500)),
+          Text(label, style: TextStyle(fontSize: 12, color: Color(0xFF64748B), fontWeight: FontWeight.w500)),
           const SizedBox(height: 12),
           Row(
             children: [
-              const Icon(Icons.trending_up_rounded, color: Color(0xFF10B981), size: 14),
+              Icon(LucideLucideIcons.trendingUpRounded, color: Color(0xFF10B981), size: 14),
               const SizedBox(width: 4),
-              Text(trend, style: const TextStyle(color: Color(0xFF10B981), fontSize: 11, fontWeight: FontWeight.bold)),
+              Text(trend, style: TextStyle(color: Color(0xFF10B981), fontSize: 11, fontWeight: FontWeight.bold)),
             ],
           ),
         ],
@@ -382,8 +384,8 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
-        TextButton(onPressed: () {}, child: const Text('See all', style: TextStyle(color: Color(0xFF38BDF8)))),
+        Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
+        TextButton(onPressed: () {}, child: Text('See all', style: TextStyle(color: Color(0xFF38BDF8)))),
       ],
     );
   }
@@ -391,9 +393,9 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
   Widget _buildActionGrid() {
     return Row(
       children: [
-        Expanded(child: _buildActionCard('Add User', Icons.person_add_alt_1_rounded, const Color(0xFF38BDF8), () => Navigator.pushNamed(context, '/register'))),
+        Expanded(child: _buildActionCard('Add User', LucideLucideLucideIcons.userAddAlt1Rounded, Color(0xFF38BDF8), () => Navigator.pushNamed(context, '/register'))),
         const SizedBox(width: 16),
-        Expanded(child: _buildActionCard('New Course', Icons.add_circle_outline_rounded, const Color(0xFF818CF8), () {})),
+        Expanded(child: _buildActionCard('New Course', LucideLucideLucideIcons.plusCircleOutlineRounded, Color(0xFF818CF8), () {})),
       ],
     );
   }
@@ -406,13 +408,13 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: color.withOpacity(0.1)),
+          border: Border.all(color: color.withValues(alpha: 0.1)),
         ),
         child: Column(
           children: [
             Icon(icon, color: color, size: 30),
             const SizedBox(height: 12),
-            Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Color(0xFF334155))),
+            Text(title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Color(0xFF334155))),
           ],
         ),
       ),
@@ -438,8 +440,8 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
             children: [
               CircleAvatar(
                 radius: 24,
-                backgroundColor: const Color(0xFFF1F5F9),
-                child: Text(user['name']?.toString().substring(0, 1) ?? 'U', style: const TextStyle(color: Color(0xFF64748B), fontWeight: FontWeight.bold)),
+                backgroundColor: Color(0xFFF1F5F9),
+                child: Text(user['name']?.toString().substring(0, 1) ?? 'U', style: TextStyle(color: Color(0xFF64748B), fontWeight: FontWeight.bold)),
               ),
               Positioned(
                 right: 0,
@@ -448,7 +450,7 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
                   width: 12,
                   height: 12,
                   decoration: BoxDecoration(
-                    color: isOnline ? const Color(0xFF10B981) : const Color(0xFFCBD5E1),
+                    color: isOnline ? Color(0xFF10B981) : Color(0xFFCBD5E1),
                     shape: BoxShape.circle,
                     border: Border.all(color: Colors.white, width: 2),
                   ),
@@ -461,13 +463,13 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(user['name']?.toString() ?? 'Unnamed', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color(0xFF1E293B))),
+                Text(user['name']?.toString() ?? 'Unnamed', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color(0xFF1E293B))),
                 const SizedBox(height: 2),
-                Text(user['role']?.toString().toUpperCase() ?? 'STUDENT', style: TextStyle(color: const Color(0xFF38BDF8), fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 0.5)),
+                Text(user['role']?.toString().toUpperCase() ?? 'STUDENT', style: TextStyle(color: Color(0xFF38BDF8), fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 0.5)),
               ],
             ),
           ),
-          const Icon(Icons.more_vert_rounded, color: Color(0xFF94A3B8)),
+          Icon(LucideLucideLucideIcons.moreVertical_rounded, color: Color(0xFF94A3B8)),
         ],
       ),
     );
@@ -484,31 +486,31 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFFFA500).withOpacity(0.3), width: 1.5),
+        border: Border.all(color: Color(0xFFFFA500).withValues(alpha: 0.3), width: 1.5),
         boxShadow: [
-          BoxShadow(color: const Color(0xFFFFA500).withOpacity(0.07), blurRadius: 12, offset: const Offset(0, 6)),
+          BoxShadow(color: Color(0xFFFFA500).withValues(alpha: 0.07), blurRadius: 12, offset: Offset(0, 6)),
         ],
       ),
       child: Row(
         children: [
           CircleAvatar(
             radius: 22,
-            backgroundColor: const Color(0xFFFFF3E0),
+            backgroundColor: Color(0xFFFFF3E0),
             child: Text(name.isNotEmpty ? name[0].toUpperCase() : 'I',
-                style: const TextStyle(color: Color(0xFFFFA500), fontWeight: FontWeight.bold)),
+                style: TextStyle(color: Color(0xFFFFA500), fontWeight: FontWeight.bold)),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Color(0xFF1E293B))),
-                Text(email, style: const TextStyle(color: Color(0xFF64748B), fontSize: 12)),
+                Text(name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Color(0xFF1E293B))),
+                Text(email, style: TextStyle(color: Color(0xFF64748B), fontSize: 12)),
                 const SizedBox(height: 4),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                  decoration: BoxDecoration(color: const Color(0xFFFFF3E0), borderRadius: BorderRadius.circular(6)),
-                  child: const Text('Wants to be Instructor', style: TextStyle(color: Color(0xFFFFA500), fontSize: 10, fontWeight: FontWeight.w600)),
+                  decoration: BoxDecoration(color: Color(0xFFFFF3E0), borderRadius: BorderRadius.circular(6)),
+                  child: Text('Wants to be Instructor', style: TextStyle(color: Color(0xFFFFA500), fontSize: 10, fontWeight: FontWeight.w600)),
                 ),
               ],
             ),
@@ -519,7 +521,7 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
                 onTap: () => _approveInstructor(id),
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                  decoration: BoxDecoration(color: const Color(0xFF10B981), borderRadius: BorderRadius.circular(20)),
+                  decoration: BoxDecoration(color: Color(0xFF10B981), borderRadius: BorderRadius.circular(20)),
                   child: const Text('Approve', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
                 ),
               ),
@@ -528,7 +530,7 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
                 onTap: () => _rejectInstructor(id),
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                  decoration: BoxDecoration(color: const Color(0xFFEF4444), borderRadius: BorderRadius.circular(20)),
+                  decoration: BoxDecoration(color: Color(0xFFEF4444), borderRadius: BorderRadius.circular(20)),
                   child: const Text('Reject', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
                 ),
               ),

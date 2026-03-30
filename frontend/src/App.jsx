@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
@@ -14,15 +14,23 @@ import AdminDashboard from './pages/AdminDashboard';
 import InstructorDashboard from './pages/InstructorDashboard';
 import InstructorCourses from './pages/InstructorCourses';
 import CertifiedDegree from './pages/CertifiedDegree';
+import ExpertPathSimple from './pages/ExpertPathSimple';
 import FeaturePage from './pages/FeaturePage';
 import Specifications from './pages/Specifications';
 import Quiz from './pages/Quiz';
 import AdminTest from './pages/AdminTest';
+import CommunitySupport from './pages/CommunitySupport';
+import Certificate from './pages/Certificate';
+import AIAssistant from './pages/AIAssistant';
+import UploadCourse from './pages/UploadCourse';
 import './App.css';
 import './styles/GlobalButtons.css';
+import { Trophy } from 'lucide-react';
+
 
 function App() {
   console.log('App component rendered');
+  console.log('Current path:', window.location.hash || window.location.pathname);
   
   // Global button click handler for debugging
   useEffect(() => {
@@ -69,6 +77,14 @@ function App() {
               } 
             />
             <Route 
+              path="/instructor/upload-course" 
+              element={
+                <ProtectedRoute requiredRole="instructor">
+                  <UploadCourse />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
               path="/admin" 
               element={
                 <ProtectedRoute requiredRole="admin">
@@ -86,10 +102,38 @@ function App() {
             />
             <Route path="/quiz" element={<Quiz />} />
             <Route path="/specifications" element={<Specifications />} />
-            <Route path="/expert-courses" element={<FeaturePage title="Expert Courses" description="Learn from industry experts and professionals with years of experience in their fields." icon="📖" />} />
+            <Route path="/test-expert" element={
+              <div style={{
+                padding: '50px',
+                background: 'green',
+                color: 'white',
+                textAlign: 'center',
+                fontSize: '24px'
+              }}>
+                TEST ROUTE WORKS!
+              </div>
+            } />
+            <Route path="/expert-courses" element={
+              <>
+                <div style={{
+                  position: 'fixed',
+                  top: '50px',
+                  right: '10px',
+                  background: 'blue',
+                  color: 'white',
+                  padding: '10px',
+                  zIndex: '9999',
+                  borderRadius: '5px'
+                }}>
+                  ROUTE /expert-courses FOUND!
+                </div>
+                <ExpertPathSimple />
+              </>
+            } />
             <Route path="/certified-degree" element={<CertifiedDegree />} />
-            <Route path="/quality-education" element={<FeaturePage title="Quality Education" description="High-quality content with interactive lessons and real-world projects." icon="🏆" />} />
-            <Route path="/community-support" element={<FeaturePage title="Community Support" description="Join a vibrant community of learners and get help when you need it." icon="👥" />} />
+            <Route path="/quality-education" element={<FeaturePage title="Quality Education" description="High-quality content with interactive lessons and real-world projects." icon="<span className="icon-wrapper"><Trophy size={18} /></span>" />} />
+            <Route path="/community-support" element={<CommunitySupport />} />
+            <Route path="/ai-assistant" element={<AIAssistant />} />
           </Routes>
         </div>
       </Router>

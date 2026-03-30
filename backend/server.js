@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const supabase = require('./config/supabase');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
@@ -35,31 +35,22 @@ app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 
-// Connect to MongoDB
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/learning-platform';
-console.log('🔌 Connecting to MongoDB...');
+// Injecter Supabase dans l'objet "req" pour l'utiliser partout dans les routes
+app.use((req, res, next) => {
+  req.supabase = supabase;
+  next();
+});
 
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => {
-  console.log('MongoDB connected to learning-platform');
-  console.log('Actual database:', mongoose.connection.name);
-  
-  // Vérifier la connexion en testant un utilisateur
-  const User = require('./models/User');
-  User.findOne({ email: 'admin@test.com' })
-    .then(user => {
-      if (user) {
-        console.log('✅ Admin user found in database');
-      } else {
-        console.log('❌ Admin user NOT found in database');
-      }
-    })
-    .catch(err => console.log('❌ Error checking user:', err));
-})
-.catch(err => console.log('❌ MongoDB connection error:', err));
+// Vérifier la connexion Supabase basique
+supabase.from('users').select('id').limit(1)
+  .then(({ error }) => {
+    if (error) {
+       console.log('⚠️ La table "users" n\'existe pas encore ou erreur de connexion :', error.message);
+    } else {
+       console.log('✅ Supabase connected to learning-platform successfully');
+    }
+  })
+  .catch(err => console.log('❌ Supabase connection error:', err));
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
@@ -68,5 +59,10 @@ app.use('/api/courses', require('./routes/courses'));
 app.use('/api/upload', require('./routes/upload'));
 // app.use('/api/quizzes', require('./routes/quizzes')); // Temporairement désactivé
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', database: 'supabase' });
+});
+
+const PORT = process.env.PORT || 5050;
+app.listen(PORT, '0.0.0.0', () => console.log(`🚀 Server running on port ${PORT}`));

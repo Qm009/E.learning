@@ -33,6 +33,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+  expertise: {
+    type: String,
+    required: false
+  },
+  motivation: {
+    type: String,
+    required: false
+  },
   createdAt: {
     type: Date,
     default: Date.now

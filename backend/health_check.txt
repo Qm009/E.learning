@@ -1,0 +1,45 @@
+* Host localhost:5050 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying [::1]:5050...
+* connect to ::1 port 5050 from ::1 port 57770 failed: Connection refused
+*   Trying 127.0.0.1:5050...
+* Connected to localhost (127.0.0.1) port 5050
+* using HTTP/1.x
+> GET /health HTTP/1.1
+> Host: localhost:5050
+> User-Agent: curl/8.15.0
+> Accept: */*
+> 
+* Request completely sent off
+< HTTP/1.1 200 OK
+< Vary: Origin
+< Access-Control-Allow-Credentials: true
+< X-RateLimit-Limit: 100
+< X-RateLimit-Remaining: 99
+< Date: Sun, 29 Mar 2026 14:06:59 GMT
+< X-RateLimit-Reset: 1774793885
+< Content-Security-Policy: default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests
+< Cross-Origin-Opener-Policy: same-origin
+< Cross-Origin-Resource-Policy: cross-origin
+< Origin-Agent-Cluster: ?1
+< Referrer-Policy: no-referrer
+< Strict-Transport-Security: max-age=15552000; includeSubDomains
+< X-Content-Type-Options: nosniff
+< X-DNS-Prefetch-Control: off
+< X-Download-Options: noopen
+< X-Frame-Options: SAMEORIGIN
+< X-Permitted-Cross-Domain-Policies: none
+< X-XSS-Protection: 0
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 37
+< ETag: W/"25-NXR0IODol2n0m+dOXwJz0alLKuQ"
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< 
+{ [37 bytes data]
+100    37  100    37    0     0   2845      0 --:--:-- --:--:-- --:--:--  3083
+* Connection #0 to host localhost left intact
+{"status":"ok","database":"supabase"}

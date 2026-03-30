@@ -1,7 +1,67 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 import './CertifiedDegree.css';
+import { BarChart, GraduationCap, Laptop, MonitorPlay, Smartphone, Target, Trophy } from 'lucide-react';
+
 
 const CertifiedDegree = () => {
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+
+  const handleStartProgram = (programName) => {
+    console.log(`Starting program: ${programName}`);
+    
+    if (user) {
+      // Utilisateur connecté - rediriger vers la page de cours spécifique
+      switch(programName) {
+        case 'Développement Web':
+          navigate('/courses?category=web-development');
+          break;
+        case 'Data Science':
+          navigate('/courses?category=data-science');
+          break;
+        case 'Design UI/UX':
+          navigate('/courses?category=design');
+          break;
+        case 'Cloud Computing':
+          navigate('/courses?category=cloud');
+          break;
+        case 'Cybersécurité':
+          navigate('/courses?category=cybersecurity');
+          break;
+        case 'Développement Mobile':
+          navigate('/courses?category=mobile');
+          break;
+        default:
+          navigate('/courses');
+      }
+    } else {
+      // Utilisateur non connecté - rediriger vers l'inscription avec le programme pré-sélectionné
+      navigate(`/register?program=${encodeURIComponent(programName)}`);
+    }
+  };
+
+  const handleLearnMore = () => {
+    navigate('/courses');
+  };
+
+  const handleStartNow = () => {
+    if (user) {
+      navigate('/courses');
+    } else {
+      navigate('/register');
+    }
+  };
+
+  // Fonctions spécifiques pour chaque programme
+  const handleWebDev = () => handleStartProgram('Développement Web');
+  const handleDataScience = () => handleStartProgram('Data Science');
+  const handleUIUX = () => handleStartProgram('Design UI/UX');
+  const handleCloud = () => handleStartProgram('Cloud Computing');
+  const handleCybersecurity = () => handleStartProgram('Cybersécurité');
+  const handleMobileDev = () => handleStartProgram('Développement Mobile');
+
   return (
     <div className="certified-degree-page">
       {/* Hero Section */}
@@ -27,7 +87,7 @@ const CertifiedDegree = () => {
           </div>
           <div className="hero-image">
             <div className="image-placeholder">
-              <div className="certification-icon">🎓</div>
+              <div className="certification-icon"><span className="icon-wrapper"><GraduationCap size={18} /></span></div>
               <span>Certifications Professionnelles</span>
             </div>
           </div>
@@ -40,7 +100,7 @@ const CertifiedDegree = () => {
           <h2>Nos Programmes de Certification</h2>
           <div className="programs-grid">
             <div className="program-card">
-              <div className="program-icon">💻</div>
+              <div className="program-icon"><span className="icon-wrapper"><Laptop size={18} /></span></div>
               <h3>Développement Web</h3>
               <p>Devenez expert en développement web full-stack avec les technologies les plus demandées.</p>
               <div className="program-details">
@@ -48,11 +108,16 @@ const CertifiedDegree = () => {
                 <span className="level">Intermédiaire</span>
                 <span className="price">Gratuit</span>
               </div>
-              <button className="btn btn-primary">Commencer</button>
+              <button 
+                className="btn btn-primary"
+                onClick={handleWebDev}
+              >
+                Commencer
+              </button>
             </div>
 
             <div className="program-card">
-              <div className="program-icon">📊</div>
+              <div className="program-icon"><span className="icon-wrapper"><BarChart size={18} /></span></div>
               <h3>Data Science</h3>
               <p>Maîtrisez l'analyse de données, le machine learning et l'intelligence artificielle.</p>
               <div className="program-details">
@@ -60,7 +125,12 @@ const CertifiedDegree = () => {
                 <span className="level">Avancé</span>
                 <span className="price">Gratuit</span>
               </div>
-              <button className="btn btn-primary">Commencer</button>
+              <button 
+                className="btn btn-primary"
+                onClick={handleDataScience}
+              >
+                Commencer
+              </button>
             </div>
 
             <div className="program-card">
@@ -72,7 +142,12 @@ const CertifiedDegree = () => {
                 <span className="level">Débutant</span>
                 <span className="price">Gratuit</span>
               </div>
-              <button className="btn btn-primary">Commencer</button>
+              <button 
+                className="btn btn-primary"
+                onClick={handleUIUX}
+              >
+                Commencer
+              </button>
             </div>
 
             <div className="program-card">
@@ -84,7 +159,12 @@ const CertifiedDegree = () => {
                 <span className="level">Intermédiaire</span>
                 <span className="price">Gratuit</span>
               </div>
-              <button className="btn btn-primary">Commencer</button>
+              <button 
+                className="btn btn-primary"
+                onClick={handleCloud}
+              >
+                Commencer
+              </button>
             </div>
 
             <div className="program-card">
@@ -96,11 +176,16 @@ const CertifiedDegree = () => {
                 <span className="level">Avancé</span>
                 <span className="price">Gratuit</span>
               </div>
-              <button className="btn btn-primary">Commencer</button>
+              <button 
+                className="btn btn-primary"
+                onClick={handleCybersecurity}
+              >
+                Commencer
+              </button>
             </div>
 
             <div className="program-card">
-              <div className="program-icon">📱</div>
+              <div className="program-icon"><span className="icon-wrapper"><Smartphone size={18} /></span></div>
               <h3>Développement Mobile</h3>
               <p>Créez des applications mobiles natives pour iOS et Android avec React Native et Flutter.</p>
               <div className="program-details">
@@ -108,7 +193,12 @@ const CertifiedDegree = () => {
                 <span className="level">Intermédiaire</span>
                 <span className="price">Gratuit</span>
               </div>
-              <button className="btn btn-primary">Commencer</button>
+              <button 
+                className="btn btn-primary"
+                onClick={handleMobileDev}
+              >
+                Commencer
+              </button>
             </div>
           </div>
         </div>
@@ -120,17 +210,17 @@ const CertifiedDegree = () => {
           <h2>Pourquoi choisir nos certifications ?</h2>
           <div className="benefits-grid">
             <div className="benefit-item">
-              <div className="benefit-icon">🏆</div>
+              <div className="benefit-icon"><span className="icon-wrapper"><Trophy size={18} /></span></div>
               <h3>Reconnu Mondialement</h3>
               <p>Nos certifications sont reconnues par les plus grandes entreprises technologiques.</p>
             </div>
             <div className="benefit-item">
-              <div className="benefit-icon">🎯</div>
+              <div className="benefit-icon"><span className="icon-wrapper"><Target size={18} /></span></div>
               <h3>Pratique</h3>
               <p>Projets réels et études de cas pour une expérience concrète.</p>
             </div>
             <div className="benefit-item">
-              <div className="benefit-icon">👨‍🏫</div>
+              <div className="benefit-icon"><span className="icon-wrapper"><MonitorPlay size={18} /></span></div>
               <h3>Experts</h3>
               <p>Apprenez avec des instructeurs experts de l'industrie.</p>
             </div>
@@ -153,10 +243,25 @@ const CertifiedDegree = () => {
         <div className="container">
           <div className="cta-content">
             <h2>Prêt à commencer votre parcours ?</h2>
-            <p>Rejoignez des milliers d'apprenants et obtenez votre certification dès aujourd'hui.</p>
+            <p>
+              {user 
+                ? `Bienvenue ${user.name || ''} ! Continuez votre apprentissage et obtenez votre certification.`
+                : 'Rejoignez des milliers d\'apprenants et obtenez votre certification dès aujourd\'hui.'
+              }
+            </p>
             <div className="cta-buttons">
-              <button className="btn btn-primary btn-large">Commencer Maintenant</button>
-              <button className="btn btn-outline btn-large">En Savoir Plus</button>
+              <button 
+                className="btn btn-primary btn-large"
+                onClick={handleStartNow}
+              >
+                {user ? 'Continuer l\'Apprentissage' : 'Commencer Maintenant'}
+              </button>
+              <button 
+                className="btn btn-outline btn-large"
+                onClick={handleLearnMore}
+              >
+                En Savoir Plus
+              </button>
             </div>
           </div>
         </div>

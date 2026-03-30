@@ -16,6 +16,15 @@ dependencies:
   shared_preferences: ^2.2.0
   jwt_decoder: ^2.0.1
 
+  video_player: any
+  youtube_player_flutter: any
+  flutter_pdfview: any
+  flutter_markdown: any
+  url_launcher: any
+  path_provider: any
+  image_picker: any
+  cached_network_image: any
+  lucide_icons: ^0.257.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

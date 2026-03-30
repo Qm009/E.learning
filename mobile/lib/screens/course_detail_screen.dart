@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/api_config.dart';
+import 'package:lucide_icons/lucide_icons.dart';
+
 
 class CourseDetailScreen extends StatefulWidget {
   final String courseId;
@@ -245,7 +247,7 @@ Continuez vos efforts, la maîtrise technique est à portée de main !''',
   Future<void> _enroll() async {
     if (_token == null) return;
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:5000/api/courses/${widget.courseId}/enroll'),
+      Uri.parse('${ApiConfig.coursesUrl}/${widget.courseId}/enroll'),
       headers: {'Authorization': 'Bearer $_token'},
     );
     if (response.statusCode == 200) {
@@ -281,7 +283,7 @@ Continuez vos efforts, la maîtrise technique est à portée de main !''',
           /* Price removed as per user request
           Text(
             'Price: ${_course!['price'] == 0 ? 'Free' : '\$${_course!['price']}'}',
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Color(0xFF00C6FF),
@@ -319,7 +321,7 @@ Continuez vos efforts, la maîtrise technique est à portée de main !''',
                   leading: Text(icon, style: const TextStyle(fontSize: 24)),
                   title: Text(file['originalName'] ?? 'Unnamed file'),
                   subtitle: Text('${isImage ? 'Image' : (isPdf ? 'PDF' : 'Document')} • ${((file['size'] ?? 0) / 1024 / 1024).toStringAsFixed(2)} MB'),
-                  trailing: const Icon(Icons.download_rounded, color: Color(0xFF00C6FF)),
+                  trailing: Icon(LucideLucideLucideLucideIcons.downloadRounded, color: Color(0xFF00C6FF)),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Download simulating...')),
@@ -345,7 +347,7 @@ Continuez vos efforts, la maîtrise technique est à portée de main !''',
                 margin: const EdgeInsets.only(bottom: 12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
-                  side: const BorderSide(color: Color(0xFFE2E8F0)),
+                  side: BorderSide(color: Color(0xFFE2E8F0)),
                 ),
                 elevation: 0,
                 child: InkWell(
@@ -423,7 +425,7 @@ Continuez vos efforts, la maîtrise technique est à portée de main !''',
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
-                  side: const BorderSide(color: Color(0xFFE2E8F0)),
+                  side: BorderSide(color: Color(0xFFE2E8F0)),
                 ),
                 child: ListTile(
                   title: Text(
@@ -433,7 +435,7 @@ Continuez vos efforts, la maîtrise technique est à portée de main !''',
                   subtitle: lesson['duration'] != null 
                     ? Text('⏱️ ${lesson['duration']}') 
                     : null,
-                  trailing: const Icon(Icons.arrow_forward_ios, size: 14, color: Color(0xFF667EEA)),
+                  trailing: Icon(LucideLucideLucideIcons.chevronRight, size: 14, color: Color(0xFF667EEA)),
                   onTap: () {
                     showDialog(
                       context: context,

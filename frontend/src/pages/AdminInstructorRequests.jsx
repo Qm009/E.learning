@@ -1,7 +1,10 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import API_BASE_URL from '../api';
 import './AdminInstructorRequests.css';
+import { Check, X } from 'lucide-react';
+
 
 const AdminInstructorRequests = () => {
   const { user } = useContext(AuthContext);
@@ -19,63 +22,70 @@ const AdminInstructorRequests = () => {
       console.log('🔑 Token from localStorage:', token ? 'Present' : 'Missing');
       console.log('🔑 Token length:', token?.length);
       
-      const response = await axios.get('http://localhost:5000/api/users/pending-instructors', {
+      const response = await axios.get(`${API_BASE_URL}/api/users/pending-instructors`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
-      console.log('✅ Response status:', response.status);
-      console.log('✅ Response data:', response.data);
-      console.log('✅ Response data length:', response.data.length);
+      console.log('<span className="icon-wrapper"><Check size={18} /></span> Response status:', response.status);
+      console.log('<span className="icon-wrapper"><Check size={18} /></span> Response data:', response.data);
+      console.log('<span className="icon-wrapper"><Check size={18} /></span> Response data length:', response.data.length);
       
       setPendingRequests(response.data);
     } catch (error) {
-      console.error('❌ Error fetching pending requests:', error);
-      console.error('❌ Error response:', error.response?.data);
-      console.error('❌ Error status:', error.response?.status);
+      console.error('<span className="icon-wrapper"><X size={18} /></span> Error fetching pending requests:', error);
+      console.error('<span className="icon-wrapper"><X size={18} /></span> Error response:', error.response?.data);
+      console.error('<span className="icon-wrapper"><X size={18} /></span> Error status:', error.response?.status);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleApprove = async (userId) => {
+  const handleApprove = async (requestId) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post(`http://localhost:5000/api/users/approve-instructor/${userId}`, {}, {
+      console.log('🔑 Approving instructor with ID:', requestId);
+      console.log('🔑 Token:', token ? 'Present' : 'Missing');
+      
+      // Essayer avec l'URL originale et PUT
+      const response = await axios.put(`${API_BASE_URL}/api/users/${requestId}`, {
+        status: 'approved',
+        role: 'instructor'
+      }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
-      // Stocker la notification pour l'utilisateur
-      if (response.data.notificationTimestamp) {
-        localStorage.setItem('lastInstructorNotification', response.data.notificationTimestamp);
-      }
-      
-      setMessage('Instructeur approuvé avec succès!');
-      fetchPendingRequests();
-      setTimeout(() => setMessage(''), 3000);
-      
-      // Forcer le rechargement de la page pour mettre à jour le rôle de l'utilisateur
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
-      
+      console.log('<span className="icon-wrapper"><Check size={18} /></span> Approval response:', response.data);
+      setMessage('<span className="icon-wrapper"><Check size={18} /></span> Instructeur approuvé avec succès!');
+      fetchPendingRequests(); // Refresh the list
     } catch (error) {
-      setMessage('Erreur lors de l\'approbation');
-      setTimeout(() => setMessage(''), 3000);
+      console.error('<span className="icon-wrapper"><X size={18} /></span> Error approving instructor:', error);
+      console.error('<span className="icon-wrapper"><X size={18} /></span> Error response:', error.response?.data);
+      console.error('<span className="icon-wrapper"><X size={18} /></span> Error status:', error.response?.status);
+      setMessage(`<span className="icon-wrapper"><X size={18} /></span> Erreur: ${error.response?.data?.message || 'Erreur lors de l\'approbation de l\'instructeur'}`);
     }
   };
 
-  const handleReject = async (userId) => {
+  const handleReject = async (requestId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`http://localhost:5000/api/users/reject-instructor/${userId}`, {}, {
+      console.log('🔑 Rejecting instructor with ID:', requestId);
+      console.log('🔑 Token:', token ? 'Present' : 'Missing');
+      
+      // Essayer avec l'URL originale et PUT
+      const response = await axios.put(`${API_BASE_URL}/api/users/${requestId}`, {
+        status: 'rejected'
+      }, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      setMessage('Demande rejetée');
-      fetchPendingRequests();
-      setTimeout(() => setMessage(''), 3000);
+      
+      console.log('<span className="icon-wrapper"><Check size={18} /></span> Rejection response:', response.data);
+      setMessage('<span className="icon-wrapper"><Check size={18} /></span> Demande d\'instructeur rejetée avec succès!');
+      fetchPendingRequests(); // Refresh the list
     } catch (error) {
-      setMessage('Erreur lors du rejet');
-      setTimeout(() => setMessage(''), 3000);
+      console.error('<span className="icon-wrapper"><X size={18} /></span> Error rejecting instructor:', error);
+      console.error('<span className="icon-wrapper"><X size={18} /></span> Error response:', error.response?.data);
+      console.error('<span className="icon-wrapper"><X size={18} /></span> Error status:', error.response?.status);
+      setMessage(`<span className="icon-wrapper"><X size={18} /></span> Erreur: ${error.response?.data?.message || 'Erreur lors du rejet de la demande d\'instructeur'}`);
     }
   };
 
@@ -139,20 +149,22 @@ const AdminInstructorRequests = () => {
               </div>
               <div className="request-status">
                 <span className="status-badge pending">En attente</span>
-              </div>
-              <div className="request-actions">
-                <button 
-                  className="btn btn-success"
-                  onClick={() => handleApprove(request._id)}
-                >
-                  ✅ Approuver
-                </button>
-                <button 
-                  className="btn btn-danger"
-                  onClick={() => handleReject(request._id)}
-                >
-                  ❌ Rejeter
-                </button>
+                <div className="request-actions">
+                  <button 
+                    onClick={() => handleApprove(request._id)}
+                    className="btn btn-sm btn-success"
+                    title="Approuver la demande"
+                  >
+                    <span className="icon-wrapper"><Check size={18} /></span> Approuver
+                  </button>
+                  <button 
+                    onClick={() => handleReject(request._id)}
+                    className="btn btn-sm btn-danger"
+                    title="Rejeter la demande"
+                  >
+                    <span className="icon-wrapper"><X size={18} /></span> Rejeter
+                  </button>
+                </div>
               </div>
             </div>
             );

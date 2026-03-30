@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'package:lucide_icons/lucide_icons.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0F172A),
+      backgroundColor: Color(0xFF0F172A),
       body: FadeTransition(
         opacity: _fadeAnim,
         child: Stack(
@@ -92,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               children: [
                 Text(
                   '👋 Welcome to',
-                  style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 14),
+                  style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 14),
                 ),
                 const Text(
                   'EduPortal',
@@ -107,12 +109,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             ),
           ),
           _glassButton(
-            icon: Icons.person_outline_rounded,
+            icon: LucideLucideLucideIcons.userOutlineRounded,
             onTap: () => Navigator.pushNamed(context, '/login'),
           ),
           const SizedBox(width: 10),
           _glassButton(
-            icon: Icons.search_rounded,
+            icon: LucideLucideLucideLucideIcons.searchRounded,
             onTap: () => Navigator.pushNamed(context, '/courses'),
           ),
         ],
@@ -130,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           child: Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
+              color: Colors.white.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(14),
               border: Border.all(color: Colors.white12),
             ),
@@ -156,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           ),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF38BDF8).withOpacity(0.25),
+              color: Color(0xFF38BDF8).withValues(alpha: 0.25),
               blurRadius: 30,
               offset: const Offset(0, 12),
             ),
@@ -168,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
+                color: Colors.white.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: const Text('🚀 World-class Education', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600)),
@@ -187,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             const SizedBox(height: 10),
             Text(
               'Access thousands of expert-led courses anytime, anywhere.',
-              style: TextStyle(color: Colors.white.withOpacity(0.85), fontSize: 14, height: 1.5),
+              style: TextStyle(color: Colors.white.withValues(alpha: 0.85), fontSize: 14, height: 1.5),
             ),
             const SizedBox(height: 22),
             Row(
@@ -199,9 +201,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(50),
-                      boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 8, offset: const Offset(0, 4))],
+                      boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 8, offset: const Offset(0, 4))],
                     ),
-                    child: const Text('Browse Courses', style: TextStyle(color: Color(0xFF6366F1), fontWeight: FontWeight.bold, fontSize: 14)),
+                    child: Text('Browse Courses', style: TextStyle(color: Color(0xFF6366F1), fontWeight: FontWeight.bold, fontSize: 14)),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -210,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.15),
+                      color: Colors.white.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(50),
                       border: Border.all(color: Colors.white38),
                     ),
@@ -253,11 +255,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   Widget _buildCategoriesRow(BuildContext context) {
     final cats = [
-      {'label': 'Development', 'icon': '💻', 'color': const Color(0xFF38BDF8)},
-      {'label': 'Design', 'icon': '🎨', 'color': const Color(0xFF818CF8)},
-      {'label': 'Business', 'icon': '📈', 'color': const Color(0xFF34D399)},
-      {'label': 'Marketing', 'icon': '📣', 'color': const Color(0xFFF472B6)},
-      {'label': 'Science', 'icon': '🔬', 'color': const Color(0xFFFBBF24)},
+      {'label': 'Development', 'icon': '💻', 'color': Color(0xFF38BDF8)},
+      {'label': 'Design', 'icon': '🎨', 'color': Color(0xFF818CF8)},
+      {'label': 'Business', 'icon': '📈', 'color': Color(0xFF34D399)},
+      {'label': 'Marketing', 'icon': '📣', 'color': Color(0xFFF472B6)},
+      {'label': 'Science', 'icon': '🔬', 'color': Color(0xFFFBBF24)},
     ];
 
     return Padding(
@@ -275,11 +277,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               onTap: () => Navigator.pushNamed(context, '/courses'),
               child: Container(
                 width: 90,
-                padding: const EdgeInsets.all(14),
+                padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: (cat['color'] as Color).withOpacity(0.12),
+                  color: (cat['color'] as Color).withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(18),
-                  border: Border.all(color: (cat['color'] as Color).withOpacity(0.3)),
+                  border: Border.all(color: (cat['color'] as Color).withValues(alpha: 0.3)),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -299,10 +301,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   Widget _buildFeatureGrid(BuildContext context) {
     final features = [
-      {'icon': Icons.menu_book_rounded, 'title': 'Expert Courses', 'sub': 'Learn from the best', 'color': const Color(0xFF38BDF8), 'route': '/expert-courses'},
-      {'icon': Icons.workspace_premium_rounded, 'title': 'Certificates', 'sub': 'Boost your career', 'color': const Color(0xFFF472B6), 'route': '/certified-degree'},
-      {'icon': Icons.people_rounded, 'title': 'Community', 'sub': 'Learn together', 'color': const Color(0xFF34D399), 'route': '/community-support'},
-      {'icon': Icons.star_rounded, 'title': 'Top Quality', 'sub': 'Vetted content', 'color': const Color(0xFFFBBF24), 'route': '/quality-education'},
+      {'icon': LucideLucideLucideLucideIcons.menuBookRounded, 'title': 'Expert Courses', 'sub': 'Learn from the best', 'color': Color(0xFF38BDF8), 'route': '/expert-courses'},
+      {'icon': LucideLucideLucideIcons.briefcasespacePremiumRounded, 'title': 'Certificates', 'sub': 'Boost your career', 'color': Color(0xFFF472B6), 'route': '/certified-degree'},
+      {'icon': LucideLucideLucideIcons.usersRounded, 'title': 'Community', 'sub': 'Learn together', 'color': Color(0xFF34D399), 'route': '/community-support'},
+      {'icon': LucideLucideLucideLucideIcons.starRounded, 'title': 'Top Quality', 'sub': 'Vetted content', 'color': Color(0xFFFBBF24), 'route': '/quality-education'},
     ];
 
     return Padding(
@@ -320,21 +322,21 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             child: Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: (f['color'] as Color).withOpacity(0.08),
+                color: (f['color'] as Color).withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: (f['color'] as Color).withOpacity(0.25)),
+                border: Border.all(color: (f['color'] as Color).withValues(alpha: 0.25)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(color: (f['color'] as Color).withOpacity(0.15), borderRadius: BorderRadius.circular(12)),
+                    decoration: BoxDecoration(color: (f['color'] as Color).withValues(alpha: 0.15), borderRadius: BorderRadius.circular(12)),
                     child: Icon(f['icon'] as IconData, color: f['color'] as Color, size: 20),
                   ),
                   const Spacer(),
                   Text(f['title'] as String, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
-                  Text(f['sub'] as String, style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 11)),
+                  Text(f['sub'] as String, style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 11)),
                 ],
               ),
             ),
@@ -350,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       child: Container(
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.05),
+          color: Colors.white.withValues(alpha: 0.05),
           borderRadius: BorderRadius.circular(24),
           border: Border.all(color: Colors.white10),
         ),
@@ -358,7 +360,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           children: [
             const Text('🎓 Ready to Start Learning?', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
             const SizedBox(height: 8),
-            Text('Join thousands of students on EduPortal today.', style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 13), textAlign: TextAlign.center),
+            Text('Join thousands of students on EduPortal today.', style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 13), textAlign: TextAlign.center),
             const SizedBox(height: 18),
             Row(
               children: [
@@ -381,17 +383,17 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
       decoration: BoxDecoration(
-        color: const Color(0xFF1E293B),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.3), blurRadius: 20, offset: const Offset(0, -4))],
+        color: Color(0xFF1E293B),
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.3), blurRadius: 20, offset: const Offset(0, -4))],
         border: const Border(top: BorderSide(color: Colors.white10)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _NavItem2(icon: Icons.home_filled, label: 'Home', isActive: true, onTap: () {}),
-          _NavItem2(icon: Icons.menu_book_rounded, label: 'Courses', onTap: () => Navigator.pushNamed(context, '/courses')),
-          _NavItem2(icon: Icons.dashboard_rounded, label: 'Dashboard', onTap: () => Navigator.pushNamed(context, '/dashboard')),
-          _NavItem2(icon: Icons.person_outline_rounded, label: 'Profile', onTap: () => Navigator.pushNamed(context, '/login')),
+          _NavItem2(icon: LucideLucideLucideLucideIcons.homeFilled, label: 'Home', isActive: true, onTap: () {}),
+          _NavItem2(icon: LucideLucideLucideLucideIcons.menuBookRounded, label: 'Courses', onTap: () => Navigator.pushNamed(context, '/courses')),
+          _NavItem2(icon: LucideLucideLucideIcons.layoutDashboard_rounded, label: 'Dashboard', onTap: () => Navigator.pushNamed(context, '/dashboard')),
+          _NavItem2(icon: LucideLucideLucideIcons.userOutlineRounded, label: 'Profile', onTap: () => Navigator.pushNamed(context, '/login')),
         ],
       ),
     );
@@ -409,14 +411,14 @@ class _StatPill extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.07),
+        color: Colors.white.withValues(alpha: 0.07),
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: Colors.white10),
       ),
       child: Column(
         children: [
           Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 18)),
-          Text(label, style: TextStyle(color: Colors.white.withOpacity(0.55), fontSize: 10)),
+          Text(label, style: TextStyle(color: Colors.white.withValues(alpha: 0.55), fontSize: 10)),
         ],
       ),
     );
@@ -437,7 +439,7 @@ class _PillButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 13),
         decoration: BoxDecoration(
-          color: outlined ? Colors.transparent : const Color(0xFF38BDF8),
+          color: outlined ? Colors.transparent : Color(0xFF38BDF8),
           borderRadius: BorderRadius.circular(50),
           border: Border.all(color: outlined ? Colors.white24 : Colors.transparent),
         ),
@@ -466,7 +468,7 @@ class _NavItem2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isActive ? const Color(0xFF38BDF8) : Colors.white38;
+    final color = isActive ? Color(0xFF38BDF8) : Colors.white38;
 
     return GestureDetector(
       onTap: onTap,
@@ -474,7 +476,7 @@ class _NavItem2 extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: isActive ? const Color(0xFF38BDF8).withOpacity(0.12) : Colors.transparent,
+          color: isActive ? Color(0xFF38BDF8).withValues(alpha: 0.12) : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(

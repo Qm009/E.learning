@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons/lucide_icons.dart';
+
 
 class InstructorProfileScreen extends StatelessWidget {
   const InstructorProfileScreen({super.key});
@@ -13,11 +15,11 @@ class InstructorProfileScreen extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 24),
-            CircleAvatar(
+            const CircleAvatar(
               radius: 40,
-              backgroundColor: const Color(0xFFE0F8FF),
-              child: const Icon(
-                Icons.person_outline_rounded,
+              backgroundColor: Color(0xFFE0F8FF),
+              child: Icon(
+                LucideLucideLucideIcons.userOutlineRounded,
                 size: 48,
                 color: Color(0xFF0052D4),
               ),
@@ -48,34 +50,34 @@ class InstructorProfileScreen extends StatelessWidget {
                   _ProfileTile(
                     title: 'Advanced React Patterns',
                     subtitle: '12 modules • Completed',
-                    icon: Icons.verified_rounded,
+                    icon: LucideLucideIcons.verifiedRounded,
                   ),
                   _ProfileTile(
                     title: 'Modern Typography Systems',
                     subtitle: '8 modules • In progress',
-                    icon: Icons.auto_graph_rounded,
+                    icon: LucideLucideIcons.autoGraphRounded,
                   ),
                   SizedBox(height: 24),
                   _ProfileSectionTitle('Account Settings'),
                   _ProfileTile(
                     title: 'Personal Information',
                     subtitle: 'Update your basic info',
-                    icon: Icons.person_outline_rounded,
+                    icon: LucideLucideLucideIcons.userOutlineRounded,
                   ),
                   _ProfileTile(
                     title: 'Notification Settings',
                     subtitle: 'Email & push notifications',
-                    icon: Icons.notifications_none_rounded,
+                    icon: LucideLucideLucideIcons.bellNoneRounded,
                   ),
                   _ProfileTile(
                     title: 'Privacy & Security',
-                    subtitle: 'Password, 2FA and more',
-                    icon: Icons.lock_outline_rounded,
+                    subtitle: 'Password, 2, FA and more',
+                    icon: LucideLucideLucideLucideIcons.lockOutlineRounded,
                   ),
                   _ProfileTile(
                     title: 'Help & Support',
                     subtitle: 'FAQ and contact',
-                    icon: Icons.help_outline_rounded,
+                    icon: LucideLucideLucideLucideIcons.helpCircleCircle_outline_rounded,
                   ),
                 ],
               ),
@@ -98,8 +100,8 @@ class InstructorProfileScreen extends StatelessWidget {
                     );
                   },
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: const Color(0xFFFF4D4F),
-                    side: const BorderSide(color: Color(0xFFFF4D4F)),
+                    foregroundColor: Color(0xFFFF4D4F),
+                    side: BorderSide(color: Color(0xFFFF4D4F)),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24),
                     ),
@@ -170,12 +172,12 @@ class _ProfileTile extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: const Color(0xFFE0F8FF),
+                color: Color(0xFFE0F8FF),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Icon(
                 icon,
-                color: const Color(0xFF00A4E4),
+                color: Color(0xFF00A4E4),
               ),
             ),
             const SizedBox(width: 12),
@@ -200,7 +202,7 @@ class _ProfileTile extends StatelessWidget {
               ),
             ),
             const Icon(
-              Icons.chevron_right_rounded,
+              LucideLucideLucideIcons.chevronRight_rounded,
               color: Color(0xFF9BA9C4),
             ),
           ],

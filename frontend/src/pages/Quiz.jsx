@@ -549,7 +549,7 @@ const Quiz = () => {
     const fetchCourses = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('http://localhost:5000/api/courses');
+        const response = await axios.get('http://localhost:5050/api/courses');
         // Always show sample courses for demo purposes
         setCourses([
           { _id: 'course1', title: 'Introduction to Programming', category: 'Development', description: 'Learn the fundamentals of programming with this comprehensive course.' },
@@ -646,17 +646,16 @@ const Quiz = () => {
         correctAnswers++;
       }
     });
-    const finalScore = Math.round((correctAnswers / quiz.questions.length) * 100);
-    setScore(finalScore);
+    setScore(correctAnswers);
     setShowResults(true);
 
     // Save quiz result to backend
-    saveQuizResult(finalScore);
+    saveQuizResult(correctAnswers);
   };
 
   const saveQuizResult = async (finalScore) => {
     try {
-      await axios.post('http://localhost:5000/api/quizzes/results', {
+      await axios.post('http://localhost:5050/api/quizzes/results', {
         userId: user._id,
         courseId: selectedCourse._id,
         score: finalScore,
@@ -768,46 +767,104 @@ const Quiz = () => {
     );
   }
 
-  if (quiz) {
-    const question = quiz.questions[currentQuestion];
-    return (
-      <div className="quiz-page">
+  const selectCourse = (courseId) => {
+    setSelectedCourse(courseId);
+    setQuiz(sampleQuizzes[courseId]);
+    setCurrentQuestion(0);
+    setAnswers({});
+    setShowResults(false);
+    setScore(0);
+    setSelectedAnswer(null);
+    setAnswerFeedback(null);
+  };
+
+  const restartQuiz = () => {
+    setCurrentQuestion(0);
+    setAnswers({});
+    setShowResults(false);
+    setScore(0);
+    setSelectedAnswer(null);
+    setAnswerFeedback(null);
+  };
+
+  return (
+    <div className="quiz-page">
+      <div className="quiz-container">
+        {/* Header */}
         <div className="quiz-header">
-          <div className="container-lg">
-            <h1>{quiz.title}</h1>
+          <h1>Quiz Challenge</h1>
+          <p>Test your knowledge and learn something new</p>
+          
+          {quiz && !showResults && (
             <div className="quiz-progress">
               <span>Question {currentQuestion + 1} of {quiz.questions.length}</span>
               <div className="progress-bar">
-                <div
-                  className="progress-fill"
+                <div 
+                  className="progress-fill" 
                   style={{ width: `${((currentQuestion + 1) / quiz.questions.length) * 100}%` }}
-                ></div>
+                />
               </div>
             </div>
-          </div>
+          )}
         </div>
 
-        <div className="quiz-section">
-          <div className="container-lg">
-            <div className="quiz-card">
-              <h3>{question.question}</h3>
-              <div className="options">
-                {question.options.map((option, index) => (
-                  <label key={index} className={`option ${selectedAnswer !== null ? (index === question.correct ? 'correct' : (index === selectedAnswer && selectedAnswer !== question.correct ? 'incorrect' : '')) : ''}`}>
+        {/* Course Selection */}
+        {!selectedCourse && (
+          <div className="course-selection">
+            <h2>Choose a Quiz Topic</h2>
+            <div className="course-grid">
+              {Object.entries(sampleQuizzes).map(([key, quizData]) => (
+                <div 
+                  key={key}
+                  className={`course-card ${selectedCourse === key ? 'selected' : ''}`}
+                  onClick={() => selectCourse(key)}
+                >
+                  <h3>{quizData.title}</h3>
+                  <p>{quizData.questions.length} questions</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Quiz Container */}
+        {selectedCourse && quiz && !showResults && (
+          <div className="quiz-container-main">
+            <div className="question-container">
+              <div className="question-number">
+                Question {currentQuestion + 1}
+              </div>
+              <h3 className="question-text">
+                {quiz.questions[currentQuestion].question}
+              </h3>
+              
+              <div className="options-container">
+                {quiz.questions[currentQuestion].options.map((option, index) => (
+                  <label 
+                    key={index}
+                    className={`option-label ${
+                      selectedAnswer === index ? 'selected' : ''
+                    } ${
+                      selectedAnswer !== null && index === quiz.questions[currentQuestion].correct ? 'correct' : ''
+                    } ${
+                      selectedAnswer !== null && index === selectedAnswer && selectedAnswer !== quiz.questions[currentQuestion].correct ? 'incorrect' : ''
+                    } ${selectedAnswer !== null ? 'disabled' : ''}`}
+                  >
                     <input
                       type="radio"
-                      name={`question-${currentQuestion}`}
+                      name="answer"
                       value={index}
                       checked={answers[currentQuestion] === index}
                       onChange={() => handleAnswer(currentQuestion, index)}
                       disabled={selectedAnswer !== null}
+                      className="option-input"
                     />
                     <span className="option-text">{option}</span>
-                    {selectedAnswer !== null && index === question.correct && (
-                      <span className="answer-indicator correct">✓ Correct</span>
+                    {selectedAnswer !== null && index === quiz.questions[currentQuestion].correct && (
+                      <span className="answer-indicator correct">Correct</span>
                     )}
-                    {selectedAnswer !== null && index === selectedAnswer && selectedAnswer !== question.correct && (
-                      <span className="answer-indicator incorrect">✗ Wrong</span>
+                    {selectedAnswer !== null && index === selectedAnswer && selectedAnswer !== quiz.questions[currentQuestion].correct && (
+                      <span className="answer-indicator incorrect">Wrong</span>
                     )}
                   </label>
                 ))}
@@ -817,7 +874,7 @@ const Quiz = () => {
                 <div className={`answer-feedback ${answerFeedback.isCorrect ? 'correct-feedback' : 'incorrect-feedback'}`}>
                   <div className="feedback-header">
                     <span className={`feedback-icon ${answerFeedback.isCorrect ? 'correct' : 'incorrect'}`}>
-                      {answerFeedback.isCorrect ? '✓' : '✗'}
+                      {answerFeedback.isCorrect ? '' : ''}
                     </span>
                     <span className="feedback-text">
                       {answerFeedback.isCorrect ? 'Correct!' : 'Incorrect!'}
@@ -825,7 +882,7 @@ const Quiz = () => {
                   </div>
                   {!answerFeedback.isCorrect && (
                     <div className="correct-answer">
-                      <strong>Correct answer:</strong> {question.options[question.correct]}
+                      <strong>Correct answer:</strong> {quiz.questions[currentQuestion].options[quiz.questions[currentQuestion].correct]}
                     </div>
                   )}
                   <div className="explanation">
@@ -833,75 +890,59 @@ const Quiz = () => {
                   </div>
                 </div>
               )}
+            </div>
 
-              <div className="quiz-navigation">
-                <button
-                  onClick={prevQuestion}
-                  disabled={currentQuestion === 0}
-                  className="btn btn-outline"
-                >
-                  Previous
-                </button>
-                <button
-                  onClick={nextQuestion}
-                  disabled={answers[currentQuestion] === undefined}
-                  className="btn btn-primary"
-                >
-                  {currentQuestion === quiz.questions.length - 1 ? 'Finish Quiz' : 'Next'}
-                </button>
-              </div>
+            <div className="quiz-navigation">
+              <button
+                onClick={prevQuestion}
+                disabled={currentQuestion === 0}
+                className="btn btn-outline"
+              >
+                Previous
+              </button>
+              <button
+                onClick={nextQuestion}
+                disabled={answers[currentQuestion] === undefined}
+                className="btn btn-primary"
+              >
+                {currentQuestion === quiz.questions.length - 1 ? 'Finish Quiz' : 'Next Question'}
+              </button>
             </div>
           </div>
-        </div>
-      </div>
-    );
-  }
+        )}
 
-  return (
-    <div className="quiz-page">
-      <div className="quiz-header">
-        <div className="container-lg">
-          <h1>Take a Quiz</h1>
-          <p>Test your knowledge and earn certificates</p>
-        </div>
-      </div>
-
-      <div className="quiz-section">
-        <div className="container-lg">
-          <div className="courses-grid">
-            {loading ? (
-              <div className="no-courses">
-                <div className="loading-spinner">
-                  <div className="spinner"></div>
-                  <p>Loading quizzes...</p>
-                </div>
-              </div>
-            ) : courses && courses.length > 0 ? (
-              courses.map(course => (
-                <div key={course._id} className="course-card">
-                  <div className="course-content">
-                    <h3>{course.title}</h3>
-                    <p>{course.description || 'Test your knowledge on this course'}</p>
-                    <div className="course-meta">
-                      <span className="category">{course.category || 'General'}</span>
-                      {course.instructorName && <span className="instructor">By {course.instructorName}</span>}
-                    </div>
-                    <button
-                      onClick={() => startQuiz(course)}
-                      className="btn btn-primary"
-                    >
-                      Start Quiz
-                    </button>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="no-courses">
-                <p>No quizzes available at the moment.</p>
-              </div>
-            )}
+        {/* Results */}
+        {showResults && (
+          <div className="results-container">
+            <h2>Quiz Complete!</h2>
+            <div className="score-display">
+              {score}/{quiz.questions.length}
+            </div>
+            <div className="score-message">
+              You got {score} out of {quiz.questions.length} questions correct!
+              {score === quiz.questions.length && ' Perfect Score!'}
+              {score >= quiz.questions.length * 0.8 && score < quiz.questions.length && ' Great Job!'}
+              {score >= quiz.questions.length * 0.6 && score < quiz.questions.length * 0.8 && ' Good Effort!'}
+              {score < quiz.questions.length * 0.6 && ' Keep Learning!'}
+            </div>
+            <div className="quiz-navigation">
+              <button onClick={restartQuiz} className="btn btn-primary">
+                Try Again
+              </button>
+              <button onClick={() => setSelectedCourse(null)} className="btn btn-outline">
+                Choose Another Quiz
+              </button>
+            </div>
           </div>
-        </div>
+        )}
+
+        {/* Loading */}
+        {loading && (
+          <div className="loading">
+            <h2>Loading Quiz...</h2>
+            <div className="loading-spinner"></div>
+          </div>
+        )}
       </div>
     </div>
   );

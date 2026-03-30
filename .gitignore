@@ -4,6 +4,8 @@ node_modules/
 
 # Backend secrets
 backend/.env
+frontend/.env
+**/.env
 
 # Backend uploads (user files)
 backend/uploads/
@@ -23,6 +25,10 @@ frontend/build/
 
 # General
 *.log
+**/*.log
+mobile/*.txt
+replace_out.txt
+run.pid
 .DS_Store
 Thumbs.db
 .vscode/

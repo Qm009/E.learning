@@ -1,4 +1,6 @@
 import './Specifications.css';
+import { BarChart, BookOpen, Check, Lock, Target, TrendingUp } from 'lucide-react';
+
 
 const Specifications = () => {
   const requirements = [
@@ -30,7 +32,7 @@ const Specifications = () => {
     },
     {
       title: 'System shall compute quiz scores',
-      icon: '📊',
+      icon: '<span className="icon-wrapper"><BarChart size={18} /></span>',
       description: 'The system automatically calculates and records quiz scores with precision and accuracy. Advanced algorithms ensure fair evaluation of student responses. Scores are computed instantly and can be reviewed by both students and instructors. The system maintains detailed performance records for comprehensive analytics and reporting.',
       details: [
         'Automatic score calculation and verification',
@@ -43,7 +45,7 @@ const Specifications = () => {
     },
     {
       title: 'Admin shall manage users',
-      icon: '🔐',
+      icon: '<span className="icon-wrapper"><Lock size={18} /></span>',
       description: 'Administrators have complete control over user management, including registration, verification, role assignment, and account monitoring. Admins can enforce security policies, manage access levels, and ensure compliance with platform guidelines. The admin dashboard provides comprehensive tools for user analytics and system management.',
       details: [
         'Review and approve user registrations',
@@ -80,7 +82,7 @@ const Specifications = () => {
                   <ul>
                     {req.details.map((detail, i) => (
                       <li key={i}>
-                        <span className="check-mark">✓</span>
+                        <span className="check-mark"><span className="icon-wrapper"><Check size={18} /></span></span>
                         {detail}
                       </li>
                     ))}
@@ -130,15 +132,15 @@ const Specifications = () => {
           <h2>Why These Features Matter</h2>
           <div className="benefits-grid">
             <div className="benefit-item">
-              <h3>📚 Complete Learning Ecosystem</h3>
+              <h3><span className="icon-wrapper"><BookOpen size={18} /></span> Complete Learning Ecosystem</h3>
               <p>Everything needed for a comprehensive learning experience in one platform</p>
             </div>
             <div className="benefit-item">
-              <h3>🎯 Quality Assurance</h3>
+              <h3><span className="icon-wrapper"><Target size={18} /></span> Quality Assurance</h3>
               <p>Admin oversight ensures content quality and user experience standards</p>
             </div>
             <div className="benefit-item">
-              <h3>📈 Performance Tracking</h3>
+              <h3><span className="icon-wrapper"><TrendingUp size={18} /></span> Performance Tracking</h3>
               <p>Automated scoring and analytics help students track progress effectively</p>
             </div>
             <div className="benefit-item">

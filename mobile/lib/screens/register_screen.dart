@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/api_config.dart';
+import 'package:lucide_icons/lucide_icons.dart';
+
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -85,7 +87,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                      icon: const Icon(LucideLucideLucideIcons.arrowLeft_ios_new_rounded),
                       onPressed: () => Navigator.pop(context),
                     ),
                     TextButton(
@@ -114,7 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Full name',
-                    prefixIcon: const Icon(Icons.person_outline_rounded),
+                    prefixIcon: const Icon(LucideLucideLucideIcons.userOutlineRounded),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -127,7 +129,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Email',
-                    prefixIcon: const Icon(Icons.email_outlined),
+                    prefixIcon: const Icon(LucideLucideLucideIcons.mailOutlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -141,7 +143,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Password',
-                    prefixIcon: const Icon(Icons.lock_outline_rounded),
+                    prefixIcon: const Icon(LucideLucideLucideLucideIcons.lockOutlineRounded),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),

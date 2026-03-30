@@ -1,6 +1,4 @@
 const express = require('express');
-const bcrypt = require('bcryptjs');
-const User = require('../models/User');
 const { auth, roleAuth } = require('../middleware/auth');
 
 const router = express.Router();
@@ -8,21 +6,16 @@ const router = express.Router();
 // Routes (order matters - specific routes first)
 router.get('/pending-instructors', auth, roleAuth(['admin']), async (req, res) => {
   try {
-    console.log('🔍 Fetching pending instructors...');
-    console.log('👤 User from req.user:', req.user);
-    
-    const pendingUsers = await User.find({ 
-      requestedRole: 'instructor', 
-      status: 'pending' 
-    }).select('-password');
-    
-    console.log('✅ Found pending users:', pendingUsers.length);
-    console.log('✅ Pending users details:', pendingUsers.map(u => ({ name: u.name, instructorName: u.instructorName })));
-    
-    res.json(pendingUsers);
+    const { data: pendingUsers, error } = await req.supabase
+      .from('users')
+      .select('id, name, email, instructorName, expertise, motivation, requestedRole, status')
+      .eq('status', 'pending')
+      .eq('requestedRole', 'instructor');
+      
+    if (error) throw error;
+    res.json(pendingUsers || []);
   } catch (err) {
-    console.error('❌ Error in pending-instructors route:', err);
-    console.error('❌ Error stack:', err.stack);
+    console.error('Error in pending-instructors route:', err);
     res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
@@ -30,14 +23,18 @@ router.get('/pending-instructors', auth, roleAuth(['admin']), async (req, res) =
 // Get user by ID
 router.get('/:id', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).select('-password');
+    const { data: user, error } = await req.supabase
+      .from('users')
+      .select('id, name, email, role, status, requestedRole, instructorName, expertise, motivation')
+      .eq('id', req.params.id)
+      .maybeSingle();
+      
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
+    
     res.json(user);
   } catch (err) {
-    console.error('❌ Error in user by ID route:', err);
-    console.error('❌ Error stack:', err.stack);
     res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
@@ -45,8 +42,12 @@ router.get('/:id', auth, async (req, res) => {
 // Get all users (admin only)
 router.get('/', auth, roleAuth(['admin']), async (req, res) => {
   try {
-    const users = await User.find().select('-password');
-    res.json(users);
+    const { data: users, error } = await req.supabase
+      .from('users')
+      .select('id, name, email, role, status, requestedRole, instructorName, expertise, motivation');
+      
+    if (error) throw error;
+    res.json(users || []);
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
   }
@@ -55,30 +56,25 @@ router.get('/', auth, roleAuth(['admin']), async (req, res) => {
 // Approve instructor request (admin only)
 router.post('/approve-instructor/:userId', auth, roleAuth(['admin']), async (req, res) => {
   try {
-    console.log('🔓 Approving instructor request...');
-    console.log('👤 User from req.user:', req.user);
-    
-    const user = await User.findById(req.params.userId);
-    
-    console.log('✅ Found user to approve:', user);
-    
-    if (!user) {
+    // Vérifier d'abord si l'utilisateur existe
+    const { data: checkUser } = await req.supabase.from('users').select('id').eq('id', req.params.userId).maybeSingle();
+    if (!checkUser) {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    user.role = 'instructor';
-    user.status = 'approved';
-    await user.save();
+    const { data: user, error } = await req.supabase
+      .from('users')
+      .update({ role: 'instructor', status: 'approved' })
+      .eq('id', req.params.userId)
+      .select('id, name, email, role, status')
+      .single();
 
-    // Stocker la notification pour le frontend
+    if (error) throw error;
+
     const notificationTimestamp = Date.now().toString();
-    
-    res.json({ 
-      message: 'Instructor request approved', 
-      user,
-      notificationTimestamp 
-    });
+    res.json({ message: 'Instructor request approved', user, notificationTimestamp });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -86,15 +82,19 @@ router.post('/approve-instructor/:userId', auth, roleAuth(['admin']), async (req
 // Reject instructor request (admin only)
 router.post('/reject-instructor/:userId', auth, roleAuth(['admin']), async (req, res) => {
   try {
-    const user = await User.findById(req.params.userId);
-    if (!user) {
+    const { data: checkUser } = await req.supabase.from('users').select('id').eq('id', req.params.userId).maybeSingle();
+    if (!checkUser) {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    user.requestedRole = 'student';
-    user.status = 'rejected';
-    await user.save();
+    const { data: user, error } = await req.supabase
+      .from('users')
+      .update({ requestedRole: 'student', status: 'rejected' })
+      .eq('id', req.params.userId)
+      .select('id, name, email, role, status, requestedRole')
+      .single();
 
+    if (error) throw error;
     res.json({ message: 'Instructor request rejected', user });
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
@@ -108,7 +108,19 @@ router.put('/:id', auth, async (req, res) => {
   }
 
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true }).select('-password');
+    // Si on essaie de mettre à jour le mot de passe dans cette route, on le gère à part (ou on le bloque)
+    // Pour l'instant on enlève le mot de passe si jamais il est envoyé
+    const updates = { ...req.body };
+    delete updates.password; 
+
+    const { data: user, error } = await req.supabase
+      .from('users')
+      .update(updates)
+      .eq('id', req.params.id)
+      .select('id, name, email, role, status, requestedRole, instructorName, expertise, motivation')
+      .single();
+
+    if (error) throw error;
     res.json(user);
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
@@ -118,10 +130,15 @@ router.put('/:id', auth, async (req, res) => {
 // Delete user (admin only)
 router.delete('/:id', auth, roleAuth(['admin']), async (req, res) => {
   try {
-    await User.findByIdAndDelete(req.params.id);
-    res.json({ message: 'User deleted' });
+    const { error } = await req.supabase
+      .from('users')
+      .delete()
+      .eq('id', req.params.id);
+
+    if (error) throw error;
+    res.json({ message: 'User deleted successfully' });
   } catch (err) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
 
